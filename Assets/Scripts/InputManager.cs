@@ -24,7 +24,7 @@ public class InputManager : MonoBehaviour
         _input.Player.Movement.performed += _playerMovement.OnMovevmentPerformed;
         _input.Player.Movement.canceled += _playerMovement.OnMovevmentCanceled;
 
-        _input.Player.Shoot.performed += _ => _shoot.Fire();
+        _input.Player.Shoot.performed += _ => _shoot.FireBullet();
         _input.Player.Shoot.canceled += _ => _shoot.StopFire();
     }
 
@@ -37,7 +37,7 @@ public class InputManager : MonoBehaviour
         _input.Player.Movement.canceled += _playerMovement.OnMovevmentCanceled;
 
 
-        _input.Player.Shoot.performed -= _ => _shoot.Fire();
+        _input.Player.Shoot.performed -= _ => _shoot.FireBullet();
         _input.Player.Shoot.canceled -= _ => _shoot.StopFire();
 
     }
