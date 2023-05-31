@@ -14,12 +14,10 @@ public class Bullet : MonoBehaviour
         if (transform.position.y > 10)
             Destroy(gameObject);
     }
-
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log("HIT");
+        Destroy(gameObject);
     }
-
 
     private void Desttoy()
     {

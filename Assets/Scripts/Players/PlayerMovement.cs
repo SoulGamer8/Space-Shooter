@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 
 
-[RequireComponent(typeof(Rigidbody2D))]
+[RequireComponent(typeof(Rigidbody))]
 public class PlayerMovement : MonoBehaviour
 {
 
@@ -12,13 +12,13 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float _speed;
 
 
-    private Rigidbody2D _rb;
+    private Rigidbody _rb;
 
 
     private void Awake()
     {
 
-        _rb=GetComponent<Rigidbody2D>();
+        _rb=GetComponent<Rigidbody>();
     }
 
     private void Update()
