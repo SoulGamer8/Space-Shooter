@@ -8,6 +8,8 @@ public class Enemy : MonoBehaviour
 
     [SerializeField] private float _speed=4;
 
+    [SerializeField] private int _damage=1;
+
     private void Update()
     {
         transform.Translate(Vector3.down * _speed * Time.deltaTime); 
@@ -30,7 +32,10 @@ public class Enemy : MonoBehaviour
         }
         if (other.tag == "Player")
         {
-            Debug.Log("Test");
+            PlayerHealth playerHealth = other.gameObject.GetComponent<PlayerHealth>();
+
+            if (playerHealth != null)
+                playerHealth.TakeDamage(_damage);
         }
     }
 
