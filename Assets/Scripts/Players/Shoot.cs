@@ -5,35 +5,49 @@ using UnityEngine;
 public class Shoot : MonoBehaviour
 {
     [SerializeField] private GameObject _bullet;
+    [SerializeField] private GameObject _tripleShoot;
+
     [SerializeField] private float _fireRate;
 
-    private bool _isShooting = false;
+
+
+    private bool _isTripleShootActive = false;
     private float _canFire = -1f;
 
 
-    
-    private void Shooting()
-    {
-        
-    }
 
     public void FireBullet()
     {
         if(Time.time > _canFire)
         {
-            Instantiate(_bullet, new Vector3(transform.position.x, transform.position.y + 1.2f, 0), Quaternion.identity);
+            if (_isTripleShootActive)
+            {
+                Instantiate(_tripleShoot, new Vector3(transform.position.x - 0.2f, transform.position.y + 4.0f, 0), Quaternion.identity);
+                _tripleShoot.transform.GetChild(1).gameObject.GetComponent<Bullet>().Change(10);
+                _tripleShoot.transform.GetChild(2).gameObject.GetComponent<Bullet>().Change(-10);
+            }
+            else
+            {
+                Instantiate(_bullet, new Vector3(transform.position.x, transform.position.y + 1.5f, 0), Quaternion.identity);
+            }
             _canFire = Time.time + _fireRate;
         }
       
-
-        Debug.Log("Start");
-        _isShooting = true;
-        Shooting();
     }
 
-    public void StopFire()
+    public void TakePowerUp()
     {
-        Debug.Log("Stop");
-        _isShooting = false;
+        _isTripleShootActive = true;
+        StartCoroutine(ActivePowerUp());
+    }
+
+
+
+
+    private IEnumerator ActivePowerUp()
+    {
+        yield return new WaitForSeconds(5.0f);
+        _isTripleShootActive = false;
+
     }
 }
