@@ -6,16 +6,13 @@ public class InputManager : MonoBehaviour
 {
     private PlayerController _input = null;
 
-    private Shoot _shoot;
-    private PlayerMovement _playerMovement;
-
+    [SerializeField] private Shoot _shoot;
+    [SerializeField] private PlayerMovement _playerMovement;
+    [SerializeField] private DeadScreen _deadSceen;
 
     private void Awake()
     {
         _input = new PlayerController();
-
-        _shoot = GetComponent<Shoot>();
-        _playerMovement = GetComponent<PlayerMovement>();
     }
 
     private void OnEnable()
@@ -25,6 +22,8 @@ public class InputManager : MonoBehaviour
         _input.Player.Movement.canceled += _playerMovement.OnMovevmentCanceled;
 
         _input.Player.Shoot.performed += _ => _shoot.FireBullet();
+
+        _input.Player.Restart.performed += _ => _deadSceen.ReloadScene();
     }
 
 

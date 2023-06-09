@@ -1,5 +1,5 @@
 {
-    "name": "PlayerControllerInput",
+    "name": "PlayerController",
     "maps": [
         {
             "name": "Player",
@@ -18,6 +18,15 @@
                     "name": "Shoot",
                     "type": "Button",
                     "id": "e4f0c505-a285-4b26-8931-345a56ea1145",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Restart",
+                    "type": "Button",
+                    "id": "c222a4b1-a249-4382-bc87-25c717bd5587",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -143,6 +152,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "Shoot",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "71cf145e-5cee-4335-9dd6-f793e7923ea1",
+                    "path": "<Keyboard>/r",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Restart",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
