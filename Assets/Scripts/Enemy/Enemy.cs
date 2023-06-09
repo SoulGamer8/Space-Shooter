@@ -7,20 +7,20 @@ using UnityEngine.Events;
 public class Enemy : MonoBehaviour
 {
 
-    public event UnityAction EnemyIsKilled;
-
     [SerializeField] private int _health=3;
 
     [SerializeField] private float _speed=4;
 
     [SerializeField] private int _damage=1;
 
+    [SerializeField] private int _score = 1;
+
     [RangeAttribute(0,1f)]
     [SerializeField] private float _chanceSpawnTripleShotPowerUp;
 
     [SerializeField] private GameObject[] _powerUps;
 
-
+    [SerializeField] private Score score;
 
     private void Update()
     {
@@ -56,6 +56,7 @@ public class Enemy : MonoBehaviour
     {
         if (_chanceSpawnTripleShotPowerUp >= Random.Range(0, 1.0f))
             Instantiate(_powerUps[Random.Range(0, _powerUps.Length)], new Vector3(transform.position.x, transform.position.y, 0), Quaternion.identity);
+        transform.parent.GetComponent<SpawnManager>().KilledEnemy(_score);
     }
 
 }

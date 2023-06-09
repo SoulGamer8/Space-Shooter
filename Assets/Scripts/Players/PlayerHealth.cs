@@ -1,5 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -9,18 +11,25 @@ public class PlayerHealth : MonoBehaviour
     
     [SerializeField] private int _health;
 
-
+   
 
     [Header("Shield")]
     [SerializeField] private GameObject _shield;
     [SerializeField] private int _shieldHealth;
     [SerializeField] private float _timeWhenActiveShild;
 
+    [Header("UI")]
+    [SerializeField] private GameObject _deadScreen;
+    [SerializeField] private GameObject _healthBar;
+
     private int _curentlyShieldHealth;
     private bool _isShieldActivate;
     private GameObject _sheild;
+
+    private Color _color;
     private void Dead()
     {
+        _deadScreen.SetActive(true);
         PlayerDieEvent?.Invoke();
         Destroy(gameObject); 
     }
@@ -30,18 +39,20 @@ public class PlayerHealth : MonoBehaviour
         if (_isShieldActivate)
         {
             _curentlyShieldHealth -= damage;
-           
+
             if (_curentlyShieldHealth <= 0)
             {
                 Destroy(_sheild);
                 _isShieldActivate = false;
             }
-          
-        }
-           
-        else
-            _health -= damage;
 
+        }
+
+        else
+        {
+            _health -= damage;
+            _healthBar.GetComponent<HealthBar>().UpdateHealthBar(damage);
+        }
         if (_health <=0)
             Dead();
     }
@@ -61,5 +72,4 @@ public class PlayerHealth : MonoBehaviour
         _isShieldActivate = false;
         Destroy(_sheild);
     }
-
 }

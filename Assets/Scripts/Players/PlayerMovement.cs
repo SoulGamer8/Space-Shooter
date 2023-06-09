@@ -10,7 +10,7 @@ public class PlayerMovement : MonoBehaviour
 
    
     [SerializeField] private float _speed;
-    [SerializeField] private float _timeWhenActiveSpeedPowerUp=4f;
+    [SerializeField] private float _timeWhenActiveSpeedPowerUp=5f;
 
 
     private Rigidbody2D _rb;
@@ -57,7 +57,7 @@ public class PlayerMovement : MonoBehaviour
 
     private IEnumerator SpeedPowerUp()
     {
-        yield return new WaitForSeconds(5f);
+        yield return new WaitForSeconds(_timeWhenActiveSpeedPowerUp);
 
         _speed /= 2;
     }
