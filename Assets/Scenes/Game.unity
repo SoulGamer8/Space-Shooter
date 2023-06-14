@@ -152,7 +152,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 771a7c57cc3e4c748a8d48fdedb2c8f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _enemyPrefab: {fileID: 3694844299455940872, guid: 412fbcd1bae7afa4bb7b5f5a124b432e, type: 3}
+  _enemyPrefab:
+  - {fileID: 3694844299455940872, guid: 412fbcd1bae7afa4bb7b5f5a124b432e, type: 3}
+  - {fileID: 6478411585412796229, guid: 875650dd098e674479e944706d76e11c, type: 3}
   _playerHealth: {fileID: 697074946}
 --- !u!4 &162726494
 Transform:
@@ -660,7 +662,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 97325f5d05f1c13478a57a594bac69b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _bullet: {fileID: 4978602119496610123, guid: 549d2344a1ab50740bca83a07d31901b, type: 3}
+  _bullet: {fileID: 4978602119496610123, guid: 80089d3b1aa1bf14c9b707ce4e264b55, type: 3}
   _tripleShoot: {fileID: 6452515784165141786, guid: c36d3c88ff5b12a4682e17f580cf1e0d, type: 3}
   _fireRate: 0.1
 --- !u!114 &697074946

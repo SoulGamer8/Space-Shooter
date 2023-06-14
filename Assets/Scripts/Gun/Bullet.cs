@@ -10,6 +10,8 @@ public class Bullet : MonoBehaviour
 {
     [SerializeField] private float _bulletSpeed=3;
 
+    [SerializeField] private bool _isEnemyShoot =false;
+
     private bool _trippleShootIsActive;
     private float _trippleShootSpeed;
 
@@ -17,10 +19,15 @@ public class Bullet : MonoBehaviour
     {
         _trippleShootSpeed = _bulletSpeed;
         _trippleShootIsActive = false;
+        if (_isEnemyShoot)
+        {
+            _bulletSpeed *= -1;
+        }
     }
 
     void Update()
     {
+        //transform.position += new Vector3(0, -1, 0) * _bulletSpeed * Time.deltaTime; 
         transform.Translate(Vector3.up * _bulletSpeed * Time.deltaTime);
 
         if (_trippleShootIsActive)
@@ -29,9 +36,9 @@ public class Bullet : MonoBehaviour
         }
 
 
-        if (transform.position.y > 10)
+        if (transform.position.y > 10 || transform.position.y < -10)
         {
-            if (transform.parent != null)
+            if (transform.parent != null && !_isEnemyShoot)
                 Destroy(transform.parent.gameObject);
             Destroy(gameObject);
         }
@@ -50,8 +57,9 @@ public class Bullet : MonoBehaviour
 
     private void Dead()
     {
-        if (transform.parent != null)
+        if (transform.parent != null & !_isEnemyShoot)
         {
+            Debug.Log("Test");
            if (gameObject.transform.parent.transform.childCount == 1 )
                 Destroy(transform.parent.gameObject);
 
