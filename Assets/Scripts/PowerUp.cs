@@ -2,15 +2,20 @@ using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using UnityEngine;
+using UnityEngine.Events;
 
-
-[RequireComponent(typeof(Collider2D))]
+[RequireComponent(typeof(Collider2D), typeof(AudioSource))]
 public class PowerUp : MonoBehaviour
 {
+
     [SerializeField] private float _speed;
     [TooltipAttribute("0 - Triple Shot\n" + "1 - Speed\n" + "2 - Shield")]
     [SerializeField] private int _powerUpId;
-   
+
+    [Header("Sound")]
+    [SerializeField] private AudioClip _soundTakePowerUp;
+
+
     void Update()
     {
         transform.Translate(Vector3.down * _speed * Time.deltaTime);
@@ -37,6 +42,9 @@ public class PowerUp : MonoBehaviour
                 default:
                     break;
             }
+           
+
+            AudioSource.PlayClipAtPoint(_soundTakePowerUp,transform.position);
 
             Destroy(gameObject);
         }

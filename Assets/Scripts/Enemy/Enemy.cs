@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-[RequireComponent(typeof(Collider2D))]
+[RequireComponent(typeof(Collider2D),typeof(AudioSource))]
 public class Enemy : MonoBehaviour
 {
     [Header("Enemy Settings")]
@@ -22,7 +22,7 @@ public class Enemy : MonoBehaviour
 
     [SerializeField] private GameObject[] _powerUps;
 
-    [SerializeField] private Score score;
+  
 
     [Header("Soot")]
     [SerializeField] private bool _isCanShoot = false;
@@ -30,12 +30,17 @@ public class Enemy : MonoBehaviour
     [SerializeField] private GameObject _bullet;
     [SerializeField] private float _speedBullet;
 
+    [Header("Sound")]
+    [SerializeField] private AudioClip _explosionSound;
+    private AudioSource _audioSource;
 
 
+    private Score score;
     private Animator _animator;
 
     private void Start()
     {
+        _audioSource = GetComponent<AudioSource>();
         _animator = GetComponent<Animator>();
         if (_isCanShoot)
             StartCoroutine(Shooting());
@@ -60,7 +65,6 @@ public class Enemy : MonoBehaviour
             if (_health <= 0)
             {
                 Dead();
-                Destroy(gameObject, 2.8f);
             }
         }
         if (other.tag == "Player")
@@ -68,18 +72,26 @@ public class Enemy : MonoBehaviour
             PlayerHealth playerHealth = other.GetComponent<PlayerHealth>();
             if (playerHealth != null)
                 playerHealth.TakeDamage(_damage);
-            Destroy(gameObject);
+            Dead();
         }
     }
 
     private void Dead()
     {
+        StopAllCoroutines();
+
         _animator.SetTrigger("IsEnemyDead");
         this.GetComponent<BoxCollider2D>().enabled = false;
+
         if (_chanceSpawnTripleShotPowerUp >= Random.Range(0, 1.0f))
             Instantiate(_powerUps[Random.Range(0, _powerUps.Length)], new Vector3(transform.position.x, transform.position.y + 0.5f, 0), Quaternion.identity);
         transform.parent.GetComponent<SpawnManager>().KilledEnemy(_score);
-      
+
+        _audioSource.clip = _explosionSound;
+        _audioSource.Play();
+
+        Destroy(gameObject, 2.8f);
+
     }
 
     IEnumerator Shooting()

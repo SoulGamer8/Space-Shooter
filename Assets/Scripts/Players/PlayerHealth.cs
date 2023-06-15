@@ -4,11 +4,14 @@ using TMPro;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.UIElements;
 
 public class PlayerHealth : MonoBehaviour
 {
     public event UnityAction PlayerDieEvent;
-    
+    public event UnityAction<AudioClip> PlayerDieSound;
+
+
     [SerializeField] private int _health;
 
    
@@ -22,16 +25,25 @@ public class PlayerHealth : MonoBehaviour
     [SerializeField] private GameObject _deadScreen;
     [SerializeField] private GameObject _healthBar;
 
+    [Header("VFX")]
+    [SerializeField] private GameObject[] _fireOnEngine;
+
+    [Header("Sound")]
+    [SerializeField] private AudioClip _explosionSound;
+
+
     private int _curentlyShieldHealth;
     private bool _isShieldActivate;
     private GameObject _sheild;
+ 
 
-    private Color _color;
+
     private void Dead()
     {
         _deadScreen.SetActive(true);
         PlayerDieEvent?.Invoke();
-        Destroy(gameObject); 
+        PlayerDieSound?.Invoke(_explosionSound);
+        Destroy(gameObject,1f); 
     }
 
     public void TakeDamage(int damage)
@@ -52,6 +64,7 @@ public class PlayerHealth : MonoBehaviour
         {
             _health -= damage;
             _healthBar.GetComponent<HealthBar>().UpdateHealthBar(damage);
+            SpawnFireOnEngine();
         }
         if (_health <=0)
             Dead();
@@ -65,6 +78,12 @@ public class PlayerHealth : MonoBehaviour
         _isShieldActivate = true;
     }
 
+
+    private void SpawnFireOnEngine()
+    {
+        if(_health - 1 >= 0 )
+            Instantiate(_fireOnEngine[_health-1], transform);
+    }
 
     private IEnumerator Sheild()
     {
