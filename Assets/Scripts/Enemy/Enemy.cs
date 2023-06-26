@@ -35,7 +35,7 @@ public class Enemy : MonoBehaviour
     private AudioSource _audioSource;
 
 
-    private Score score;
+    //private Score score;
     private Animator _animator;
 
     private void Start()
@@ -49,7 +49,6 @@ public class Enemy : MonoBehaviour
 
     private void Update()
     {
-        //transform.Translate(Vector3.down * _speed * Time.deltaTime);
         transform.position += new Vector3(0, -1, 0) * Time.deltaTime * _speed;
         if (transform.position.y < -5)
         {
@@ -98,7 +97,7 @@ public class Enemy : MonoBehaviour
     {
         while (true)
         {
-            Instantiate(_bullet, new Vector3(transform.position.x,transform.position.y + 0.5f, 0),Quaternion.identity,transform);
+            Instantiate(_bullet, new Vector3(transform.position.x,transform.position.y - 2.1f, 0),Quaternion.identity);
             yield return new WaitForSeconds(_fireRate);
         }
        

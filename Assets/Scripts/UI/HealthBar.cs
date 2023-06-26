@@ -8,17 +8,15 @@ public class HealthBar : MonoBehaviour
     [SerializeField] private Texture[] _spriteHealthBar;
 
 
-    private int curentlyHealth = 3 ;
-
 
     private void Start()
     {
-        gameObject.GetComponent<RawImage>().texture = _spriteHealthBar[curentlyHealth];
+        gameObject.GetComponent<RawImage>().texture = _spriteHealthBar[3];
     }
 
-    public void UpdateHealthBar(int damage)
+    public void UpdateHealthBar(int curentlyHealth)
     {
-        curentlyHealth -= damage;
-        gameObject.GetComponent<RawImage>().texture = _spriteHealthBar[curentlyHealth];
+        if(curentlyHealth>0)
+            gameObject.GetComponent<RawImage>().texture = _spriteHealthBar[curentlyHealth];
     }
 }

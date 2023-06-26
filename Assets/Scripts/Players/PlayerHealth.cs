@@ -8,22 +8,19 @@ using UnityEngine.UIElements;
 
 public class PlayerHealth : MonoBehaviour
 {
+    public UnityEvent UnityAction;
+
     public event UnityAction PlayerDieEvent;
     public event UnityAction<AudioClip> PlayerDieSound;
 
 
-    [SerializeField] private int _health;
+    [SerializeField] private int _health = 3;
 
-   
 
     [Header("Shield")]
     [SerializeField] private GameObject _shield;
     [SerializeField] private int _shieldHealth;
     [SerializeField] private float _timeWhenActiveShild;
-
-    [Header("UI")]
-    [SerializeField] private GameObject _deadScreen;
-    [SerializeField] private GameObject _healthBar;
 
     [Header("VFX")]
     [SerializeField] private GameObject[] _fireOnEngine;
@@ -35,12 +32,24 @@ public class PlayerHealth : MonoBehaviour
     private int _curentlyShieldHealth;
     private bool _isShieldActivate;
     private GameObject _sheild;
- 
 
 
-    private void Dead()
+    private GameObject _healthBar;
+
+
+    public void Spawn(GameManager gameManager)
     {
-        _deadScreen.SetActive(true);
+        UnityAction.AddListener(gameManager.PlayerDead);
+    }
+
+    public void AddHealthBar(GameObject healthBar)
+    {
+        _healthBar = healthBar;
+    }
+
+    public void Dead()
+    {
+        UnityAction?.Invoke();
         PlayerDieEvent?.Invoke();
         PlayerDieSound?.Invoke(_explosionSound);
         Destroy(gameObject,1f); 
@@ -63,7 +72,7 @@ public class PlayerHealth : MonoBehaviour
         else
         {
             _health -= damage;
-            _healthBar.GetComponent<HealthBar>().UpdateHealthBar(damage);
+            _healthBar.GetComponent<HealthBar>().UpdateHealthBar(_health);
             SpawnFireOnEngine();
         }
         if (_health <=0)
@@ -77,7 +86,6 @@ public class PlayerHealth : MonoBehaviour
         _sheild = Instantiate(_shield, new Vector3(transform.position.x, transform.position.y, 0), Quaternion.identity,transform);
         _isShieldActivate = true;
     }
-
 
     private void SpawnFireOnEngine()
     {

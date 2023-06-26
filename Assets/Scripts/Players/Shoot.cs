@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-[RequireComponent(typeof(AudioSource))]
+
 public class Shoot : MonoBehaviour
 {
     public event UnityAction<AudioClip> PlaySoundSoot;

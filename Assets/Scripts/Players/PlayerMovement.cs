@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 
 
-[RequireComponent(typeof(Rigidbody2D))]
+[RequireComponent(typeof(Rigidbody2D), typeof(Animator))]
 public class PlayerMovement : MonoBehaviour
 {
 
@@ -14,12 +14,12 @@ public class PlayerMovement : MonoBehaviour
 
 
     private Rigidbody2D _rb;
-
+    private Animator _animator;
 
     private void Awake()
     {
-
-        _rb=GetComponent<Rigidbody2D>();
+        _animator = GetComponent<Animator>();
+        _rb =GetComponent<Rigidbody2D>();
     }
 
     private void Update()
@@ -41,11 +41,12 @@ public class PlayerMovement : MonoBehaviour
     public void OnMovevmentPerformed(InputAction.CallbackContext value)
     {
         CalculatedMovment(value.ReadValue<Vector2>());
-    }
 
-    public void OnMovevmentCanceled(InputAction.CallbackContext value)
-    {
-        CalculatedMovment(value.ReadValue<Vector2>());
+       
+        var vector2 = value.ReadValue<Vector2>();
+        if(vector2.x == 0)
+            _animator.SetTrigger("Stop");
+        _animator.SetFloat("Vector2", vector2.x);
     }
 
     public void TakeSpeedPowerUp()

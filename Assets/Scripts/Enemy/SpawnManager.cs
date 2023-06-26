@@ -9,19 +9,9 @@ public class SpawnManager : MonoBehaviour
 
 
     [SerializeField] private GameObject[] _enemyPrefab;
-    [SerializeField] private PlayerHealth _playerHealth;
 
     private IEnumerator _spawnEnemyRoutine;
 
-    private void OnEnable()
-    {
-        _playerHealth.PlayerDieEvent += OnPlayerDeath;
-    }
-
-    private void OnDisable()
-    {
-        _playerHealth.PlayerDieEvent -= OnPlayerDeath;
-    }
 
     private void Start()
     {
@@ -30,7 +20,7 @@ public class SpawnManager : MonoBehaviour
         StartCoroutine(_spawnEnemyRoutine);
     }
 
-    private void OnPlayerDeath()
+    public void PlayerDeath()
     {
         StopCoroutine(_spawnEnemyRoutine);
     }
