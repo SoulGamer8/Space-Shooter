@@ -14,11 +14,12 @@ public class InputManager : MonoBehaviour
 
     private void OnEnable()
     {
-        
+        _input.Enable();
+        _input.UI.Exit.performed += _ => _gameManager.PauseGame();
     }
 
     private void OnDisable()
     {
-        
+        _input.Disable();
     }
 }
