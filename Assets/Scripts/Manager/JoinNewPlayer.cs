@@ -12,21 +12,22 @@ public class JoinNewPlayer : MonoBehaviour
     [SerializeField] private GameObject _player;
 
     [SerializeField] private Vector3[] _positionHealthBar;
-    private void Start()
-    {
-        Instantiate(_player);
-    }
+
+    [SerializeField] private int _amountPlayers=-1;
 
     private void OnPlayerJoined(PlayerInput playerInput)
    {
+        _amountPlayers++;
         GameManager.AddPlayer(playerInput.gameObject);
         CreateHealthBar(playerInput.gameObject);
+        Debug.Log(playerInput);
+
    }
 
 
     private void CreateHealthBar(GameObject player)
     {
-        GameObject healthBar = Instantiate(_healthBar, _positionHealthBar[0], Quaternion.identity, _canvas.transform);
+        GameObject healthBar = Instantiate(_healthBar, _positionHealthBar[_amountPlayers], Quaternion.identity, _canvas.transform);
         player.GetComponent<PlayerHealth>().AddHealthBar(healthBar);
     }
 }

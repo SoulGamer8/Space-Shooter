@@ -9,7 +9,7 @@ public class PowerUp : MonoBehaviour
 {
 
     [SerializeField] private float _speed;
-    [TooltipAttribute("0 - Triple Shot\n" + "1 - Speed\n" + "2 - Shield")]
+    [TooltipAttribute("0 - Triple Shot\n" + "1 - Speed\n" + "2 - Shield\n" + "3 - Respawn\n" + "4 - Heal\n")]
     [SerializeField] private int _powerUpId;
 
     [Header("Sound")]
@@ -38,6 +38,12 @@ public class PowerUp : MonoBehaviour
                     break;
                 case 2:
                     collision.GetComponent<PlayerHealth>().ActivateShild();
+                    break;
+                case 3:
+                    collision.GetComponent<PlayerHealth>().ActivateShild();
+                    break;
+                case 4:
+                    collision.GetComponent<PlayerHealth>().TakeHeal(); 
                     break;
                 default:
                     break;

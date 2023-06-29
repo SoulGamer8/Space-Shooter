@@ -35,11 +35,20 @@ public class PlayerHealth : MonoBehaviour
 
 
     private GameObject _healthBar;
+    private GameManager _gameManager;
+
+    private int _curentlyHealth;
 
 
+    private void Start()
+    {
+        _curentlyHealth = _health;
+     
+    }
     public void Spawn(GameManager gameManager)
     {
-        UnityAction.AddListener(gameManager.PlayerDead);
+        _gameManager = gameManager;
+        UnityAction.AddListener(_gameManager.PlayerDead);
     }
 
     public void AddHealthBar(GameObject healthBar)
@@ -71,12 +80,27 @@ public class PlayerHealth : MonoBehaviour
 
         else
         {
-            _health -= damage;
-            _healthBar.GetComponent<HealthBar>().UpdateHealthBar(_health);
+            _curentlyHealth -= damage;
+            UpdateHealthBar();
             SpawnFireOnEngine();
         }
-        if (_health <=0)
+        if (_curentlyHealth <= 0)
             Dead();
+    }
+
+    private void UpdateHealthBar()
+    {
+        Debug.Log(_curentlyHealth);
+        _healthBar.GetComponent<HealthBar>().UpdateHealthBar(_curentlyHealth);
+    }
+
+    public void TakeHeal()
+    {
+        if (_curentlyHealth != _health)
+        {
+            _curentlyHealth++;
+            UpdateHealthBar();
+        }
     }
 
     public void ActivateShild()
@@ -87,10 +111,14 @@ public class PlayerHealth : MonoBehaviour
         _isShieldActivate = true;
     }
 
+    public void RespawnPlayer()
+    {
+       // _gameManager.
+    }
     private void SpawnFireOnEngine()
     {
-        if(_health - 1 >= 0 )
-            Instantiate(_fireOnEngine[_health-1], transform);
+        if(_curentlyHealth - 1 >= 0 )
+            Instantiate(_fireOnEngine[_curentlyHealth - 1], transform);
     }
 
     private IEnumerator Sheild()

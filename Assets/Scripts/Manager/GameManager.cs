@@ -11,8 +11,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] private SpawnManager spawnManager;
 
     [SerializeField] private GameObject _pauseMenu;
-    
 
+    [SerializeField] private GameObject[] _playerArray = new GameObject[2];
     int _playerAlive=0;
 
    
@@ -29,11 +29,15 @@ public class GameManager : MonoBehaviour
 
     public void AddPlayer(GameObject player)
     {
-
+        _playerArray[_playerAlive] = player; 
         _playerAlive++;
         player.GetComponent<PlayerHealth>().Spawn(gameObject.GetComponent<GameManager>());
     }
 
+    public void RespawnPlayer()
+    {
+
+    }
 
     public void PauseGame()
     {
