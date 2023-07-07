@@ -33,10 +33,7 @@ public class PlayerMovement : MonoBehaviour
         transform.position = new Vector3(transform.position.x, Mathf.Clamp(transform.position.y, -4, 4),0);
     }
 
-    private void CalculatedMovment(Vector2 moveVecntor)
-    {
-        _rb.velocity = moveVecntor * _speed;
-    }
+   
 
     public void OnMovevmentPerformed(InputAction.CallbackContext value)
     {
@@ -47,6 +44,10 @@ public class PlayerMovement : MonoBehaviour
         if(vector2.x == 0)
             _animator.SetTrigger("Stop");
         _animator.SetFloat("Vector2", vector2.x);
+    }
+    private void CalculatedMovment(Vector2 moveVecntor)
+    {
+        _rb.velocity = moveVecntor * _speed;
     }
 
     public void TakeSpeedPowerUp()

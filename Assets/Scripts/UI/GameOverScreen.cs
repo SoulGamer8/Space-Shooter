@@ -23,9 +23,9 @@ public class GameOverScreen : MonoBehaviour
 
     public void PlayerDead()
     {
+
         StartCoroutine(GameOverText());
         _isPlayerDead = true;
-        gameObject.SetActive(true) ;
     }
 
 

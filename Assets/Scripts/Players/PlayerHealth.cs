@@ -1,6 +1,9 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.Serialization;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.Events;
@@ -35,15 +38,18 @@ public class PlayerHealth : MonoBehaviour
 
 
     private GameObject _healthBar;
+
     private GameManager _gameManager;
+
 
     private int _curentlyHealth;
 
+    private Animator _animator;
 
     private void Start()
     {
         _curentlyHealth = _health;
-     
+        _animator = GetComponent<Animator>();
     }
     public void Spawn(GameManager gameManager)
     {
@@ -61,7 +67,8 @@ public class PlayerHealth : MonoBehaviour
         UnityAction?.Invoke();
         PlayerDieEvent?.Invoke();
         PlayerDieSound?.Invoke(_explosionSound);
-        Destroy(gameObject,1f); 
+        _animator.SetTrigger("PlayerDead");
+        this.gameObject.SetActive(false);
     }
 
     public void TakeDamage(int damage)
@@ -90,7 +97,6 @@ public class PlayerHealth : MonoBehaviour
 
     private void UpdateHealthBar()
     {
-        Debug.Log(_curentlyHealth);
         _healthBar.GetComponent<HealthBar>().UpdateHealthBar(_curentlyHealth);
     }
 
@@ -113,7 +119,8 @@ public class PlayerHealth : MonoBehaviour
 
     public void RespawnPlayer()
     {
-       // _gameManager.
+        _gameManager.RespawnPlayer();
+        Debug.Log("Test");
     }
     private void SpawnFireOnEngine()
     {

@@ -8,7 +8,8 @@ public class LoadingScene : MonoBehaviour
 {
     [SerializeField] private GameObject _loadingScene;
     [SerializeField] private Slider _slider;
-    
+
+
     public void LoadScene(int sceneId)
     {
         StartCoroutine(LoadSceneAsync(sceneId));
@@ -16,15 +17,17 @@ public class LoadingScene : MonoBehaviour
 
     IEnumerator LoadSceneAsync(int sceneId)
     {
-       AsyncOperation operation = SceneManager.LoadSceneAsync(sceneId);
+       AsyncOperation scene = SceneManager.LoadSceneAsync(sceneId);
+        Instantiate(_loadingScene);
         _loadingScene.SetActive(true);
-        while(!operation.isDone)
+        while(!scene.isDone)
         {
-            float progressValue = Mathf.Clamp01(operation.progress / 0.9f);
+            float progressValue = Mathf.Clamp01(scene.progress / 0.9f);
             _slider.value = progressValue;
-
 
             yield return null;
         }
+
     }
+
 }

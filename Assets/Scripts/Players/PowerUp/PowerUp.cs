@@ -40,7 +40,7 @@ public class PowerUp : MonoBehaviour
                     collision.GetComponent<PlayerHealth>().ActivateShild();
                     break;
                 case 3:
-                    collision.GetComponent<PlayerHealth>().ActivateShild();
+                    collision.GetComponent<PlayerHealth>().RespawnPlayer();
                     break;
                 case 4:
                     collision.GetComponent<PlayerHealth>().TakeHeal(); 

@@ -11,23 +11,31 @@ public class JoinNewPlayer : MonoBehaviour
     [SerializeField] private GameObject _canvas;
     [SerializeField] private GameObject _player;
 
-    [SerializeField] private Vector3[] _positionHealthBar;
+    [SerializeField] private Transform[] _healthBarTransform;
 
-    [SerializeField] private int _amountPlayers=-1;
+
+    private List<GameObject> _playersList;
+     private int _amountPlayers=-1;
+
 
     private void OnPlayerJoined(PlayerInput playerInput)
-   {
-        _amountPlayers++;
-        GameManager.AddPlayer(playerInput.gameObject);
-        CreateHealthBar(playerInput.gameObject);
-        Debug.Log(playerInput);
+    {
+        Debug.Log(_playersList.Count);
+        if(_playersList.Count != 2)
+        {
+            _playersList.Add(playerInput.gameObject);
+            GameManager.AddPlayer(playerInput.gameObject);
+            CreateHealthBar(playerInput.gameObject);
+            DontDestroyOnLoad(playerInput.gameObject);
+        }
 
-   }
-
+    }
 
     private void CreateHealthBar(GameObject player)
     {
-        GameObject healthBar = Instantiate(_healthBar, _positionHealthBar[_amountPlayers], Quaternion.identity, _canvas.transform);
+
+        GameObject healthBar = Instantiate(_healthBar, _healthBarTransform[_playersList.Count].transform.position, Quaternion.identity, _canvas.transform.transform);
+
         player.GetComponent<PlayerHealth>().AddHealthBar(healthBar);
     }
 }

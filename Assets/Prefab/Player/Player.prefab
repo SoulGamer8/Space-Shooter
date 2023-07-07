@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 719033182039605500}
   - component: {fileID: 719033182039605506}
   - component: {fileID: 719033182039605505}
+  - component: {fileID: 5446844221940640015}
   - component: {fileID: 719033182039605501}
   - component: {fileID: 719033182039605496}
   - component: {fileID: 719033182039605498}
@@ -34,7 +35,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 719033182039605512}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.75, y: -1.14, z: 0}
+  m_LocalPosition: {x: 2.75, y: -1.14, z: 10}
   m_LocalScale: {x: 0.8, y: 0.8, z: 0.8}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -124,6 +125,19 @@ MonoBehaviour:
   _tripleShoot: {fileID: 6452515784165141786, guid: c36d3c88ff5b12a4682e17f580cf1e0d, type: 3}
   _fireRate: 0.1
   _laserShoot: {fileID: 8300000, guid: 75676f361bdfeaf41a46623e95df3dbc, type: 3}
+--- !u!114 &5446844221940640015
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 719033182039605512}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 264317ee691102a4899d0590d06ad762, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _gameManager: {fileID: 0}
 --- !u!114 &719033182039605501
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -381,7 +395,7 @@ MonoBehaviour:
       - m_Target: {fileID: 719033182039605505}
         m_TargetAssemblyTypeName: Shoot, Assembly-CSharp
         m_MethodName: FireBullet
-        m_Mode: 1
+        m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
