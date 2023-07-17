@@ -10,17 +10,16 @@ public class LevelManager : MonoBehaviour
 
     public static bool _isWin;
 
-    public static Scene _scene;
+    public static string _scene;
 
     private void Start()
     {
-        Debug.Log(_isWin);
-        Debug.Log(_scene.name);
+        LevelComplete();
     }
 
     private void LevelComplete()
     {
-        int levelNumber = _levels.FindIndex(obj => obj.name == _scene.name);
-        _levels[levelNumber].GetComponent<LoadingLevel>().OpenLevel();
+        int levelNumber = _levels.FindIndex(obj => obj.name == _scene);
+        _levels[levelNumber+1].GetComponent<LoadingLevel>().OpenLevel();
     }
 }

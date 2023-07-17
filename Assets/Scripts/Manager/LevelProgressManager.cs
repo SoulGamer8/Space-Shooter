@@ -19,7 +19,8 @@ public class LevelProgressManager : MonoBehaviour
     {
         yield return new WaitForSeconds(_timeHowLongLive);
         LevelManager._isWin = true;
-        LevelManager._scene = SceneManager.GetActiveScene();
+        LevelManager._scene = SceneManager.GetActiveScene().name;
+        Debug.Log(SceneManager.GetActiveScene().name);
         _menuCompleteLevel.SetActive(true);
         Debug.Log("Level complete");
     } 
