@@ -26,16 +26,18 @@ public class Enemy : MonoBehaviour
 
     [Header("Soot")]
     [SerializeField] private bool _isCanShoot = false;
+
+    [ConditionalHide("_isCanShoot", true)]
     [SerializeField] private float _fireRate;
+    [ConditionalHide("_isCanShoot", true)]
     [SerializeField] private GameObject _bullet;
+    [ConditionalHide("_isCanShoot", true)]
     [SerializeField] private float _speedBullet;
 
     [Header("Sound")]
     [SerializeField] private AudioClip _explosionSound;
     private AudioSource _audioSource;
 
-
-    //private Score score;
     private Animator _animator;
 
     private void Start()
@@ -52,23 +54,20 @@ public class Enemy : MonoBehaviour
         transform.position += new Vector3(0, -1, 0) * Time.deltaTime * _speed;
         if (transform.position.y < -5)
         {
+            transform.parent.GetComponent<SpawnManager>().KilledEnemy(0, this.gameObject);
             Destroy(gameObject);
         }
     }
 
-    private void OnTriggerEnter2D(Collider2D other)
+    private void OnTriggerEnter2D(Collider2D collider)
     {
-        if (other.tag == "Bullet")
+        if (collider.tag == "Bullet")
         {
-            _health--;
-            if (_health <= 0)
-            {
-                Dead();
-            }
+            TakeDamage(1);
         }
-        if (other.tag == "Player")
+        if (collider.tag == "Player")
         {
-            PlayerHealth playerHealth = other.GetComponent<PlayerHealth>();
+            PlayerHealth playerHealth = collider.GetComponent<PlayerHealth>();
             if (playerHealth != null)
                 playerHealth.TakeDamage(_damage);
             Dead();
@@ -84,13 +83,22 @@ public class Enemy : MonoBehaviour
 
         if (_chanceSpawnTripleShotPowerUp >= Random.Range(0, 1.0f))
             Instantiate(_powerUps[Random.Range(0, _powerUps.Length)], new Vector3(transform.position.x, transform.position.y + 0.5f, 0), Quaternion.identity);
-        transform.parent.GetComponent<SpawnManager>().KilledEnemy(_score);
+        transform.parent.GetComponent<SpawnManager>().KilledEnemy(_score,this.gameObject);
 
         _audioSource.clip = _explosionSound;
         _audioSource.Play();
 
         Destroy(gameObject, 2.8f);
 
+    }
+
+    public void TakeDamage(int damage)
+    {
+        _health -= damage;
+        if (_health <= 0)
+        {
+            Dead();
+        }
     }
 
     IEnumerator Shooting()
@@ -101,6 +109,5 @@ public class Enemy : MonoBehaviour
             yield return new WaitForSeconds(_fireRate);
         }
        
-
     }
 }

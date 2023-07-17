@@ -10,8 +10,13 @@ public class SpawnManager : MonoBehaviour
 
     [SerializeField] private GameObject[] _enemyPrefab;
 
+    [SerializeField] private int _spawnRate;
+
+
+    [SerializeField] private List<GameObject> _enemyList;
     private IEnumerator _spawnEnemyRoutine;
 
+    private int _spawnCount=0;
 
     private void Start()
     {
@@ -32,14 +37,28 @@ public class SpawnManager : MonoBehaviour
         {
             Vector3 randomPosition = new Vector3(Random.Range(-8, 8), transform.position.y, 0);
             int randomEnemy = Random.Range(0, _enemyPrefab.Length);
-            Instantiate(_enemyPrefab[randomEnemy], randomPosition, Quaternion.identity, transform);
-            yield return new WaitForSeconds(4);
+            GameObject enemy =  Instantiate(_enemyPrefab[randomEnemy], randomPosition, Quaternion.identity, transform);
+            enemy.name = enemy.name + _spawnCount;
+            _spawnCount++;
+            _enemyList.Add(enemy);
+            yield return new WaitForSeconds(_spawnRate);
         }
     }
 
-    public void KilledEnemy(int score)
+    public void KilledEnemy(int score, GameObject enemy)
     {
+        if (enemy == null)
+            Debug.Log("Test");
         enemyKilledEvent?.Invoke(score);
+        int enemyNumber = _enemyList.FindIndex(obj => obj.name == enemy.name);
+        if (enemyNumber != -1)
+            _enemyList.RemoveAt(enemyNumber);
+    }
+
+    public GameObject GetRandomObject()
+    {
+        int random = Random.Range(0, _enemyList.Count);
+        return _enemyList[random];
     }
 
 }

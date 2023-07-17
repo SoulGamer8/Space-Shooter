@@ -18,9 +18,9 @@ public class LoadingScene : MonoBehaviour
     IEnumerator LoadSceneAsync(int sceneId)
     {
        AsyncOperation scene = SceneManager.LoadSceneAsync(sceneId);
-        Instantiate(_loadingScene);
         _loadingScene.SetActive(true);
-        while(!scene.isDone)
+        _slider = _loadingScene.transform.GetChild(0).gameObject.GetComponent<Slider>();
+        while (!scene.isDone)
         {
             float progressValue = Mathf.Clamp01(scene.progress / 0.9f);
             _slider.value = progressValue;

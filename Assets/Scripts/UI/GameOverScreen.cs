@@ -8,26 +8,10 @@ public class GameOverScreen : MonoBehaviour
 {
     private TextMeshProUGUI  _text;
 
-    private bool _isPlayerDead;
-
-
-    public void ReloadScene()
-    {
-        if (_isPlayerDead)
-        {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-            _isPlayerDead =false;
-        }
-    }
-
-
     public void PlayerDead()
     {
-
         StartCoroutine(GameOverText());
-        _isPlayerDead = true;
     }
-
 
 
     private IEnumerator GameOverText()

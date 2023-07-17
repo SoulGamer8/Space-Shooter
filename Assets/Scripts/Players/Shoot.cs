@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
@@ -17,10 +18,12 @@ public class Shoot : MonoBehaviour
     [SerializeField] private AudioClip _laserShoot;
 
 
+    [SerializeField] private GameObject _rocket;
     private bool _isTripleShootActive = false;
-    private float _canFire = -1f;
+
 
     private Coroutine fire;
+
 
     public void FireBullet(InputAction.CallbackContext value)
     {
@@ -38,6 +41,12 @@ public class Shoot : MonoBehaviour
         StartCoroutine(ActivePowerUp());
     }
 
+    public void FireRocket(InputAction.CallbackContext value)
+    {
+        if (value.started)
+           Instantiate(_rocket, new Vector3(transform.position.x - 0.2f, transform.position.y + 1.0f, 0), Quaternion.identity);
+       
+    }
 
 
 

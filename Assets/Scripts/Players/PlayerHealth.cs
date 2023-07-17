@@ -16,40 +16,45 @@ public class PlayerHealth : MonoBehaviour
     public event UnityAction PlayerDieEvent;
     public event UnityAction<AudioClip> PlayerDieSound;
 
-
+    [Header("Health")]
     [SerializeField] private int _health = 3;
 
+    private int _curentlyHealth;
+    private GameObject _healthBar;
 
     [Header("Shield")]
     [SerializeField] private GameObject _shield;
     [SerializeField] private int _shieldHealth;
     [SerializeField] private float _timeWhenActiveShild;
 
-    [Header("VFX")]
-    [SerializeField] private GameObject[] _fireOnEngine;
-
-    [Header("Sound")]
-    [SerializeField] private AudioClip _explosionSound;
-
-
     private int _curentlyShieldHealth;
     private bool _isShieldActivate;
     private GameObject _sheild;
 
+    [Header("VFX")]
+    [SerializeField] private GameObject[] _fireOnEngine;
 
-    private GameObject _healthBar;
+    [SerializeField] private List<GameObject> _fireOnEngineInstiate;
+
+    [Header("Sound")]
+    [SerializeField] private AudioClip _explosionSound;
+
+    [SerializeField] private float _timeWhenPlayerInvulnerability;
+
+
+    private bool _isInvulnerabilityAactivated = false;
+
+    private PolygonCollider2D _polygonCollider2D;
 
     private GameManager _gameManager;
 
-
-    private int _curentlyHealth;
-
     private Animator _animator;
 
-    private void Start()
+    private void Awake()
     {
         _curentlyHealth = _health;
         _animator = GetComponent<Animator>();
+        _polygonCollider2D = GetComponent<PolygonCollider2D>();
     }
     public void Spawn(GameManager gameManager)
     {
@@ -85,11 +90,13 @@ public class PlayerHealth : MonoBehaviour
 
         }
 
-        else
+        if(!_isInvulnerabilityAactivated)
         {
             _curentlyHealth -= damage;
             UpdateHealthBar();
             SpawnFireOnEngine();
+            StartCoroutine(Invulnerability());
+            
         }
         if (_curentlyHealth <= 0)
             Dead();
@@ -105,6 +112,8 @@ public class PlayerHealth : MonoBehaviour
         if (_curentlyHealth != _health)
         {
             _curentlyHealth++;
+            Destroy(_fireOnEngineInstiate[_fireOnEngineInstiate.Count - 1]);
+            _fireOnEngineInstiate.RemoveAt(_fireOnEngineInstiate.Count-1);
             UpdateHealthBar();
         }
     }
@@ -120,12 +129,15 @@ public class PlayerHealth : MonoBehaviour
     public void RespawnPlayer()
     {
         _gameManager.RespawnPlayer();
-        Debug.Log("Test");
+
     }
     private void SpawnFireOnEngine()
     {
-        if(_curentlyHealth - 1 >= 0 )
-            Instantiate(_fireOnEngine[_curentlyHealth - 1], transform);
+        if (_curentlyHealth - 1 >= 0)
+        {
+            GameObject fire = Instantiate(_fireOnEngine[_curentlyHealth - 1], transform);
+            _fireOnEngineInstiate.Add(fire);
+        }
     }
 
     private IEnumerator Sheild()
@@ -133,5 +145,12 @@ public class PlayerHealth : MonoBehaviour
         yield return new WaitForSeconds(_timeWhenActiveShild);
         _isShieldActivate = false;
         Destroy(_sheild);
+    }
+    
+    private IEnumerator Invulnerability()
+    {
+        _polygonCollider2D.enabled = false;
+        yield return new WaitForSeconds(_timeWhenPlayerInvulnerability);
+        _polygonCollider2D.enabled = true;
     }
 }

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -40,7 +41,7 @@ public class GameManager : MonoBehaviour
         player.GetComponent<PlayerHealth>().Spawn(gameObject.GetComponent<GameManager>());
     }
 
-    public void RespawnPlayer()
+    public void RespawnPlayer() 
     {
         for(int i = 0; i < _playerArray.Length; i++)
         {
@@ -52,9 +53,17 @@ public class GameManager : MonoBehaviour
         }
     }
 
+
+    public void RestartGame()
+    {
+        if (_playerAlive == 0)
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+
     public void PauseGame()
     {
         _pauseMenu.SetActive(true);
+        _pauseMenu.GetComponent<Animator>().SetTrigger("Activate Pause menu");
         Time.timeScale = 0f;
     }
 

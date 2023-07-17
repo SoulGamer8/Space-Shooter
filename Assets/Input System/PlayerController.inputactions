@@ -22,6 +22,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
+                },
+                {
+                    "name": "Rocket",
+                    "type": "Button",
+                    "id": "a9aaf331-6732-4d46-b479-ec69df38e02a",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
                 }
             ],
             "bindings": [
@@ -156,6 +165,17 @@
                     "action": "Movement",
                     "isComposite": false,
                     "isPartOfComposite": true
+                },
+                {
+                    "name": "",
+                    "id": "f64f4271-ced3-441d-8c50-8a40ca6e3d7e",
+                    "path": "<Keyboard>/x",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Rocket",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         },
@@ -176,6 +196,15 @@
                     "name": "Exit",
                     "type": "Button",
                     "id": "a65399be-ba0b-4c11-84c3-bc6be257f593",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Start level",
+                    "type": "Button",
+                    "id": "7d4f66c1-814d-42fe-8a6d-39be37d902ef",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -202,6 +231,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "Exit",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "8d334831-874b-416e-b71f-1bca56f1bbb9",
+                    "path": "<Keyboard>/enter",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Start level",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

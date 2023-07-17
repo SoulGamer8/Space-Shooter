@@ -44,6 +44,15 @@ public partial class @PlayerController: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Rocket"",
+                    ""type"": ""Button"",
+                    ""id"": ""a9aaf331-6732-4d46-b479-ec69df38e02a"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
                 }
             ],
             ""bindings"": [
@@ -178,6 +187,17 @@ public partial class @PlayerController: IInputActionCollection2, IDisposable
                     ""action"": ""Movement"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""f64f4271-ced3-441d-8c50-8a40ca6e3d7e"",
+                    ""path"": ""<Keyboard>/x"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Rocket"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -198,6 +218,15 @@ public partial class @PlayerController: IInputActionCollection2, IDisposable
                     ""name"": ""Exit"",
                     ""type"": ""Button"",
                     ""id"": ""a65399be-ba0b-4c11-84c3-bc6be257f593"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Start level"",
+                    ""type"": ""Button"",
+                    ""id"": ""7d4f66c1-814d-42fe-8a6d-39be37d902ef"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
@@ -226,6 +255,17 @@ public partial class @PlayerController: IInputActionCollection2, IDisposable
                     ""action"": ""Exit"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""8d334831-874b-416e-b71f-1bca56f1bbb9"",
+                    ""path"": ""<Keyboard>/enter"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Start level"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -236,10 +276,12 @@ public partial class @PlayerController: IInputActionCollection2, IDisposable
         m_Player = asset.FindActionMap("Player", throwIfNotFound: true);
         m_Player_Movement = m_Player.FindAction("Movement", throwIfNotFound: true);
         m_Player_Shoot = m_Player.FindAction("Shoot", throwIfNotFound: true);
+        m_Player_Rocket = m_Player.FindAction("Rocket", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Restart = m_UI.FindAction("Restart", throwIfNotFound: true);
         m_UI_Exit = m_UI.FindAction("Exit", throwIfNotFound: true);
+        m_UI_Startlevel = m_UI.FindAction("Start level", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -303,12 +345,14 @@ public partial class @PlayerController: IInputActionCollection2, IDisposable
     private List<IPlayerActions> m_PlayerActionsCallbackInterfaces = new List<IPlayerActions>();
     private readonly InputAction m_Player_Movement;
     private readonly InputAction m_Player_Shoot;
+    private readonly InputAction m_Player_Rocket;
     public struct PlayerActions
     {
         private @PlayerController m_Wrapper;
         public PlayerActions(@PlayerController wrapper) { m_Wrapper = wrapper; }
         public InputAction @Movement => m_Wrapper.m_Player_Movement;
         public InputAction @Shoot => m_Wrapper.m_Player_Shoot;
+        public InputAction @Rocket => m_Wrapper.m_Player_Rocket;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -324,6 +368,9 @@ public partial class @PlayerController: IInputActionCollection2, IDisposable
             @Shoot.started += instance.OnShoot;
             @Shoot.performed += instance.OnShoot;
             @Shoot.canceled += instance.OnShoot;
+            @Rocket.started += instance.OnRocket;
+            @Rocket.performed += instance.OnRocket;
+            @Rocket.canceled += instance.OnRocket;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -334,6 +381,9 @@ public partial class @PlayerController: IInputActionCollection2, IDisposable
             @Shoot.started -= instance.OnShoot;
             @Shoot.performed -= instance.OnShoot;
             @Shoot.canceled -= instance.OnShoot;
+            @Rocket.started -= instance.OnRocket;
+            @Rocket.performed -= instance.OnRocket;
+            @Rocket.canceled -= instance.OnRocket;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -357,12 +407,14 @@ public partial class @PlayerController: IInputActionCollection2, IDisposable
     private List<IUIActions> m_UIActionsCallbackInterfaces = new List<IUIActions>();
     private readonly InputAction m_UI_Restart;
     private readonly InputAction m_UI_Exit;
+    private readonly InputAction m_UI_Startlevel;
     public struct UIActions
     {
         private @PlayerController m_Wrapper;
         public UIActions(@PlayerController wrapper) { m_Wrapper = wrapper; }
         public InputAction @Restart => m_Wrapper.m_UI_Restart;
         public InputAction @Exit => m_Wrapper.m_UI_Exit;
+        public InputAction @Startlevel => m_Wrapper.m_UI_Startlevel;
         public InputActionMap Get() { return m_Wrapper.m_UI; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -378,6 +430,9 @@ public partial class @PlayerController: IInputActionCollection2, IDisposable
             @Exit.started += instance.OnExit;
             @Exit.performed += instance.OnExit;
             @Exit.canceled += instance.OnExit;
+            @Startlevel.started += instance.OnStartlevel;
+            @Startlevel.performed += instance.OnStartlevel;
+            @Startlevel.canceled += instance.OnStartlevel;
         }
 
         private void UnregisterCallbacks(IUIActions instance)
@@ -388,6 +443,9 @@ public partial class @PlayerController: IInputActionCollection2, IDisposable
             @Exit.started -= instance.OnExit;
             @Exit.performed -= instance.OnExit;
             @Exit.canceled -= instance.OnExit;
+            @Startlevel.started -= instance.OnStartlevel;
+            @Startlevel.performed -= instance.OnStartlevel;
+            @Startlevel.canceled -= instance.OnStartlevel;
         }
 
         public void RemoveCallbacks(IUIActions instance)
@@ -409,10 +467,12 @@ public partial class @PlayerController: IInputActionCollection2, IDisposable
     {
         void OnMovement(InputAction.CallbackContext context);
         void OnShoot(InputAction.CallbackContext context);
+        void OnRocket(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {
         void OnRestart(InputAction.CallbackContext context);
         void OnExit(InputAction.CallbackContext context);
+        void OnStartlevel(InputAction.CallbackContext context);
     }
 }

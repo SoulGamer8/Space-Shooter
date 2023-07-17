@@ -8,6 +8,8 @@ public class GameController : MonoBehaviour
     [SerializeField] private GameObject _text;
 
     private bool connected = false;
+    private Coroutine _textBlink;
+
 
     void Awake()
     {
@@ -24,13 +26,14 @@ public class GameController : MonoBehaviour
             if (!connected && controllers.Length > 0)
             {
                 connected = true;
-                
+                _textBlink = StartCoroutine(TextBlink());
                 Debug.Log("Connected");
 
             }
             else if (connected && controllers.Length == 0)
             {
                 connected = false;
+                StopCoroutine(_textBlink);
                 Debug.Log("Disconnected");
             }
             _text.SetActive(connected);
@@ -38,8 +41,15 @@ public class GameController : MonoBehaviour
         }
     }
 
-    IEnumerable text()
+    IEnumerator TextBlink()
     {
-        yield return null;
+        TextMeshProUGUI text = _text.GetComponent<TextMeshProUGUI>();
+        while (true)
+        {
+            text.text = "Press any key to add  Player2";
+            yield return new WaitForSeconds(0.5f);
+            text.text = "";
+            yield return new WaitForSeconds(0.5f);
+        }
     }
 }

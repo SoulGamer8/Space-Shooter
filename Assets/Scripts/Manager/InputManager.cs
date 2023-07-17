@@ -17,6 +17,7 @@ public class InputManager : MonoBehaviour
     {
         _input.Enable();
         _input.UI.Exit.performed += _ => _gameManager.PauseGame();
+        _input.UI.Restart.performed += _ => _gameManager.RestartGame();
     }
 
     private void OnDisable()

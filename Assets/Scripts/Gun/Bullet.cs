@@ -49,13 +49,13 @@ public class Bullet : MonoBehaviour
         _trippleShootIsActive = true;
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerEnter2D(Collider2D collider)
     {
-        if (collision.tag == "Enemy" && !_isEnemyShoot)
+        if (collider.tag == "Enemy" && !_isEnemyShoot)
             Dead();
-        if (collision.tag == "Player" && _isEnemyShoot)
+        if (collider.tag == "Player" && _isEnemyShoot)
         {
-            collision.GetComponent<PlayerHealth>().TakeDamage(1);
+            collider.GetComponent<PlayerHealth>().TakeDamage(1);
             Dead();
         }
            

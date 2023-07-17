@@ -1,15 +1,20 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Score : MonoBehaviour
 {
     [SerializeField] private SpawnManager _spawnManager;
 
-    private TextMeshProUGUI _scoreTesxt;
+    [SerializeField] private TextMeshProUGUI _scoreText;
 
+    [SerializeField] private TextMeshProUGUI _bestScoreText;
     private int _score;
+    
+    private int _bestScore= 0;
+
 
     private void OnEnable()
     {
@@ -23,18 +28,35 @@ public class Score : MonoBehaviour
 
     private void Start()
     {
-        _scoreTesxt = this.GetComponent<TextMeshProUGUI>();
+        _scoreText = this.GetComponent<TextMeshProUGUI>();
+        LoadNumber();
         UpdateUI();
+        
     }
 
     private void UpdateUI()
     {
-        _scoreTesxt.text ="Score: " +  _score.ToString();
+        _scoreText.text ="Score: " +  _score.ToString();
+        _bestScoreText.text = "Best Score: " + _bestScore.ToString();
     }
 
     private void AddScore(int score)
     {
         _score += score;
+        if(_score > _bestScore)
+            _bestScore = _score;
+        UpdateUI();
+        SaveNumber();
+    }
+
+    public void SaveNumber()
+    {
+        PlayerPrefs.SetInt("bestScore", _bestScore);
+    }
+
+    public void LoadNumber()
+    {
+        _bestScore = PlayerPrefs.GetInt("bestScore");
         UpdateUI();
     }
 }

@@ -1,0 +1,726 @@
+fileFormatVersion: 2
+guid: 4a5ca7cc73ee2bd428db4867d990f1b4
+TextureImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 12
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMasterTextureLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 0
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Server
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Neo Geo NGCD - Metal Slug 5 - Missiles_24
+      rect:
+        serializedVersion: 2
+        x: 57
+        y: 290
+        width: 125
+        height: 24
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bf7ba252431498142a62fedb7a6ceded
+      internalID: 1877308142
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Neo Geo NGCD - Metal Slug 5 - Missiles_25
+      rect:
+        serializedVersion: 2
+        x: 185
+        y: 289
+        width: 125
+        height: 26
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5310e9cd08563ec40b75d4c7fc62e463
+      internalID: 447631910
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Neo Geo NGCD - Metal Slug 5 - Missiles_26
+      rect:
+        serializedVersion: 2
+        x: 313
+        y: 288
+        width: 129
+        height: 28
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f3e4d706afda209438e8f2029b50ef54
+      internalID: 988964487
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Neo Geo NGCD - Metal Slug 5 - Missiles_30
+      rect:
+        serializedVersion: 2
+        x: 55
+        y: 259
+        width: 125
+        height: 24
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 686908cf9d2687a4f95a0ae5a1f927c1
+      internalID: -1971312450
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Neo Geo NGCD - Metal Slug 5 - Missiles_31
+      rect:
+        serializedVersion: 2
+        x: 184
+        y: 260
+        width: 125
+        height: 25
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9ad878b343509bf4ead1b4db588d8cab
+      internalID: -192205918
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Neo Geo NGCD - Metal Slug 5 - Missiles_32
+      rect:
+        serializedVersion: 2
+        x: 315
+        y: 252
+        width: 125
+        height: 28
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c49abcd8b1eb49a4e8da74790d2e2931
+      internalID: 1428714305
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Neo Geo NGCD - Metal Slug 5 - Missiles_34
+      rect:
+        serializedVersion: 2
+        x: 188
+        y: 227
+        width: 124
+        height: 29
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b3fa70965a96ec5469aa05c411dc925c
+      internalID: -876103003
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Neo Geo NGCD - Metal Slug 5 - Missiles_36
+      rect:
+        serializedVersion: 2
+        x: 55
+        y: 228
+        width: 125
+        height: 26
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c8e4c18109793044b98e172fcc66081b
+      internalID: -433205097
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Neo Geo NGCD - Metal Slug 5 - Missiles_38
+      rect:
+        serializedVersion: 2
+        x: 316
+        y: 222
+        width: 126
+        height: 26
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5507e0ea4b9ac1341bbfaec1e381b909
+      internalID: 451621358
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Neo Geo NGCD - Metal Slug 5 - Missiles_39
+      rect:
+        serializedVersion: 2
+        x: 56
+        y: 192
+        width: 125
+        height: 26
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4ed9c94ec6cbcc34b84fcea8de811349
+      internalID: 1290254234
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Neo Geo NGCD - Metal Slug 5 - Missiles_40
+      rect:
+        serializedVersion: 2
+        x: 188
+        y: 190
+        width: 124
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5086b6bf637f1954da45683b7479d02d
+      internalID: -241647831
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Neo Geo NGCD - Metal Slug 5 - Missiles_41
+      rect:
+        serializedVersion: 2
+        x: 315
+        y: 191
+        width: 127
+        height: 25
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 631d6e0a150605f40930513fef0151d5
+      internalID: -2044261143
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Neo Geo NGCD - Metal Slug 5 - Missiles_42
+      rect:
+        serializedVersion: 2
+        x: 56
+        y: 158
+        width: 125
+        height: 26
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 78c29d4f47cdd78479ead68c5df7288d
+      internalID: 515374385
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Neo Geo NGCD - Metal Slug 5 - Missiles_43
+      rect:
+        serializedVersion: 2
+        x: 188
+        y: 156
+        width: 124
+        height: 30
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 212abe9765c25b946b04d88b2da70d91
+      internalID: 1228749600
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Neo Geo NGCD - Metal Slug 5 - Missiles_47
+      rect:
+        serializedVersion: 2
+        x: 315
+        y: 156
+        width: 127
+        height: 25
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 01aa271e8465045409be17b91c2687a0
+      internalID: -1501775671
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Neo Geo NGCD - Metal Slug 5 - Missiles_48
+      rect:
+        serializedVersion: 2
+        x: 56
+        y: 123
+        width: 126
+        height: 24
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 334069f0f3f288241808114a098cda06
+      internalID: 1292160741
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Neo Geo NGCD - Metal Slug 5 - Missiles_49
+      rect:
+        serializedVersion: 2
+        x: 187
+        y: 119
+        width: 126
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 47a4bf5cb2909164aa86d2c825ff1a45
+      internalID: -1917003705
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Neo Geo NGCD - Metal Slug 5 - Missiles_53
+      rect:
+        serializedVersion: 2
+        x: 316
+        y: 121
+        width: 125
+        height: 26
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e2517eb403dc0d14f82fbea15d82e3f3
+      internalID: -2075616648
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Neo Geo NGCD - Metal Slug 5 - Missiles_54
+      rect:
+        serializedVersion: 2
+        x: 55
+        y: 85
+        width: 127
+        height: 25
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f43926b182e076a478c7d446bed36925
+      internalID: -1047217821
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Neo Geo NGCD - Metal Slug 5 - Missiles_55
+      rect:
+        serializedVersion: 2
+        x: 188
+        y: 82
+        width: 125
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e06bd5278be5f2e4c84695a97c512416
+      internalID: 1186135605
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Neo Geo NGCD - Metal Slug 5 - Missiles_56
+      rect:
+        serializedVersion: 2
+        x: 317
+        y: 86
+        width: 125
+        height: 26
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1f43a3ead75e12b4199199201016f27f
+      internalID: -1849419620
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Neo Geo NGCD - Metal Slug 5 - Missiles_57
+      rect:
+        serializedVersion: 2
+        x: 56
+        y: 49
+        width: 125
+        height: 26
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 151598fe6eb8ad949941ce23e4f2d3de
+      internalID: -560803168
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Neo Geo NGCD - Metal Slug 5 - Missiles_59
+      rect:
+        serializedVersion: 2
+        x: 318
+        y: 48
+        width: 124
+        height: 27
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c7be0512758e9964a8181a5fb01e8cfc
+      internalID: 495478234
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Neo Geo NGCD - Metal Slug 5 - Missiles_61
+      rect:
+        serializedVersion: 2
+        x: 188
+        y: 47
+        width: 125
+        height: 30
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9d9fa6261c090c34d9a37bf4c4d4179e
+      internalID: -1592257511
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Neo Geo NGCD - Metal Slug 5 - Missiles_63
+      rect:
+        serializedVersion: 2
+        x: 56
+        y: 16
+        width: 125
+        height: 27
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1b86fe93e0f26444bb3fdedc8b935f96
+      internalID: 2009515076
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    nameFileIdTable:
+      Neo Geo NGCD - Metal Slug 5 - Missiles_0: 110486276
+      Neo Geo NGCD - Metal Slug 5 - Missiles_1: -1990056567
+      Neo Geo NGCD - Metal Slug 5 - Missiles_10: -619609783
+      Neo Geo NGCD - Metal Slug 5 - Missiles_11: -1089679599
+      Neo Geo NGCD - Metal Slug 5 - Missiles_12: -1029967217
+      Neo Geo NGCD - Metal Slug 5 - Missiles_13: -1561191444
+      Neo Geo NGCD - Metal Slug 5 - Missiles_14: -1697932803
+      Neo Geo NGCD - Metal Slug 5 - Missiles_15: -1394858401
+      Neo Geo NGCD - Metal Slug 5 - Missiles_16: -339127860
+      Neo Geo NGCD - Metal Slug 5 - Missiles_17: -454132120
+      Neo Geo NGCD - Metal Slug 5 - Missiles_18: 1959207302
+      Neo Geo NGCD - Metal Slug 5 - Missiles_19: -1233979871
+      Neo Geo NGCD - Metal Slug 5 - Missiles_2: 502383869
+      Neo Geo NGCD - Metal Slug 5 - Missiles_20: 1391772295
+      Neo Geo NGCD - Metal Slug 5 - Missiles_21: -1985649085
+      Neo Geo NGCD - Metal Slug 5 - Missiles_22: 500528799
+      Neo Geo NGCD - Metal Slug 5 - Missiles_23: 1942738948
+      Neo Geo NGCD - Metal Slug 5 - Missiles_24: 1877308142
+      Neo Geo NGCD - Metal Slug 5 - Missiles_25: 447631910
+      Neo Geo NGCD - Metal Slug 5 - Missiles_26: 988964487
+      Neo Geo NGCD - Metal Slug 5 - Missiles_27: -1777930335
+      Neo Geo NGCD - Metal Slug 5 - Missiles_28: -1970265412
+      Neo Geo NGCD - Metal Slug 5 - Missiles_29: -1402004249
+      Neo Geo NGCD - Metal Slug 5 - Missiles_3: -1715331722
+      Neo Geo NGCD - Metal Slug 5 - Missiles_30: -1971312450
+      Neo Geo NGCD - Metal Slug 5 - Missiles_31: -192205918
+      Neo Geo NGCD - Metal Slug 5 - Missiles_32: 1428714305
+      Neo Geo NGCD - Metal Slug 5 - Missiles_33: 142629129
+      Neo Geo NGCD - Metal Slug 5 - Missiles_34: -876103003
+      Neo Geo NGCD - Metal Slug 5 - Missiles_35: -1312006026
+      Neo Geo NGCD - Metal Slug 5 - Missiles_36: -433205097
+      Neo Geo NGCD - Metal Slug 5 - Missiles_37: 45749542
+      Neo Geo NGCD - Metal Slug 5 - Missiles_38: 451621358
+      Neo Geo NGCD - Metal Slug 5 - Missiles_39: 1290254234
+      Neo Geo NGCD - Metal Slug 5 - Missiles_4: 434527646
+      Neo Geo NGCD - Metal Slug 5 - Missiles_40: -241647831
+      Neo Geo NGCD - Metal Slug 5 - Missiles_41: -2044261143
+      Neo Geo NGCD - Metal Slug 5 - Missiles_42: 515374385
+      Neo Geo NGCD - Metal Slug 5 - Missiles_43: 1228749600
+      Neo Geo NGCD - Metal Slug 5 - Missiles_44: 1814910456
+      Neo Geo NGCD - Metal Slug 5 - Missiles_45: -1394286564
+      Neo Geo NGCD - Metal Slug 5 - Missiles_46: -1341798726
+      Neo Geo NGCD - Metal Slug 5 - Missiles_47: -1501775671
+      Neo Geo NGCD - Metal Slug 5 - Missiles_48: 1292160741
+      Neo Geo NGCD - Metal Slug 5 - Missiles_49: -1917003705
+      Neo Geo NGCD - Metal Slug 5 - Missiles_5: -1047481196
+      Neo Geo NGCD - Metal Slug 5 - Missiles_50: -118325518
+      Neo Geo NGCD - Metal Slug 5 - Missiles_51: 1271719428
+      Neo Geo NGCD - Metal Slug 5 - Missiles_52: -1796772067
+      Neo Geo NGCD - Metal Slug 5 - Missiles_53: -2075616648
+      Neo Geo NGCD - Metal Slug 5 - Missiles_54: -1047217821
+      Neo Geo NGCD - Metal Slug 5 - Missiles_55: 1186135605
+      Neo Geo NGCD - Metal Slug 5 - Missiles_56: -1849419620
+      Neo Geo NGCD - Metal Slug 5 - Missiles_57: -560803168
+      Neo Geo NGCD - Metal Slug 5 - Missiles_58: -1778750646
+      Neo Geo NGCD - Metal Slug 5 - Missiles_59: 495478234
+      Neo Geo NGCD - Metal Slug 5 - Missiles_6: 2102574057
+      Neo Geo NGCD - Metal Slug 5 - Missiles_60: 1093052671
+      Neo Geo NGCD - Metal Slug 5 - Missiles_61: -1592257511
+      Neo Geo NGCD - Metal Slug 5 - Missiles_62: 929053179
+      Neo Geo NGCD - Metal Slug 5 - Missiles_63: 2009515076
+      Neo Geo NGCD - Metal Slug 5 - Missiles_64: 1875487986
+      Neo Geo NGCD - Metal Slug 5 - Missiles_65: 87906865
+      Neo Geo NGCD - Metal Slug 5 - Missiles_7: 1493601632
+      Neo Geo NGCD - Metal Slug 5 - Missiles_8: -1526689835
+      Neo Geo NGCD - Metal Slug 5 - Missiles_9: -470982841
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
