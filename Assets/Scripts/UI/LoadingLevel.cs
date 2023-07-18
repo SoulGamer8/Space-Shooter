@@ -21,6 +21,9 @@ public class LoadingLevel : MonoBehaviour
 
     private void Start()
     {
+        int test = PlayerPrefs.GetInt(this.gameObject.name);
+        if (test== 1)
+            _isOpen = true;
         if (_isOpen)
             ChangeImage();
 
@@ -56,6 +59,6 @@ public class LoadingLevel : MonoBehaviour
     {
         _isOpen = true;
         ChangeImage();
-        //PlayerPrefs("open",_isOpen);
+        PlayerPrefs.SetInt(this.gameObject.name, 1);
     }
 }

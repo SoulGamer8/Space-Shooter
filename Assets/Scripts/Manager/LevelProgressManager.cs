@@ -8,9 +8,10 @@ public class LevelProgressManager : MonoBehaviour
     [SerializeField] private float _timeHowLongLive;
     [SerializeField] private GameObject _menuCompleteLevel;
 
-
+    private WalletManager _walletManager;
     private void Start()
     {
+        _walletManager = WalletManager.instance;
         StartCoroutine(Timer());
     }
 
@@ -20,8 +21,9 @@ public class LevelProgressManager : MonoBehaviour
         yield return new WaitForSeconds(_timeHowLongLive);
         LevelManager._isWin = true;
         LevelManager._scene = SceneManager.GetActiveScene().name;
-        Debug.Log(SceneManager.GetActiveScene().name);
         _menuCompleteLevel.SetActive(true);
+        _walletManager.SaveMoney();
         Debug.Log("Level complete");
+
     } 
 }

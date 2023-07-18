@@ -14,6 +14,11 @@ public class SpawnManager : MonoBehaviour
 
 
     [SerializeField] private List<GameObject> _enemyList;
+
+    [Header("Coin")]
+    [SerializeField] private GameObject _coinPrefab;
+    [Range(0f,1f)]
+    [SerializeField] private float _chanceSpawnCoin;
     private IEnumerator _spawnEnemyRoutine;
 
     private int _spawnCount=0;
@@ -41,6 +46,9 @@ public class SpawnManager : MonoBehaviour
             enemy.name = enemy.name + _spawnCount;
             _spawnCount++;
             _enemyList.Add(enemy);
+            float chance = Random.Range(0f, 1f);
+            if(chance >= _chanceSpawnCoin) 
+                Instantiate(_coinPrefab, randomPosition, Quaternion.identity, transform);
             yield return new WaitForSeconds(_spawnRate);
         }
     }
