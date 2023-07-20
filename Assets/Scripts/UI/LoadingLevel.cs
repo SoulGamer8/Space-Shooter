@@ -13,10 +13,10 @@ public class LoadingLevel : MonoBehaviour
     [SerializeField] private bool _isOpen = false;
     [SerializeField] private Texture _openLevelTexture;
 
-
+    [SerializeField] private GameObject _menu;
 
     private Transform _startLevel;
-    private GameObject _menu;
+
 
 
     private void Start()
@@ -42,8 +42,6 @@ public class LoadingLevel : MonoBehaviour
 
     private void OpenMenu()
     {
-        if (_menu == null)
-            _menu = Instantiate(_menuPrefab, transform);
         _menu.SetActive(true);
         _startLevel = _menu.transform.GetChild(0);
         _startLevel.GetComponent<Button>().onClick.AddListener(() => _loadingScene.LoadScene(_LevelID));

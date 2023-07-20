@@ -20,7 +20,8 @@ public class GameController : MonoBehaviour
     IEnumerator CheckForControllers()
     {
         while (true)
-        {   
+        {
+            Debug.Log("Test");
             var controllers = Input.GetJoystickNames();
 
             if (!connected && controllers.Length > 0)
