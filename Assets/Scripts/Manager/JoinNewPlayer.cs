@@ -13,24 +13,32 @@ public class JoinNewPlayer : MonoBehaviour
 
     [SerializeField] private Transform[] _healthBarTransform;
 
-    [SerializeField] private GameController _gameController;
-
-     private PlayerInputManager _inputManager;
-
+    private PlayerInputManager _playerInputManager;
      private int _amountPlayers=-1;
 
 
     private void Awake()
     {
-        _inputManager = GetComponent<PlayerInputManager>();
+        _playerInputManager = GetComponent<PlayerInputManager>();
     }
 
-    private void Start()
+    public void RespawnPlayer()
     {
-        //OnPlayerJoined(_inputManager.playerPrefab.GetComponent<PlayerInput>());
+        _playerInputManager.playerPrefab = _player;
+        _playerInputManager.JoinPlayer();
+        OnPlayerJoined(_player);
     }
 
-    private void OnPlayerJoined(PlayerInput playerInput)
+    private  void OnPlayerJoined(PlayerInput playerInput)
+    {
+        _amountPlayers++;
+        GameManager.AddPlayer(playerInput.gameObject);
+        CreateHealthBar(playerInput.gameObject);
+        DontDestroyOnLoad(playerInput.gameObject);
+
+    }
+
+    private void OnPlayerJoined(GameObject playerInput)
     {
         _amountPlayers++;
         GameManager.AddPlayer(playerInput.gameObject);

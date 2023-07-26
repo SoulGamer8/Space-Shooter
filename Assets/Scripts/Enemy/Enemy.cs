@@ -105,7 +105,7 @@ public class Enemy : MonoBehaviour
     {
         while (true)
         {
-            Instantiate(_bullet, new Vector3(transform.position.x,transform.position.y - 2.1f, 0),Quaternion.identity);
+            Instantiate(_bullet, new Vector3(transform.position.x,transform.position.y - 2.1f, 0),Quaternion.identity,transform);
             yield return new WaitForSeconds(_fireRate);
         }
        

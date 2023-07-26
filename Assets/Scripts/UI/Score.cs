@@ -7,14 +7,17 @@ using UnityEngine;
 public class Score : MonoBehaviour
 {
     [SerializeField] private SpawnManager _spawnManager;
-
     [SerializeField] private TextMeshProUGUI _scoreText;
-
     [SerializeField] private TextMeshProUGUI _bestScoreText;
-    private int _score;
-    
-    private int _bestScore= 0;
 
+    [SerializeField] private GameObject _newBestScoreMenu;
+
+    private bool _newRecord = false;
+
+    [SerializeField] private int _score;
+    [SerializeField] private int _bestScore= 0;
+
+    private bool _isMenuOpen = false;
 
     private void OnEnable()
     {
@@ -43,13 +46,31 @@ public class Score : MonoBehaviour
     private void AddScore(int score)
     {
         _score += score;
-        if(_score > _bestScore)
+        if (_score > _bestScore)
+        {
             _bestScore = _score;
+            SaveNumber();
+            _newRecord = true;
+        }
         UpdateUI();
-        SaveNumber();
     }
 
-    public void SaveNumber()
+
+    public void OpenRecordMenu()
+    {
+        if(_newRecord )
+        {
+            _newBestScoreMenu.SetActive(true);
+         
+        }
+    }
+
+    public bool MenuOpen()
+    {
+        return !_newBestScoreMenu.gameObject.activeSelf;
+    }
+
+    private void SaveNumber()
     {
         PlayerPrefs.SetInt("bestScore", _bestScore);
     }

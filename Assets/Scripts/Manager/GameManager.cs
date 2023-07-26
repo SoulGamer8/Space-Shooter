@@ -16,47 +16,49 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] private GameObject _pauseMenu;
 
-    [SerializeField] private GameObject[] _playerArray = new GameObject[2];
+    [SerializeField] private JoinNewPlayer _joinNewPlayer;
 
+    [SerializeField] private Score _score;
 
 
     private int _playerAlive=0;
-
-   
     public void PlayerDead()
     {
         _playerAlive--;
         if (_playerAlive == 0)
         {
-            gameOverScreen.PlayerDead();
             _gameOverScreen.SetActive(true);
+            gameOverScreen.PlayerDead();
+
             spawnManager.PlayerDeath();
+
+            _score.OpenRecordMenu();
         }
     }
 
     public void AddPlayer(GameObject player)
     {
-        _playerArray[_playerAlive] = player; 
         _playerAlive++;
         player.GetComponent<PlayerHealth>().Spawn(gameObject.GetComponent<GameManager>());
     }
 
+
+
     public void RespawnPlayer() 
     {
-        for(int i = 0; i < _playerArray.Length; i++)
+        if (_playerAlive < 2)
         {
-            if (_playerArray[i].activeInHierarchy)
-            {
-                _playerArray[i].SetActive(true);
-                break;
-            }
+            _joinNewPlayer.RespawnPlayer();
+            _playerAlive++;
         }
     }
 
 
     public void RestartGame()
     {
-        if (_playerAlive == 0)
+        Debug.Log(_playerAlive);
+        Debug.Log(_score.MenuOpen());
+        if (_playerAlive <= 0 && _score.MenuOpen())
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 

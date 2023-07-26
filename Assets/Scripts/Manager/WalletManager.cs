@@ -26,6 +26,7 @@ public class WalletManager : MonoBehaviour
         {
             instance = this;
         }
+        DontDestroyOnLoad(gameObject);
     }
 
 

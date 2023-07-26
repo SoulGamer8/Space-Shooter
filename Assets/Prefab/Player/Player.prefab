@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 719033182039605500}
   - component: {fileID: 719033182039605506}
   - component: {fileID: 719033182039605505}
-  - component: {fileID: 5446844221940640015}
   - component: {fileID: 719033182039605501}
   - component: {fileID: 719033182039605496}
   - component: {fileID: 719033182039605498}
@@ -126,19 +125,6 @@ MonoBehaviour:
   _fireRate: 0.1
   _laserShoot: {fileID: 8300000, guid: 75676f361bdfeaf41a46623e95df3dbc, type: 3}
   _rocket: {fileID: 6672853568568838723, guid: 40b9d90a7e18fad4da1da58b86e417c2, type: 3}
---- !u!114 &5446844221940640015
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 719033182039605512}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 264317ee691102a4899d0590d06ad762, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _gameManager: {fileID: 0}
 --- !u!114 &719033182039605501
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -395,6 +381,10 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: a9aaf331-6732-4d46-b479-ec69df38e02a
     m_ActionName: Player/Rocket[/Keyboard/x]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 7d4f66c1-814d-42fe-8a6d-39be37d902ef
+    m_ActionName: UI/Start level[/Keyboard/enter]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player

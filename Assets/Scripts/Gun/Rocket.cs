@@ -14,8 +14,13 @@ public class Rocket : MonoBehaviour
 
     [SerializeField] private int _damage = 3;
 
+
+
     private Rigidbody2D _rigiddody2D;
     private SpawnManager _spawnManager;
+
+
+    private Coroutine _timeWhenMissileSelfDestroy;
     void Awake()
     {
         _rigiddody2D = GetComponent<Rigidbody2D>();
@@ -48,7 +53,14 @@ public class Rocket : MonoBehaviour
     public void SetTarget()
     {
         GameObject target = _spawnManager.GetRandomObject();
-        _target = target.transform;
+        if (target == null)
+            _timeWhenMissileSelfDestroy = StartCoroutine(TimeWhenSelfDestroy());
+        else
+        {
+            _target = target.transform;
+            if(_timeWhenMissileSelfDestroy  != null)
+                StopCoroutine(_timeWhenMissileSelfDestroy);
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -58,5 +70,11 @@ public class Rocket : MonoBehaviour
             collision.GetComponent<Enemy>().TakeDamage(_damage);
             Destroy(gameObject);
         }
+    }
+
+    private IEnumerator TimeWhenSelfDestroy()
+    {
+        yield return new WaitForSeconds(5);
+        Destroy(this.gameObject);
     }
 }

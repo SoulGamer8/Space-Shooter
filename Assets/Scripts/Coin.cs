@@ -20,13 +20,15 @@ public class Coin : MonoBehaviour
 
     private void Update() {
         transform.Translate(Vector3.down *_speed * Time.deltaTime);
+
+        if (transform.position.y < -5)
+            Destroy(gameObject);
     }
 
 
     private void OnTriggerEnter2D(Collider2D collider) {
         if(collider.tag == "Player")
         {
-             Debug.Log("Test");
             _audioSorce.Play();
             _walletManager.SetMoney(1);
             Destroy(gameObject,0.4f);

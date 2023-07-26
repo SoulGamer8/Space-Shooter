@@ -41,7 +41,6 @@ public class PlayerHealth : MonoBehaviour
 
     [SerializeField] private float _timeWhenPlayerInvulnerability;
 
-
     private bool _isInvulnerabilityAactivated = false;
 
     private PolygonCollider2D _polygonCollider2D;
@@ -67,14 +66,7 @@ public class PlayerHealth : MonoBehaviour
         _healthBar = healthBar;
     }
 
-    public void Dead()
-    {
-        UnityAction?.Invoke();
-        PlayerDieEvent?.Invoke();
-        PlayerDieSound?.Invoke(_explosionSound);
-        _animator.SetTrigger("PlayerDead");
-        this.gameObject.SetActive(false);
-    }
+  
 
     public void TakeDamage(int damage)
     {
@@ -138,6 +130,15 @@ public class PlayerHealth : MonoBehaviour
             GameObject fire = Instantiate(_fireOnEngine[_curentlyHealth - 1], transform);
             _fireOnEngineInstiate.Add(fire);
         }
+    }
+
+    public void Dead()
+    {
+        UnityAction?.Invoke();
+        PlayerDieEvent?.Invoke();
+        PlayerDieSound?.Invoke(_explosionSound);
+        _animator.SetTrigger("PlayerDead");
+        Destroy(gameObject, 1f);
     }
 
     private IEnumerator Sheild()
