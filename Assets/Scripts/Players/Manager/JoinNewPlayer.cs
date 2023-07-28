@@ -7,7 +7,7 @@ public class JoinNewPlayer : MonoBehaviour
 {
     [SerializeField] private GameObject _healthBar;
 
-    [SerializeField] private GameManager GameManager;
+    [SerializeField] private PlayersController _playersController;
     [SerializeField] private GameObject _canvas;
     [SerializeField] private GameObject _player;
 
@@ -32,7 +32,7 @@ public class JoinNewPlayer : MonoBehaviour
     private  void OnPlayerJoined(PlayerInput playerInput)
     {
         _amountPlayers++;
-        GameManager.AddPlayer(playerInput.gameObject);
+        _playersController.AddPlayer(playerInput.gameObject);
         CreateHealthBar(playerInput.gameObject);
         DontDestroyOnLoad(playerInput.gameObject);
 
@@ -41,7 +41,7 @@ public class JoinNewPlayer : MonoBehaviour
     private void OnPlayerJoined(GameObject playerInput)
     {
         _amountPlayers++;
-        GameManager.AddPlayer(playerInput.gameObject);
+        _playersController.AddPlayer(playerInput.gameObject);
         CreateHealthBar(playerInput.gameObject);
         DontDestroyOnLoad(playerInput.gameObject);
 

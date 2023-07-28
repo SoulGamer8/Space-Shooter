@@ -8,7 +8,7 @@ public class GameOverScreen : MonoBehaviour
 {
     private TextMeshProUGUI  _text;
 
-    public void PlayerDead()
+    public void Start()
     {
         StartCoroutine(GameOverText());
     }

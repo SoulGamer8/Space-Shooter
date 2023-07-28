@@ -1,10 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Runtime.Serialization;
-using TMPro;
-using Unity.VisualScripting;
-using UnityEditor;
+
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UIElements;
@@ -45,9 +42,9 @@ public class PlayerHealth : MonoBehaviour
 
     private PolygonCollider2D _polygonCollider2D;
 
-    private GameManager _gameManager;
-
     private Animator _animator;
+
+    private PlayersController _playersController;
 
     private void Awake()
     {
@@ -55,14 +52,15 @@ public class PlayerHealth : MonoBehaviour
         _animator = GetComponent<Animator>();
         _polygonCollider2D = GetComponent<PolygonCollider2D>();
     }
-    public void Spawn(GameManager gameManager)
+    public void Spawn(PlayersController playersController)
     {
-        _gameManager = gameManager;
-        UnityAction.AddListener(_gameManager.PlayerDead);
+        _playersController = playersController;
+        UnityAction.AddListener(playersController.PlayerDead);
     }
 
     public void AddHealthBar(GameObject healthBar)
     {
+
         _healthBar = healthBar;
     }
 
@@ -120,7 +118,7 @@ public class PlayerHealth : MonoBehaviour
 
     public void RespawnPlayer()
     {
-        _gameManager.RespawnPlayer();
+        _playersController.RespawnPlayer();
 
     }
     private void SpawnFireOnEngine()
@@ -153,5 +151,14 @@ public class PlayerHealth : MonoBehaviour
         _polygonCollider2D.enabled = false;
         yield return new WaitForSeconds(_timeWhenPlayerInvulnerability);
         _polygonCollider2D.enabled = true;
+    }
+
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.tag == "EnemyBullet")
+        {
+            TakeDamage(1);
+        }
     }
 }

@@ -17,7 +17,6 @@ public class Score : MonoBehaviour
     [SerializeField] private int _score;
     [SerializeField] private int _bestScore= 0;
 
-    private bool _isMenuOpen = false;
 
     private void OnEnable()
     {

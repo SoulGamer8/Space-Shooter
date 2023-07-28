@@ -12,13 +12,10 @@ public class Rocket : MonoBehaviour
     [SerializeField] private float _speed = 5f;
     [SerializeField] private float _rotateSpeed = 200f;
 
-    [SerializeField] private int _damage = 3;
-
-
+    [SerializeField] private int _damage;
 
     private Rigidbody2D _rigiddody2D;
     private SpawnManager _spawnManager;
-
 
     private Coroutine _timeWhenMissileSelfDestroy;
     void Awake()
@@ -27,8 +24,12 @@ public class Rocket : MonoBehaviour
         _spawnManager = GameObject.FindGameObjectWithTag("SpawnManager").GetComponent<SpawnManager>();
     }
 
+    public int GetDamage()
+    {
+        return _damage;
+    }
 
-    private void FixedUpdate()
+    private void Update()
     {
 
         if (_target == null)
@@ -63,11 +64,11 @@ public class Rocket : MonoBehaviour
         }
     }
 
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.tag == "Enemy")
         {
-            collision.GetComponent<Enemy>().TakeDamage(_damage);
             Destroy(gameObject);
         }
     }

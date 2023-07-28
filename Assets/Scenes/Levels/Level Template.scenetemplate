@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Level Template
   m_EditorClassIdentifier: 
   templateScene: {fileID: 102900000, guid: a33828198e0ad7a4aaab804708968fd5, type: 3}
-  templateName: 
+  templateName: Level
   description: 
   preview: {fileID: 0}
   dependencies:

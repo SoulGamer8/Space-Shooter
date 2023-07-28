@@ -9,11 +9,17 @@ using UnityEngine;
 public class Bullet : MonoBehaviour
 {
     [SerializeField] private float _bulletSpeed=3;
-
+    [SerializeField] private int _bulletDamager;
     [SerializeField] private bool _isEnemyShoot =false;
+
 
     private bool _trippleShootIsActive;
     private float _trippleShootSpeed;
+
+    public int GetDamage()
+    {
+        return _bulletDamager;
+    }
 
     private void Start()
     {
@@ -53,14 +59,10 @@ public class Bullet : MonoBehaviour
     {
         if (collider.tag == "Enemy" && !_isEnemyShoot)
             Dead();
-        if (collider.tag == "Player" && _isEnemyShoot)
-        {
-            collider.GetComponent<PlayerHealth>().TakeDamage(1);
-            Dead();
-        }
-           
-       
+
     }
+
+
 
     private void Dead()
     {
@@ -71,7 +73,7 @@ public class Bullet : MonoBehaviour
 
         }
 
-        Destroy(gameObject);
+        //Destroy(gameObject);
     }
 
 }

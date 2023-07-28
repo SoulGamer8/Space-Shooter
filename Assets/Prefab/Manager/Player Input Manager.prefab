@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2995388411297300316}
   - component: {fileID: 2995388411297300319}
+  - component: {fileID: 5898634431407320054}
   - component: {fileID: 2995388411297300317}
   m_Layer: 0
   m_Name: Player Input Manager
@@ -97,6 +98,21 @@ MonoBehaviour:
     y: 0
     width: 1
     height: 1
+--- !u!114 &5898634431407320054
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2995388411297300318}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3ae803f4d9a836f43ace6a40e3689125, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _joinNewPlayer: {fileID: 2995388411297300317}
+  _gameManager: {fileID: 0}
+  _score: {fileID: 0}
 --- !u!114 &2995388411297300317
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -110,9 +126,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _healthBar: {fileID: 8317646714793087119, guid: 62bf5217053bc22479fec1d8de69594f, type: 3}
-  GameManager: {fileID: 0}
+  _playersController: {fileID: 5898634431407320054}
   _canvas: {fileID: 0}
   _player: {fileID: 719033182039605512, guid: 516e5d93e69182e48bbfc27b7a8a7563, type: 3}
-  _positionHealthBar:
-  - {x: 45, y: 25, z: 0}
-  - {x: 725, y: 25, z: 0}
+  _healthBarTransform: []

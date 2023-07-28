@@ -62,9 +62,10 @@ public class Enemy : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collider)
     {
         if (collider.tag == "Bullet")
-        {
-            TakeDamage(1);
-        }
+            TakeDamage(collider.GetComponent<Bullet>().GetDamage());
+      
+        if(collider.tag == "Missiles")
+            TakeDamage(collider.GetComponent<Rocket>().GetDamage());
         if (collider.tag == "Player")
         {
             PlayerHealth playerHealth = collider.GetComponent<PlayerHealth>();

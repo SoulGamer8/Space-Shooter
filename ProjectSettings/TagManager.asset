@@ -8,6 +8,8 @@ TagManager:
   - Bullet
   - SpawnManager
   - Coin
+  - EnemyBullet
+  - Missiles
   layers:
   - Default
   - TransparentFX
