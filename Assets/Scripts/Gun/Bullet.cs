@@ -9,16 +9,17 @@ using UnityEngine;
 public class Bullet : MonoBehaviour
 {
     [SerializeField] private float _bulletSpeed=3;
-    [SerializeField] private int _bulletDamager;
+    [SerializeField] private int _bulletDamage;
     [SerializeField] private bool _isEnemyShoot =false;
 
 
     private bool _trippleShootIsActive;
     private float _trippleShootSpeed;
 
-    public int GetDamage()
+    public void SetDamage(int damage)
     {
-        return _bulletDamager;
+        if(damage >0)
+            _bulletDamage = damage;
     }
 
     private void Start()
@@ -33,7 +34,11 @@ public class Bullet : MonoBehaviour
 
     void Update()
     {
+        DoMove();
+    }
 
+
+    private void DoMove(){
         transform.Translate(Vector3.up * _bulletSpeed * Time.deltaTime);
 
         if (_trippleShootIsActive)
@@ -41,13 +46,8 @@ public class Bullet : MonoBehaviour
             transform.position += new Vector3(_trippleShootSpeed, _bulletSpeed, 0) * Time.deltaTime;
         }
 
-
         if (transform.position.y > 10 || transform.position.y < -10)
-        {
-            if (transform.parent != null && !_isEnemyShoot)
-                Destroy(transform.parent.gameObject);
-            Destroy(gameObject);
-        }
+            Dead();
     }
 
     public void Change(float isRight)
@@ -55,13 +55,18 @@ public class Bullet : MonoBehaviour
         _trippleShootIsActive = true;
     }
 
-    private void OnTriggerEnter2D(Collider2D collider)
-    {
-        if (collider.tag == "Enemy" && !_isEnemyShoot)
+    private void OnTriggerEnter2D(Collider2D collider){
+        IDamageable damageable = collider.GetComponent<IDamageable>();
+        if(damageable != null && !_isEnemyShoot && collider.tag !="Player")
+        {
+            damageable.Damege(_bulletDamage);
             Dead();
-
+        }
+        else if(damageable != null && _isEnemyShoot){
+            damageable.Damege(_bulletDamage);
+            Dead();
+        }
     }
-
 
 
     private void Dead()
@@ -70,10 +75,8 @@ public class Bullet : MonoBehaviour
         {
            if (gameObject.transform.parent.transform.childCount == 1 )
                 Destroy(transform.parent.gameObject);
-
         }
-
-        //Destroy(gameObject);
+        Destroy(gameObject);
     }
 
 }

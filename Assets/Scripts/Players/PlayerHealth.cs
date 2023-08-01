@@ -6,7 +6,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UIElements;
 
-public class PlayerHealth : MonoBehaviour
+public class PlayerHealth : MonoBehaviour,IDamageable
 {
     public UnityEvent UnityAction;
 
@@ -64,11 +64,9 @@ public class PlayerHealth : MonoBehaviour
         _healthBar = healthBar;
     }
 
-  
-
-    public void TakeDamage(int damage)
+    public void Damege(int damage)
     {
-        if (_isShieldActivate)
+          if (_isShieldActivate)
         {
             _curentlyShieldHealth -= damage;
 
@@ -151,14 +149,5 @@ public class PlayerHealth : MonoBehaviour
         _polygonCollider2D.enabled = false;
         yield return new WaitForSeconds(_timeWhenPlayerInvulnerability);
         _polygonCollider2D.enabled = true;
-    }
-
-
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.tag == "EnemyBullet")
-        {
-            TakeDamage(1);
-        }
     }
 }

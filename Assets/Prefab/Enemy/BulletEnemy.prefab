@@ -99,6 +99,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _bulletSpeed: 6
+  _bulletDamage: 1
   _isEnemyShoot: 1
 --- !u!70 &3560559170170541490
 CapsuleCollider2D:

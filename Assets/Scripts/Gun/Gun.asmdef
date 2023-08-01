@@ -2,7 +2,8 @@
     "name": "Gun",
     "rootNamespace": "",
     "references": [
-        "GUID:db635b2868b434c47b9e12f442a03c33"
+        "GUID:db635b2868b434c47b9e12f442a03c33",
+        "GUID:f97eafeb2bab49b4bb3ed3dd1cca3176"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

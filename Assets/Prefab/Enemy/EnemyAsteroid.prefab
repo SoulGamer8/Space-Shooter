@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3694844299455940884}
   - component: {fileID: -7810728092735670921}
-  - component: {fileID: -4716543477190477107}
+  - component: {fileID: 980370957952868939}
   - component: {fileID: 4446468468296184438}
   - component: {fileID: -8655848969820630085}
   - component: {fileID: 1805394378}
@@ -89,7 +89,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &-4716543477190477107
+--- !u!114 &980370957952868939
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -98,23 +98,20 @@ MonoBehaviour:
   m_GameObject: {fileID: 3694844299455940872}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2117090f6cbfd9948963fe8f8c55654a, type: 3}
+  m_Script: {fileID: 11500000, guid: 6d6f1326d4aa14b468635862c01a35c0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _health: 3
+  _health: 1
   _speed: 4
   _damage: 1
   _score: 1
-  _chanceSpawnTripleShotPowerUp: 0.1
+  _chanceSpawnTripleShotPowerUp: 1
   _powerUps:
+  - {fileID: 1962149739858341712, guid: 5f0a59c14ac16494bb9b4ff3822539e1, type: 3}
+  - {fileID: 8296805648766830689, guid: fd2af8bb78df30a48bf87e2968b3ef01, type: 3}
   - {fileID: 5744669851517557007, guid: eda2ab619d689934aa28936259ed38f6, type: 3}
   - {fileID: 6031965873052742763, guid: 3704c4085c768584d812f02ee881ecc4, type: 3}
   - {fileID: 4999118602094741899, guid: b8ff3d352834e9a419beed4fc355eaac, type: 3}
-  - {fileID: 1962149739858341712, guid: 5f0a59c14ac16494bb9b4ff3822539e1, type: 3}
-  _isCanShoot: 0
-  _fireRate: 0
-  _bullet: {fileID: 0}
-  _speedBullet: 0
   _explosionSound: {fileID: 8300000, guid: a885c043fab7e46438bba03ba9dab6bc, type: 3}
 --- !u!61 &4446468468296184438
 BoxCollider2D:
