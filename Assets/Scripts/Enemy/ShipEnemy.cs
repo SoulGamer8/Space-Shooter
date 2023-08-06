@@ -8,7 +8,7 @@ public class ShipEnemy : Enemy
     [Header("Enemy Settings")]
     [SerializeField] private int _health=3;
 
-    [SerializeField] private float _speed=4;
+    [SerializeField] private float _speed = 4;
 
     [SerializeField] private int _damage=1;
 
@@ -70,16 +70,6 @@ public class ShipEnemy : Enemy
     }
 
     
-    IEnumerator ShootRoutine(){
-        while (true)
-        {
-            GameObject bullet;
-            bullet = Instantiate(_bullet, new Vector3(transform.position.x,transform.position.y - 2.1f, 0),Quaternion.identity,transform);
-            bullet.GetComponent<Bullet>().SetDamage(_damage);
-            yield return new WaitForSeconds(_fireRate);
-        }
-       
-    }
 
     protected override void Dead()
     {
@@ -99,5 +89,16 @@ public class ShipEnemy : Enemy
         Destroy(gameObject, 2.8f);
     }
 
-
+    
+    IEnumerator ShootRoutine(){
+        while (true)
+        {
+            GameObject bullet;
+            bullet = Instantiate(_bullet, new Vector3(transform.position.x,transform.position.y - 2.1f, 0),Quaternion.identity,transform);
+            bullet.GetComponent<EnemyLaser>().SetDamage(_damage);
+            bullet.GetComponent<EnemyLaser>().SetSpeed(_speedBullet);
+            yield return new WaitForSeconds(_fireRate);
+        }
+       
+    }
 }

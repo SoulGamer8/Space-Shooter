@@ -64,8 +64,8 @@ public class Shoot : MonoBehaviour
             if (_isTripleShootActive)
             {
                 Instantiate(_tripleShoot, new Vector3(transform.position.x - 0.2f, transform.position.y + 4.0f, 0), Quaternion.identity);
-                _tripleShoot.transform.GetChild(1).gameObject.GetComponent<Bullet>().Change(10);
-                _tripleShoot.transform.GetChild(2).gameObject.GetComponent<Bullet>().Change(-10);
+                _tripleShoot.transform.GetChild(1).gameObject.GetComponent<PlayerLaser>().ActiveTrippleShot();
+                _tripleShoot.transform.GetChild(2).gameObject.GetComponent<PlayerLaser>().ActiveTrippleShot();
             }
             else
             {

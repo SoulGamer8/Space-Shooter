@@ -123,6 +123,7 @@ MonoBehaviour:
   _target: {fileID: 0}
   _speed: 5
   _rotateSpeed: 200
+  _damage: 3
 --- !u!60 &1649263500
 PolygonCollider2D:
   m_ObjectHideFlags: 0

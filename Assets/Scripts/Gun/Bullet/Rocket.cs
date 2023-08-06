@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.AI;
 
 [RequireComponent(typeof(Rigidbody2D))]
-public class Rocket : MonoBehaviour
+public class Rocket : Ammo
 {
     [SerializeField] private Transform _target;
 
@@ -15,23 +15,27 @@ public class Rocket : MonoBehaviour
     [SerializeField] private int _damage;
 
     private Rigidbody2D _rigiddody2D;
-    private SpawnManager _spawnManager;
-
     private Coroutine _timeWhenMissileSelfDestroy;
+    
     void Awake()
     {
         _rigiddody2D = GetComponent<Rigidbody2D>();
-        _spawnManager = GameObject.FindGameObjectWithTag("SpawnManager").GetComponent<SpawnManager>();
-    }
-
-    public int GetDamage()
-    {
-        return _damage;
+        StartCoroutine(TimeWhenSelfDestroy());
     }
 
     private void Update()
     {
+        DoMove();
+    }
 
+    public void SetTarget()
+    {
+        _target = GameObject.FindGameObjectWithTag("Enemy").transform;
+    }
+
+
+    protected override void DoMove()
+    {
         if (_target == null)
             SetTarget();
         try
@@ -51,31 +55,28 @@ public class Rocket : MonoBehaviour
         }
     }
 
-    public void SetTarget()
+    protected override void OnTriggerEnter2D(Collider2D collider)
     {
-        GameObject target = _spawnManager.GetRandomObject();
-        if (target == null)
-            _timeWhenMissileSelfDestroy = StartCoroutine(TimeWhenSelfDestroy());
-        else
+        IDamageable damageable = collider.GetComponent<IDamageable>();
+        if(damageable != null  && collider.tag =="Enemy")
         {
-            _target = target.transform;
-            if(_timeWhenMissileSelfDestroy  != null)
-                StopCoroutine(_timeWhenMissileSelfDestroy);
+            damageable.Damege(_damage);
+            Dead();
         }
     }
 
-
-    private void OnTriggerEnter2D(Collider2D collision)
+    
+    protected override void Dead()
     {
-        if (collision.tag == "Enemy")
-        {
-            Destroy(gameObject);
-        }
+        Destroy(gameObject);
     }
 
+    
     private IEnumerator TimeWhenSelfDestroy()
     {
         yield return new WaitForSeconds(5);
         Destroy(this.gameObject);
     }
+
+
 }

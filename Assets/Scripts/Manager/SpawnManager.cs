@@ -7,6 +7,7 @@ public class SpawnManager : MonoBehaviour
 {
     public event UnityAction<int> enemyKilledEvent;
 
+    [SerializeField] private bool _isSpawnEnemy=true;
 
     [SerializeField] private GameObject[] _enemyPrefab;
 
@@ -33,9 +34,11 @@ public class SpawnManager : MonoBehaviour
 
     private void Start()
     {
-        _spawnEnemyRoutine = SpawnEnemy();
 
-        StartCoroutine(_spawnEnemyRoutine);
+        if(_isSpawnEnemy){
+            _spawnEnemyRoutine = SpawnEnemy();
+            StartCoroutine(_spawnEnemyRoutine);
+        }
     }
 
     public void PlayerDeath()
@@ -43,27 +46,9 @@ public class SpawnManager : MonoBehaviour
         StopCoroutine(_spawnEnemyRoutine);
     }
 
-    
-
     public void KilledEnemy(int score, GameObject enemy)
     {
-        if (enemy == null)
-            Debug.Log("WTF");
         enemyKilledEvent?.Invoke(score);
-        int enemyNumber = _enemyList.FindIndex(obj => obj.name == enemy.name);
-        if (enemyNumber != -1)
-            _enemyList.RemoveAt(enemyNumber);
-    }
-
-    public GameObject GetRandomObject()
-    {
-        if (_enemyList.Count > 0)
-        {
-            int random = Random.Range(0, _enemyList.Count);
-            return _enemyList[random];
-        }
-        else 
-            return null;
     }
 
     private IEnumerator SpawnEnemy()
@@ -72,10 +57,8 @@ public class SpawnManager : MonoBehaviour
         {
             Vector3 randomPosition = new Vector3(Random.Range(-8, 8), transform.position.y, 0);
             int randomEnemy = Random.Range(0, _enemyPrefab.Length);
-            GameObject enemy = Instantiate(_enemyPrefab[randomEnemy], randomPosition, Quaternion.identity, transform);
-            enemy.name = enemy.name + _spawnCount;
-            _spawnCount++;
-            _enemyList.Add(enemy);
+            Instantiate(_enemyPrefab[randomEnemy], randomPosition, Quaternion.identity, transform);
+        
             float chance = Random.Range(0f, 1f);
             if (chance >= _chanceSpawnCoin && _isSpawnCoin)
                 Instantiate(_coinPrefab, randomPosition, Quaternion.identity, transform);

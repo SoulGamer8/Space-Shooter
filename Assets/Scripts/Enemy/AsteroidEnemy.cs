@@ -34,6 +34,8 @@ public class AsteroidEnemy : Enemy
     private void Awake(){
         _animator = GetComponent<Animator>();
         _audioSource = GetComponent<AudioSource>();
+
+        transform.rotation = Quaternion.Euler(0,0,Random.Range(0,360)); 
     }
 
     private void Update(){
@@ -45,8 +47,7 @@ public class AsteroidEnemy : Enemy
         transform.position += new Vector3(0, -1, 0) * Time.deltaTime * _speed;
         if (transform.position.y < -5)
         {
-            transform.parent.GetComponent<SpawnManager>().KilledEnemy(0, this.gameObject);
-            Destroy(gameObject);
+            Dead();
         }
     }
 
@@ -69,7 +70,7 @@ public class AsteroidEnemy : Enemy
         _audioSource.clip = _explosionSound;
         _audioSource.Play();
 
-        Destroy(gameObject, 2.8f);
+        Destroy(gameObject);
     }
 
 
