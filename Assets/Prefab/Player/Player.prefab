@@ -35,7 +35,7 @@ Transform:
   m_GameObject: {fileID: 719033182039605512}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 2.75, y: -1.14, z: 10}
-  m_LocalScale: {x: 0.8, y: 0.8, z: 0.8}
+  m_LocalScale: {x: 0.6, y: 0.6, z: 0.6}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 719033182705352553}
@@ -108,6 +108,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _speed: 15
   _timeWhenActiveSpeedPowerUp: 4
+  _speedPowerUp: 0
 --- !u!114 &719033182039605505
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -123,8 +124,13 @@ MonoBehaviour:
   _bullet: {fileID: 4978602119496610123, guid: 80089d3b1aa1bf14c9b707ce4e264b55, type: 3}
   _tripleShoot: {fileID: 6452515784165141786, guid: c36d3c88ff5b12a4682e17f580cf1e0d, type: 3}
   _fireRate: 0.1
+  _bulletSpeed: 0
+  _bulletDamage: 0
   _laserShoot: {fileID: 8300000, guid: 75676f361bdfeaf41a46623e95df3dbc, type: 3}
   _rocket: {fileID: 6672853568568838723, guid: 40b9d90a7e18fad4da1da58b86e417c2, type: 3}
+  _ammoUI:
+  - {fileID: 2459200411177510462, guid: 4959eaa1f78b31e4f8eac5d879f321d5, type: 3}
+  - {fileID: 3805997343180953413, guid: 81a3c4ac51ba2ee4c83fd865405c4748, type: 3}
 --- !u!114 &719033182039605501
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -140,7 +146,11 @@ MonoBehaviour:
   UnityAction:
     m_PersistentCalls:
       m_Calls: []
+  _healthBarArray:
+  - {fileID: 1703989031570211199, guid: 5094165a1781ef544b0223b3279dae1f, type: 3}
+  - {fileID: 3912512522151601194, guid: 61f2430d8a3fa144bbc5f35549552d7d, type: 3}
   _health: 3
+  _timeWhenPlayerInvulnerability: 0.5
   _shield: {fileID: 8300780217632172099, guid: 3ae0af117f248854eab04f6010c6aa6c, type: 3}
   _shieldHealth: 3
   _timeWhenActiveShild: 4
@@ -149,7 +159,6 @@ MonoBehaviour:
   - {fileID: 8574169450794588326, guid: 24320022ad1a5794c9b1ff88c0088d33, type: 3}
   _fireOnEngineInstiate: []
   _explosionSound: {fileID: 8300000, guid: a885c043fab7e46438bba03ba9dab6bc, type: 3}
-  _timeWhenPlayerInvulnerability: 0.5
 --- !u!114 &719033182039605496
 MonoBehaviour:
   m_ObjectHideFlags: 0

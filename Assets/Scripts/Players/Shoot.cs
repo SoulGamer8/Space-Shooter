@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
@@ -9,24 +8,40 @@ public class Shoot : MonoBehaviour
 {
     public event UnityAction<AudioClip> PlaySoundSoot;
 
+    [Header("Bullet")]
     [SerializeField] private GameObject _bullet;
     [SerializeField] private GameObject _tripleShoot;
-
     [SerializeField] private float _fireRate;
+    [SerializeField] private float _bulletSpeed;
+    [SerializeField] private int _bulletDamage;
 
     [Header("Sound")]
     [SerializeField] private AudioClip _laserShoot;
 
-
+    [Header("Rocket")]
     [SerializeField] private GameObject _rocket;
+    [SerializeField] private List<GameObject> _ammoUI;
+    private  AmmoMissile _ammoMissile;
+    
     private bool _isTripleShootActive = false;
-
-
     private Coroutine fire;
 
+    private void Start(){
+       SpawnAmmoUI();
+    }
 
-    public void FireBullet(InputAction.CallbackContext value)
-    {
+    private void SpawnAmmoUI(){
+        GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
+        GameObject canvas = GameObject.FindGameObjectWithTag("AmmoUI");
+
+        GameObject missileUI;
+
+        missileUI = Instantiate(_ammoUI[players.Length-1],canvas.transform);
+        _ammoMissile = missileUI.GetComponent<AmmoMissile>();
+
+    }
+
+    public void FireBullet(InputAction.CallbackContext value){
        
         if (value.started)
             fire = StartCoroutine(Shooting());
@@ -35,30 +50,26 @@ public class Shoot : MonoBehaviour
 
     }
 
-    public void TakePowerUp()
-    {
+    public void TakeTripelShoot(){
         _isTripleShootActive = true;
         StartCoroutine(ActivePowerUp());
     }
 
-    public void FireRocket(InputAction.CallbackContext value)
-    {
-        if (value.started)
-           Instantiate(_rocket, new Vector3(transform.position.x - 0.2f, transform.position.y + 1.0f, 0), Quaternion.identity);
-       
+    public void TakeAmmo(){
+        _ammoMissile.AddMissile();
+    }
+    public void FireRocket(InputAction.CallbackContext value){
+        if (value.started &&  _ammoMissile.UseMissile())
+            Instantiate(_rocket, new Vector3(transform.position.x - 0.2f, transform.position.y + 1.0f, 0), Quaternion.identity);
     }
 
-
-
-    private IEnumerator ActivePowerUp()
-    {
+    private IEnumerator ActivePowerUp(){
         yield return new WaitForSeconds(5.0f);
         _isTripleShootActive = false;
 
     }
 
-    private IEnumerator Shooting()
-    {
+    private IEnumerator Shooting(){
         while (true) 
         {
             if (_isTripleShootActive)

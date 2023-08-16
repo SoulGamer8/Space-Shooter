@@ -1,10 +1,7 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
-
 using UnityEngine;
 using UnityEngine.Events;
-using UnityEngine.UIElements;
 
 public class PlayerHealth : MonoBehaviour,IDamageable
 {
@@ -14,10 +11,12 @@ public class PlayerHealth : MonoBehaviour,IDamageable
     public event UnityAction<AudioClip> PlayerDieSound;
 
     [Header("Health")]
+    [SerializeField]private GameObject[] _healthBarArray;
     [SerializeField] private int _health = 3;
+    [SerializeField] private float _timeWhenPlayerInvulnerability;
 
     private int _curentlyHealth;
-    private GameObject _healthBar;
+    private HealthBar _healthBar;
 
     [Header("Shield")]
     [SerializeField] private GameObject _shield;
@@ -36,91 +35,84 @@ public class PlayerHealth : MonoBehaviour,IDamageable
     [Header("Sound")]
     [SerializeField] private AudioClip _explosionSound;
 
-    [SerializeField] private float _timeWhenPlayerInvulnerability;
-
-    private bool _isInvulnerabilityAactivated = false;
-
     private PolygonCollider2D _polygonCollider2D;
 
     private Animator _animator;
 
     private PlayersController _playersController;
 
-    private void Awake()
-    {
+    private PowerUpWeightController _powerUpWeightController;
+    private void Awake(){
         _curentlyHealth = _health;
         _animator = GetComponent<Animator>();
         _polygonCollider2D = GetComponent<PolygonCollider2D>();
+        FindHealthBar();
+        _powerUpWeightController = PowerUpWeightController.instance;
+        Debug.Log(_powerUpWeightController);
     }
-    public void Spawn(PlayersController playersController)
-    {
+
+    public void Spawn(PlayersController playersController){
         _playersController = playersController;
         UnityAction.AddListener(playersController.PlayerDead);
     }
 
-    public void AddHealthBar(GameObject healthBar)
-    {
 
-        _healthBar = healthBar;
+    private void FindHealthBar(){
+        GameObject[] gameObject = GameObject.FindGameObjectsWithTag("Player");
+        GameObject canvas = GameObject.FindGameObjectWithTag("HealthBar");
+        GameObject helthBar = Instantiate(_healthBarArray[gameObject.Length-1],canvas.transform);
+        _healthBar = helthBar.GetComponent<HealthBar>();
+        _healthBar.MaxHealth(_health);
     }
 
-    public void Damege(int damage)
-    {
-          if (_isShieldActivate)
-        {
+    public void Damege(int damage){
+        if (_isShieldActivate){
             _curentlyShieldHealth -= damage;
-
             if (_curentlyShieldHealth <= 0)
             {
                 Destroy(_sheild);
                 _isShieldActivate = false;
             }
-
         }
-
-        if(!_isInvulnerabilityAactivated)
-        {
+        else{
             _curentlyHealth -= damage;
             UpdateHealthBar();
             SpawnFireOnEngine();
             StartCoroutine(Invulnerability());
-            
+            if (_curentlyHealth <= 0)
+                Dead();
+            _powerUpWeightController.ChangeSpawnChacneWeightRepair(10);
         }
-        if (_curentlyHealth <= 0)
-            Dead();
+        
     }
 
-    private void UpdateHealthBar()
-    {
-        _healthBar.GetComponent<HealthBar>().UpdateHealthBar(_curentlyHealth);
+    private void UpdateHealthBar(){
+        _healthBar.UpdateHealthBar(_curentlyHealth);
     }
 
-    public void TakeHeal()
-    {
+    public void TakeHeal(){
         if (_curentlyHealth != _health)
         {
             _curentlyHealth++;
             Destroy(_fireOnEngineInstiate[_fireOnEngineInstiate.Count - 1]);
             _fireOnEngineInstiate.RemoveAt(_fireOnEngineInstiate.Count-1);
             UpdateHealthBar();
+            _powerUpWeightController.ChangeSpawnChacneWeightRepair(-10);
         }
     }
 
-    public void ActivateShild()
-    {
+    public void ActivateShild(){
         _curentlyShieldHealth = _shieldHealth;
         StartCoroutine(Sheild());
         _sheild = Instantiate(_shield, new Vector3(transform.position.x, transform.position.y, 0), Quaternion.identity,transform);
         _isShieldActivate = true;
     }
 
-    public void RespawnPlayer()
-    {
+    public void RespawnPlayer(){
         _playersController.RespawnPlayer();
 
     }
-    private void SpawnFireOnEngine()
-    {
+    private void SpawnFireOnEngine(){
         if (_curentlyHealth - 1 >= 0)
         {
             GameObject fire = Instantiate(_fireOnEngine[_curentlyHealth - 1], transform);
@@ -128,8 +120,7 @@ public class PlayerHealth : MonoBehaviour,IDamageable
         }
     }
 
-    public void Dead()
-    {
+    public void Dead(){
         UnityAction?.Invoke();
         PlayerDieEvent?.Invoke();
         PlayerDieSound?.Invoke(_explosionSound);
@@ -137,17 +128,33 @@ public class PlayerHealth : MonoBehaviour,IDamageable
         Destroy(gameObject, 1f);
     }
 
-    private IEnumerator Sheild()
-    {
+
+    private IEnumerator Sheild(){
         yield return new WaitForSeconds(_timeWhenActiveShild);
         _isShieldActivate = false;
         Destroy(_sheild);
     }
     
-    private IEnumerator Invulnerability()
-    {
+    private IEnumerator Invulnerability(){
+        Coroutine blink = StartCoroutine(Blink());
         _polygonCollider2D.enabled = false;
         yield return new WaitForSeconds(_timeWhenPlayerInvulnerability);
+        StopCoroutine(blink);
         _polygonCollider2D.enabled = true;
+        
+    }
+
+    private IEnumerator Blink(){
+        SpriteRenderer spriteRenderer = this.gameObject.GetComponent<SpriteRenderer>();
+        var tempColor = spriteRenderer.color;
+        while(true){  
+            tempColor.a = 1f;
+            spriteRenderer.color = tempColor;
+            yield return new WaitForSeconds(0.1f);
+            tempColor.a = 0f;
+            spriteRenderer.color = tempColor;
+            yield return new WaitForSeconds(0.1f);
+
+        }
     }
 }

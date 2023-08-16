@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -10,8 +9,11 @@ public class PlayerMovement : MonoBehaviour
 
    
     [SerializeField] private float _speed;
-    [SerializeField] private float _timeWhenActiveSpeedPowerUp=5f;
 
+    [Header("Power Up")]
+    [SerializeField] private float _timeWhenActiveSpeedPowerUp=5f;
+    [SerializeField] private float _speedPowerUp;
+    private bool _isSpeedPowerUpActive = false; 
 
     private Rigidbody2D _rb;
     private Animator _animator;
@@ -45,15 +47,18 @@ public class PlayerMovement : MonoBehaviour
             _animator.SetTrigger("Stop");
         _animator.SetFloat("Vector2", vector2.x);
     }
+
     private void CalculatedMovment(Vector2 moveVecntor)
     {
-        _rb.velocity = moveVecntor * _speed;
+        float speed = _isSpeedPowerUpActive ? _speedPowerUp : _speed;
+
+        _rb.velocity = moveVecntor * speed;
     }
 
     public void TakeSpeedPowerUp()
     {
         StartCoroutine(SpeedPowerUp());
-        _speed *= 2;
+        _isSpeedPowerUpActive = true;
     }
 
 
@@ -61,6 +66,6 @@ public class PlayerMovement : MonoBehaviour
     {
         yield return new WaitForSeconds(_timeWhenActiveSpeedPowerUp);
 
-        _speed /= 2;
+        _isSpeedPowerUpActive = false;
     }
 }

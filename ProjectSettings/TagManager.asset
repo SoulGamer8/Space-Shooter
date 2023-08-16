@@ -10,6 +10,9 @@ TagManager:
   - Coin
   - EnemyBullet
   - Missiles
+  - HealthBar
+  - Ammo
+  - AmmoUI
   layers:
   - Default
   - TransparentFX

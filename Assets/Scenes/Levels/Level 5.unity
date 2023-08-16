@@ -1299,6 +1299,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 141167393, guid: 47e3bc22f224ae54d934ed6dbf0834c1, type: 3}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 27ba5b629e1e32f41959e1a89bc6a6be, type: 3}
     - target: {fileID: 141167394, guid: 47e3bc22f224ae54d934ed6dbf0834c1, type: 3}
       propertyPath: _healthBar
       value: 

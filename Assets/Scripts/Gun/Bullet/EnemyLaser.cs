@@ -4,19 +4,17 @@ using UnityEngine;
 
 public class EnemyLaser : Ammo
 { 
-    private float _bulletSpeed;
+    private int _bulletSpeed=1;
     private int _bulletDamage;
     private bool _trippleShootIsActive = false;
     private float _trippleShootSpeed;
 
-    public void SetDamage(int damage)
+    public void SetDamageAndSpeed(int damage,int speed)
     {
         if(damage >0)
             _bulletDamage = damage;
-    }
-
-    public void SetSpeed(float speed){
-        _bulletSpeed = speed;
+        if(speed >0)
+            _bulletSpeed = speed;
     }
     
     private void Start()

@@ -6,25 +6,7 @@ public class KamikazeEnemy : Enemy
 {
 
     [Header("Enemy Settings")]
-    [SerializeField] private int _health=3;
-
-    [SerializeField] private float _speed=4;
-
-    [SerializeField] private int _damage=1;
-
-    [SerializeField] private int _score = 1;
-
     [SerializeField] private float _timeWait =1f;
-
-    [Header("PowerUp")]
-    [RangeAttribute(0,1f)]
-    [SerializeField] private float _chanceSpawnTripleShotPowerUp;
-    [SerializeField] private GameObject[] _powerUps;
-
-
-    [Header("Dead")]
-    [SerializeField] private AudioClip _explosionSound;
-
 
     enum MovingState{Moving,Rotating,Waitint}
     MovingState _myState;
@@ -41,9 +23,7 @@ public class KamikazeEnemy : Enemy
 
     public override void Damege(int damage)
     {
-        _health-=damage;
-        if(_health <0)
-            Dead();
+       base.Damege(damage);
     }
 
     private void Update() {
@@ -88,8 +68,7 @@ public class KamikazeEnemy : Enemy
         }
     }
 
-
-
+    
     private void DoRotate(){
         startTime += Time.deltaTime;
         float percent = startTime/duration;
@@ -116,9 +95,10 @@ public class KamikazeEnemy : Enemy
         _targetRotation = Vector3.SignedAngle(Vector3.up ,_player.transform.position-transform.position, Vector3.forward);
     }
 
-    private void OnTriggerEnter2D(Collider2D other) {
-        IDamageable damageable = other.GetComponent<IDamageable>();
-        if(other.tag== "Player"){
+    protected override void OnTriggerEnter2D(Collider2D collider)
+    {
+        IDamageable damageable = collider.GetComponent<IDamageable>();
+        if(collider.tag== "Player"){
             damageable.Damege(_damage);
             Dead();
         }
@@ -130,10 +110,10 @@ public class KamikazeEnemy : Enemy
     }
 
 
-
     protected override void DoShoot()
     {
         throw new System.NotImplementedException();
     }
 
+   
 }

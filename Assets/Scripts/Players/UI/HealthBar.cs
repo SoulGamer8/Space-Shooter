@@ -5,18 +5,24 @@ using UnityEngine.UI;
 
 public class HealthBar : MonoBehaviour
 {
-    [SerializeField] private Texture[] _spriteHealthBar;
+    private Slider _healthSlider;
 
 
 
-    private void Start()
+
+    private void Awake()
     {
-        gameObject.GetComponent<RawImage>().texture = _spriteHealthBar[3];
+        _healthSlider = gameObject.GetComponentInChildren<Slider>();
     }
+
+    public void MaxHealth(int maxHealth){
+        _healthSlider.maxValue = maxHealth;
+    }
+
 
     public void UpdateHealthBar(int curentlyHealth)
     {
         if(curentlyHealth>0)
-            gameObject.GetComponent<RawImage>().texture = _spriteHealthBar[curentlyHealth];
+            _healthSlider.value = curentlyHealth;
     }
 }

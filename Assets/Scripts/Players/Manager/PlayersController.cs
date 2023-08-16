@@ -8,8 +8,7 @@ public class PlayersController : MonoBehaviour
 
     [SerializeField] private JoinNewPlayer _joinNewPlayer;
     [SerializeField] private GameManager _gameManager;
-    [SerializeField] private Score _score;
-
+    
     private int _playerAlive = 0;
 
 

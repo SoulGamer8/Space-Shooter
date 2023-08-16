@@ -4,10 +4,8 @@ using UnityEngine;
 
 public class SmartEnemyLaser : Ammo
 {
-    private float _bulletSpeed;
+    private int _bulletSpeed;
     private int _bulletDamage;
-    private bool _trippleShootIsActive = false;
-    private float _trippleShootSpeed;
     private Vector3 _playerPosition;
     
     public void SetTarget(Vector3 target){
@@ -15,7 +13,7 @@ public class SmartEnemyLaser : Ammo
        _playerPosition = target - temp*2;
     }
 
-    public void SetSpeed(float speed){
+    public void SetSpeed(int speed){
         _bulletSpeed = speed;
     }
 

@@ -1,20 +1,26 @@
-using System.Collections;
-using System.Collections.Generic;
-using System.ComponentModel;
 using UnityEngine;
-using UnityEngine.Events;
+
 
 [RequireComponent(typeof(Collider2D), typeof(AudioSource))]
-public class PowerUp : MonoBehaviour
+public class PowerUp : MonoBehaviour,ISpawnChanceWeight
 {
 
     [SerializeField] private float _speed;
-    [TooltipAttribute("0 - Triple Shot\n" + "1 - Speed\n" + "2 - Shield\n" + "3 - Respawn\n" + "4 - Heal\n")]
-    [SerializeField] private int _powerUpId;
+    [SerializeField] private int _spawnChanceWeight;
+    private enum TypePowerUp {TripleShot,Speed,Shield,Respawn,Repair,Ammo};
+    [SerializeField] private TypePowerUp _powerUpId;
 
     [Header("Sound")]
     [SerializeField] private AudioClip _soundTakePowerUp;
 
+    public int GetSpawnChanceWeight()
+    {
+        return _spawnChanceWeight;
+    }
+
+    public void ChangeSpawnChacneWeight(int spawnChanceWeight){
+        _spawnChanceWeight += spawnChanceWeight;
+    }
 
     void Update()
     {
@@ -28,10 +34,10 @@ public class PowerUp : MonoBehaviour
     {
         if(collision.tag == "Player")
         {
-            switch (_powerUpId)
+            switch ((int)_powerUpId)
             {
                 case 0:
-                    collision.GetComponent<Shoot>().TakePowerUp();
+                    collision.GetComponent<Shoot>().TakeTripelShoot();
                     break;
                 case 1:
                     collision.GetComponent<PlayerMovement>().TakeSpeedPowerUp();
@@ -45,6 +51,9 @@ public class PowerUp : MonoBehaviour
                 case 4:
                     collision.GetComponent<PlayerHealth>().TakeHeal(); 
                     break;
+                case 5:
+                    collision.GetComponent<Shoot>().TakeAmmo();
+                    break;
                 default:
                     break;
             }
@@ -55,6 +64,5 @@ public class PowerUp : MonoBehaviour
             Destroy(gameObject);
         }
     }
-
 
 }
