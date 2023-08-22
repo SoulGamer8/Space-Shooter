@@ -80,5 +80,8 @@ public class ShipEnemy : Enemy
        
     }
 
-    
+    public override int GetSpawnChanceWeight()
+    {
+       return _spawnChanceWeight;
+    }
 }

@@ -1,10 +1,8 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
+using Unity.Services.Analytics;
 using UnityEngine;
-using UnityEngine.Events;
 using UnityEngine.SceneManagement;
+using Unity.Services.Core;
+using System.Collections.Generic;
 
 public class GameManager : MonoBehaviour
 {
@@ -19,8 +17,19 @@ public class GameManager : MonoBehaviour
 
     private bool _isAllPlayerDied=false;
 
+    async  private void Start() {
+        await UnityServices.InitializeAsync();
+    }
+
     public void AllPlayerDead()
     {
+        Dictionary<string, object> parameters = new Dictionary<string, object>()
+        {
+            { "levelNumber", SceneManager.GetActiveScene().name},
+        };
+
+        
+        AnalyticsService.Instance.CustomData("PlayerDead",parameters);
         _gameOverScreen.SetActive(true);
 
         spawnManager.PlayerDeath();

@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "883012242915",
+    "firebase_url": "https://spaceshooter-1c74e-default-rtdb.europe-west1.firebasedatabase.app",
+    "project_id": "spaceshooter-1c74e",
+    "storage_bucket": "spaceshooter-1c74e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:883012242915:android:5163646a876828415064d6",
+        "android_client_info": {
+          "package_name": "com.NeverMing.SpaceShooter"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "883012242915-0plspavt2da1oneae00hbiibqsvb93c6.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD8Ogwii_2YFaqMYD5CTp39lxW4WKXM4t0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "883012242915-0plspavt2da1oneae00hbiibqsvb93c6.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,5 +1,7 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Analytics;
 using UnityEngine.Events;
 
 public class SpawnManager : MonoBehaviour
@@ -8,7 +10,6 @@ public class SpawnManager : MonoBehaviour
     public event UnityAction<int> enemyKilledEvent;
 
     [Header("Enemy")]
-    [SerializeField] private bool _isSpawnEnemy=true;
     [SerializeField] private GameObject[] _enemiesArray;
     [SerializeField] private int _spawnRate;
 
@@ -29,8 +30,7 @@ public class SpawnManager : MonoBehaviour
 
     private void Start()
     {
-        if(_isSpawnEnemy)
-            StartCoroutine(SpawnEnemy());
+        StartCoroutine(SpawnEnemy());
         StartCoroutine(SpawnPowerUp());
     }
 
@@ -59,6 +59,7 @@ public class SpawnManager : MonoBehaviour
                 return objects[i];
             random -= weight[i];
         }
+        Debug.Log("Somithing is ChooseWeightedItem");
         return null;
     }
 
@@ -67,9 +68,9 @@ public class SpawnManager : MonoBehaviour
         while (true)
         {
             Vector3 randomPosition = new Vector3(Random.Range(-8, 8), transform.position.y, 0);
-            int randomEnemy = Random.Range(0, _enemiesArray.Length);
-            Instantiate(_enemiesArray[randomEnemy], randomPosition, Quaternion.identity, transform);
-        
+            GameObject randomEnemy = ChooseWeightedItem(_enemiesArray);
+            Instantiate(randomEnemy, randomPosition, Quaternion.identity, transform);
+
             float chance = Random.Range(0f, 1f);
             if (chance >= _chanceSpawnCoin && _isSpawnCoin)
                 Instantiate(_coinPrefab, randomPosition, Quaternion.identity, transform);

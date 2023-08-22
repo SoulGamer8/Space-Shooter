@@ -115,5 +115,8 @@ public class KamikazeEnemy : Enemy
         throw new System.NotImplementedException();
     }
 
-   
+    public override int GetSpawnChanceWeight()
+    {
+       return _spawnChanceWeight;
+    }
 }

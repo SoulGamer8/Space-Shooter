@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 9145592627855830255}
   m_Layer: 0
   m_Name: Smart Enemy
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -101,12 +101,11 @@ MonoBehaviour:
   _speed: 4
   _damage: 1
   _score: 1
-  _chanceSpawnTripleShotPowerUp: 0
-  _powerUps: []
+  _spawnChanceWeight: 1
+  _explosionSound: {fileID: 0}
   _fireRate: 1
   _bullet: {fileID: 6735492421502545530, guid: b9e1cc08e498fc94c921667113c6ec68, type: 3}
   _speedBullet: 10
   _timeToFire: 0
   _timeToMove: 0
-  _explosionSound: {fileID: 0}
   _timeWait: 2

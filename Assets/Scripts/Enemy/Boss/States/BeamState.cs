@@ -2,9 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SpawnBombsState : State
+public class BeamState : BossState
 {
-    public override void OnEnter(GameObject gameObject, float fireRate)
+    public BeamState(BossController bossController, BossStateMachine bossStateMachine) : base(bossController, bossStateMachine)
+    {
+    }
+
+    public override void OnEnter()
     {
         throw new System.NotImplementedException();
     }

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(Animator))]
 public class SpeedEnemy : Enemy
 {
     private float sinCenterY;
@@ -63,7 +64,8 @@ public class SpeedEnemy : Enemy
 
     protected override void Dead()
     {
-        Destroy(gameObject, this.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).length);
+        Destroy(this.gameObject);
+        // Destroy(gameObject, this.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).length);
     }
 
     protected override void DoShoot()
@@ -71,4 +73,8 @@ public class SpeedEnemy : Enemy
         throw new System.NotImplementedException();
     }
 
+    public override int GetSpawnChanceWeight()
+    {
+       return _spawnChanceWeight;
+    }
 }

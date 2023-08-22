@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class AsteroidEnemy : Enemy
@@ -19,8 +17,7 @@ public class AsteroidEnemy : Enemy
         DoMove();
     }
 
-    protected override void DoMove()
-    {
+    protected override void DoMove(){
         transform.position += new Vector3(0, -1, 0) * Time.deltaTime * _speed;
         if (transform.position.y < -5)
         {
@@ -28,14 +25,12 @@ public class AsteroidEnemy : Enemy
         }
     }
 
-    public override void Damege(int damage)
-    {
+    public override void Damege(int damage){
         base.Damege(damage);
     }
 
 
-    protected override void OnTriggerEnter2D(Collider2D collider)
-    {
+    protected override void OnTriggerEnter2D(Collider2D collider){
         IDamageable damageable = collider.GetComponent<IDamageable>();
         if(damageable != null)
         {
@@ -44,8 +39,7 @@ public class AsteroidEnemy : Enemy
         }
     }
 
-    protected override void Dead()
-    {
+    protected override void Dead(){
         _animator.SetTrigger("IsEnemyDead");
         this.GetComponent<BoxCollider2D>().enabled = false;
 
@@ -57,9 +51,10 @@ public class AsteroidEnemy : Enemy
 
 
 
-    protected override void DoShoot()
-    {
+    protected override void DoShoot(){
     }
 
-  
+    public override int GetSpawnChanceWeight(){
+       return _spawnChanceWeight;
+    }
 }

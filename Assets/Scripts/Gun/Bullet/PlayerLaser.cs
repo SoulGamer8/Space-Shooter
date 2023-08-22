@@ -1,21 +1,19 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerLaser : Ammo
 {
-    private float _bulletSpeed;
-    private int _bulletDamage;
+    private float _bulletSpeed= 8f;
+    private int _bulletDamage = 1;
     private bool _trippleShootIsActive = false;
     private float _trippleShootSpeed;
 
-    public void SetSpeed(float speed){
-        _bulletSpeed = speed;
+    public void SetDamageAndSpeed(int damage,float speed){
+        if(damage >0)
+            _bulletDamage = damage;
+        if(speed >0)
+            _bulletSpeed = speed;
     }
-
-    public void SetDamage(int damage){
-        _bulletDamage = damage;
-    }
+    
 
     private void Update() {
         DoMove();
@@ -25,8 +23,7 @@ public class PlayerLaser : Ammo
         _trippleShootIsActive = true;
     }
 
-    protected override void DoMove()
-    {
+    protected override void DoMove(){
         transform.Translate(Vector3.up * _bulletSpeed * Time.deltaTime);
 
         if (_trippleShootIsActive)
@@ -38,18 +35,18 @@ public class PlayerLaser : Ammo
             Dead();
     }
 
-    protected override void OnTriggerEnter2D(Collider2D collider)
-    {
+    protected override void OnTriggerEnter2D(Collider2D collider){
         IDamageable damageable = collider.GetComponent<IDamageable>();
+        Debug.Log(damageable);
         if(damageable != null  && collider.tag =="Enemy")
         {
+           
             damageable.Damege(_bulletDamage);
             Dead();
         }
     }
 
-    protected override void Dead()
-    {
+    protected override void Dead(){
         if (transform.parent != null)
         {
            if (gameObject.transform.parent.transform.childCount == 1 )

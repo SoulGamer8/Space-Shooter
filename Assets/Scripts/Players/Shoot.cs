@@ -12,8 +12,6 @@ public class Shoot : MonoBehaviour
     [SerializeField] private GameObject _bullet;
     [SerializeField] private GameObject _tripleShoot;
     [SerializeField] private float _fireRate;
-    [SerializeField] private float _bulletSpeed;
-    [SerializeField] private int _bulletDamage;
 
     [Header("Sound")]
     [SerializeField] private AudioClip _laserShoot;
@@ -26,13 +24,13 @@ public class Shoot : MonoBehaviour
     private bool _isTripleShootActive = false;
     private Coroutine fire;
 
-    private void Start(){
+    private void Awake(){
        SpawnAmmoUI();
     }
 
     private void SpawnAmmoUI(){
         GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
-        GameObject canvas = GameObject.FindGameObjectWithTag("AmmoUI");
+        GameObject canvas = GameObject.FindGameObjectWithTag("HealthBar");
 
         GameObject missileUI;
 
@@ -80,7 +78,8 @@ public class Shoot : MonoBehaviour
             }
             else
             {
-                Instantiate(_bullet, new Vector3(transform.position.x, transform.position.y + 1.5f, 0), Quaternion.identity);
+                GameObject bullet;
+                bullet = Instantiate(_bullet, new Vector3(transform.position.x, transform.position.y + 1.5f, 0), Quaternion.identity);
             }
 
             PlaySoundSoot?.Invoke(_laserShoot);

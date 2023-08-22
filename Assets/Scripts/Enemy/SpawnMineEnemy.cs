@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class SpawnMineEnemy : Enemy
@@ -16,29 +15,23 @@ public class SpawnMineEnemy : Enemy
         DoMove();
     }
 
-    public override void Damege(int damage)
-    {
+    public override void Damege(int damage){
         _health -=damage;
         if(_health <0)
             Dead();
     }
 
- 
-
-    protected override void DoMove()
-    {
+    protected override void DoMove(){
         transform.position +=new Vector3(0,-1,0)*Time.deltaTime *_speed;
         if(transform.position.y<-6)
             Dead();
     }
 
-    protected override void DoShoot()
-    {
+    protected override void DoShoot(){
         StartCoroutine(SpawnMine());
     }
 
-    protected override void OnTriggerEnter2D(Collider2D collider)
-    {
+    protected override void OnTriggerEnter2D(Collider2D collider){
         IDamageable damageable = collider.GetComponent<IDamageable>();
         if(collider.tag== "Player"){
             damageable.Damege(_damage);
@@ -46,8 +39,7 @@ public class SpawnMineEnemy : Enemy
         }
     }
 
-    protected override void Dead()
-    {
+    protected override void Dead(){
         Destroy(gameObject);
     }
 
@@ -58,4 +50,7 @@ public class SpawnMineEnemy : Enemy
         }
     }
 
+    public override int GetSpawnChanceWeight(){
+        return _spawnChanceWeight;
+    }
 }

@@ -1,8 +1,7 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SpeedShipController : MonoBehaviour
+public class SpeedShipController : MonoBehaviour, ISpawnChanceWeight
 {
     [SerializeField] private GameObject _speedShip;
     [SerializeField] private List<GameObject> _speedShipList;
@@ -12,6 +11,7 @@ public class SpeedShipController : MonoBehaviour
     [SerializeField] private float _frequency;
     [SerializeField] private bool _isNegetive = false;
     
+    [SerializeField] private int _spawnChanceWeight;
     
     private float _positionY;
 
@@ -36,4 +36,7 @@ public class SpeedShipController : MonoBehaviour
         ship.GetComponent<SpeedEnemy>().SetSin(_amplitede,_frequency,_isNegetive);
     }
 
+    public int GetSpawnChanceWeight(){
+        return _spawnChanceWeight;
+    }
 }

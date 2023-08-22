@@ -33,21 +33,25 @@ public class PlayerHealth : MonoBehaviour,IDamageable
     [SerializeField] private List<GameObject> _fireOnEngineInstiate;
 
     [Header("Sound")]
+    [SerializeField] private AudioClip _hitSound;
     [SerializeField] private AudioClip _explosionSound;
+    private PlayerSoundManager _playerSoundManager;
 
     private PolygonCollider2D _polygonCollider2D;
-
     private Animator _animator;
-
     private PlayersController _playersController;
-
     private PowerUpWeightController _powerUpWeightController;
+
+
     private void Awake(){
         _curentlyHealth = _health;
         _animator = GetComponent<Animator>();
         _polygonCollider2D = GetComponent<PolygonCollider2D>();
+        _playerSoundManager = GetComponent<PlayerSoundManager>();
         FindHealthBar();
         _powerUpWeightController = PowerUpWeightController.instance;
+
+        
         Debug.Log(_powerUpWeightController);
     }
 
@@ -60,8 +64,14 @@ public class PlayerHealth : MonoBehaviour,IDamageable
     private void FindHealthBar(){
         GameObject[] gameObject = GameObject.FindGameObjectsWithTag("Player");
         GameObject canvas = GameObject.FindGameObjectWithTag("HealthBar");
-        GameObject helthBar = Instantiate(_healthBarArray[gameObject.Length-1],canvas.transform);
-        _healthBar = helthBar.GetComponent<HealthBar>();
+        
+        GameObject healthBar;
+        if(canvas == null)
+            throw new System.NullReferenceException("HealthBar not found");
+        
+        healthBar = Instantiate(_healthBarArray[gameObject.Length-1],canvas.transform);
+
+        _healthBar = healthBar.GetComponent<HealthBar>();
         _healthBar.MaxHealth(_health);
     }
 
@@ -81,7 +91,8 @@ public class PlayerHealth : MonoBehaviour,IDamageable
             StartCoroutine(Invulnerability());
             if (_curentlyHealth <= 0)
                 Dead();
-            _powerUpWeightController.ChangeSpawnChacneWeightRepair(10);
+            // _powerUpWeightController.ChangeSpawnChacneWeightRepair(10);
+            _playerSoundManager.PlaySound(_hitSound);
         }
         
     }
@@ -115,7 +126,8 @@ public class PlayerHealth : MonoBehaviour,IDamageable
     private void SpawnFireOnEngine(){
         if (_curentlyHealth - 1 >= 0)
         {
-            GameObject fire = Instantiate(_fireOnEngine[_curentlyHealth - 1], transform);
+            Debug.Log(_fireOnEngine.Length - _curentlyHealth);
+            GameObject fire = Instantiate(_fireOnEngine[_fireOnEngine.Length - _curentlyHealth], transform);
             _fireOnEngineInstiate.Add(fire);
         }
     }

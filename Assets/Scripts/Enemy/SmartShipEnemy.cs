@@ -131,5 +131,8 @@ public class SmartShipEnemy : Enemy
         Destroy(gameObject, 2.8f);
     }
 
-    
+    public override int GetSpawnChanceWeight()
+    {
+       return _spawnChanceWeight;
+    }
 }

@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class EnemyLaser : Ammo
 { 
-    private int _bulletSpeed=1;
-    private int _bulletDamage;
+    [SerializeField] private int _bulletSpeed=8;
+    [SerializeField] private int _bulletDamage=1;
     private bool _trippleShootIsActive = false;
     private float _trippleShootSpeed;
 
-    public void SetDamageAndSpeed(int damage,int speed)
+    public void SetDamageAndSpeed(int speed,int damage = 1)
     {
         if(damage >0)
             _bulletDamage = damage;
@@ -32,7 +32,7 @@ public class EnemyLaser : Ammo
 
     protected override void DoMove(){
         transform.Translate(Vector3.up * _bulletSpeed * Time.deltaTime);
-
+        
         if (_trippleShootIsActive)
         {
             transform.position += new Vector3(_trippleShootSpeed, _bulletSpeed, 0) * Time.deltaTime;

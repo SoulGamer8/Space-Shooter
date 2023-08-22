@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 5753047922043332651}
   m_Layer: 0
   m_Name: Spawn Mine Enemy
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -102,8 +102,7 @@ MonoBehaviour:
   _speed: 4
   _damage: 1
   _score: 1
-  _chanceSpawnTripleShotPowerUp: 0
-  _powerUps: []
+  _spawnChanceWeight: 1
   _explosionSound: {fileID: 0}
   _minePrefab: {fileID: 4910969230209893057, guid: e68e0ffdceea1434181f89586affcdd9, type: 3}
   _timeSpawn: 1

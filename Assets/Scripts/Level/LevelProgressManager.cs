@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-
+using Unity.Services.Analytics;
 public class LevelProgressManager : MonoBehaviour
 {
     [SerializeField] private float _timeHowLongLive;
@@ -11,20 +11,19 @@ public class LevelProgressManager : MonoBehaviour
     [SerializeField] private bool _isHasBoss=false;
     [ConditionalHide("_isHasBoss", true)]
     [SerializeField] private GameObject _boosPrefab;
+
     private WalletManager _walletManager;
-    private void Start()
-    {
+
+    private void Start(){
         _walletManager = WalletManager.instance;
         StartCoroutine(Timer());
     }
 
-
-    private void SpawnBoss()
-    {
+    private void SpawnBoss(){
         Instantiate(_boosPrefab);
     }
-    private IEnumerator Timer()
-    {
+
+    private IEnumerator Timer(){
         yield return new WaitForSeconds(_timeHowLongLive);
         if (!_isHasBoss ) 
         {
@@ -34,11 +33,17 @@ public class LevelProgressManager : MonoBehaviour
             _walletManager.SaveMoney();
             Debug.Log("Level complete");
 
+            Dictionary<string, object> parameters = new Dictionary<string, object>()
+            {
+            { "level", SceneManager.GetActiveScene().name},
+            };
+
+        
+            AnalyticsService.Instance.CustomData("levelWin",parameters);
+
         }
         else
-        {
             SpawnBoss();
-        }
 
     } 
 }

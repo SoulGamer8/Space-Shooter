@@ -33,7 +33,7 @@ public class PlayerSoundManager : MonoBehaviour
     }
 
     
-    private void PlaySound(AudioClip clip)
+    public void PlaySound(AudioClip clip)
     {
         _audioSource.clip = clip;
         _audioSource.Play();

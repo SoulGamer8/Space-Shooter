@@ -105,17 +105,12 @@ MonoBehaviour:
   _speed: 4
   _damage: 1
   _score: 1
-  _chanceSpawnTripleShotPowerUp: 0.103
-  _powerUps:
-  - {fileID: 1962149739858341712, guid: 5f0a59c14ac16494bb9b4ff3822539e1, type: 3}
-  - {fileID: 8296805648766830689, guid: fd2af8bb78df30a48bf87e2968b3ef01, type: 3}
-  - {fileID: 5744669851517557007, guid: eda2ab619d689934aa28936259ed38f6, type: 3}
-  - {fileID: 6031965873052742763, guid: 3704c4085c768584d812f02ee881ecc4, type: 3}
-  - {fileID: 4999118602094741899, guid: b8ff3d352834e9a419beed4fc355eaac, type: 3}
-  _fireRate: 1.5
-  _bullet: {fileID: 4978602119496610123, guid: 549d2344a1ab50740bca83a07d31901b, type: 3}
-  _speedBullet: 8
+  _spawnChanceWeight: 5
   _explosionSound: {fileID: 8300000, guid: a885c043fab7e46438bba03ba9dab6bc, type: 3}
+  _bullet: {fileID: 4978602119496610123, guid: 549d2344a1ab50740bca83a07d31901b, type: 3}
+  _bulletDamage: 0
+  _bulletSpeed: 0
+  _fireRate: 1.5
 --- !u!95 &3175444527686205786
 Animator:
   serializedVersion: 5

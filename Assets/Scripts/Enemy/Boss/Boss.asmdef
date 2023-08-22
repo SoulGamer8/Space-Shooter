@@ -1,3 +1,16 @@
 {
-	"name": "Boss"
+    "name": "Boss",
+    "rootNamespace": "",
+    "references": [
+        "GUID:f97eafeb2bab49b4bb3ed3dd1cca3176"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
 }

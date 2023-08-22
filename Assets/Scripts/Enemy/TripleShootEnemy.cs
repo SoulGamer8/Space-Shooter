@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class TripleShootEnemy : Enemy
@@ -12,7 +11,7 @@ public class TripleShootEnemy : Enemy
     [SerializeField] private float _fireRate;
 
     private Vector3 _targetPosition;
-    private Vector3 _Patruling;
+    private Vector3 _patruling;
 
     enum MovingState{Starting,Moving}
     private MovingState _myState;
@@ -36,10 +35,9 @@ public class TripleShootEnemy : Enemy
         }
     }
 
-
     private void ChangeState(MovingState myState){
         _myState = myState;
-        _Patruling = new Vector3(6,transform.position.y);
+        _patruling = new Vector3(6,transform.position.y);
     }
 
     private void StartMoving(){
@@ -52,30 +50,28 @@ public class TripleShootEnemy : Enemy
         }
     }
 
-    protected override void DoMove()
-    {
+    protected override void DoMove(){
 
-        transform.position = Vector3.Lerp(transform.position, _Patruling, 0.3f*_speed * Time.deltaTime);
-        if(Vector3.Distance(transform.position, _Patruling) < 0.1f)
-            _Patruling.x *=-1;
+        transform.position = Vector3.Lerp(transform.position, _patruling, 0.3f*_speed * Time.deltaTime);
+        if(Vector3.Distance(transform.position, _patruling) < 0.1f)
+            _patruling.x *=-1;
     }
 
-
-    protected override void DoShoot()
-    {
+    protected override void DoShoot(){
         StartCoroutine(ShootinCorutine());
     }
 
-    protected override void OnTriggerEnter2D(Collider2D collider)
-    {
+    protected override void OnTriggerEnter2D(Collider2D collider){
         throw new System.NotImplementedException();
     }
 
-    protected override void Dead()
-    {
+    protected override void Dead(){
         throw new System.NotImplementedException();
     }
 
+    public override int GetSpawnChanceWeight(){
+       return _spawnChanceWeight;
+    }
 
     IEnumerator ShootinCorutine(){
         GameObject bullet;

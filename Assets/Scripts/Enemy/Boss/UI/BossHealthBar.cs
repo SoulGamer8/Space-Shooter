@@ -1,15 +1,20 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class BossHealthBar : MonoBehaviour
 {
-    [SerializeField] private Slider _healthSlider;
+    private Slider _healthSlider;
 
+    private void Awake() {
+        _healthSlider = GetComponent<Slider>();
+    }
 
-    public void UpdateUI(int health)
-    {
+    public void SetValueMax(int maxHealth){
+        _healthSlider.maxValue = maxHealth;
+        _healthSlider.value = maxHealth;
+    }
+
+    public void UpdateUI(int health){
         _healthSlider.value = health;
     }
 }
