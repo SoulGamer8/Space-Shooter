@@ -25,7 +25,7 @@ public class SmartEnemyLaser : Ammo
         DoMove();
     }
 
-    protected override void DoMove()
+    public override void DoMove()
     {
 
         transform.position = Vector3.MoveTowards(transform.position, _playerPosition, 1*Time.deltaTime*_bulletSpeed);

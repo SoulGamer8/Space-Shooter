@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class BeamState : BossState
 {
+
+    private enum BeamAttackState{Tracking,Locked,Fire}
+    BeamAttackState _currentBeamAttackState;
     public BeamState(BossController bossController, BossStateMachine bossStateMachine) : base(bossController, bossStateMachine)
     {
     }

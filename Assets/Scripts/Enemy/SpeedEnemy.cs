@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(Animator))]
@@ -34,7 +32,7 @@ public class SpeedEnemy : Enemy
     }
 
   
-    protected override void DoMove()
+    public override void DoMove()
     {
         Vector2 pos = transform.position;
 
@@ -68,10 +66,6 @@ public class SpeedEnemy : Enemy
         // Destroy(gameObject, this.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).length);
     }
 
-    protected override void DoShoot()
-    {
-        throw new System.NotImplementedException();
-    }
 
     public override int GetSpawnChanceWeight()
     {

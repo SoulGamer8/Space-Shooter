@@ -8,7 +8,7 @@ public class SpawnMineEnemy : Enemy
     [SerializeField] private GameObject _minePrefab;
     [SerializeField] private float _timeSpawn;
     private void Awake() {
-        DoShoot();
+        Shoot();
     }
 
     private void Update() {
@@ -21,13 +21,13 @@ public class SpawnMineEnemy : Enemy
             Dead();
     }
 
-    protected override void DoMove(){
+    public override void DoMove(){
         transform.position +=new Vector3(0,-1,0)*Time.deltaTime *_speed;
         if(transform.position.y<-6)
             Dead();
     }
 
-    protected override void DoShoot(){
+    public override void Shoot(){
         StartCoroutine(SpawnMine());
     }
 

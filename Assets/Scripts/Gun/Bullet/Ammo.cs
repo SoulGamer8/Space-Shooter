@@ -1,10 +1,10 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class Ammo : MonoBehaviour
+public abstract class Ammo : MonoBehaviour, IMoveable
 {
-    protected abstract void DoMove();
+    public virtual void DoMove(){}
+
     protected abstract void Dead();
     protected abstract void OnTriggerEnter2D(Collider2D collider);
+
 }

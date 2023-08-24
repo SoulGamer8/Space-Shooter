@@ -15,6 +15,8 @@ public class TripleShootEnemy : Enemy
 
     enum MovingState{Starting,Moving}
     private MovingState _myState;
+    private int _volleyLaserSpread = 40;
+    private int _countLaserToFire = 3;
 
     private void Start() {
         _targetPosition = new Vector3(transform.position.x,4);
@@ -46,18 +48,18 @@ public class TripleShootEnemy : Enemy
 
         if(Vector3.Distance(transform.position, _targetPosition) < 0.1f){
             ChangeState(MovingState.Moving);
-            DoShoot();
+            Shoot();
         }
     }
 
-    protected override void DoMove(){
+    public override void DoMove(){
 
         transform.position = Vector3.Lerp(transform.position, _patruling, 0.3f*_speed * Time.deltaTime);
         if(Vector3.Distance(transform.position, _patruling) < 0.1f)
             _patruling.x *=-1;
     }
 
-    protected override void DoShoot(){
+    public override void Shoot(){
         StartCoroutine(ShootinCorutine());
     }
 
@@ -74,16 +76,12 @@ public class TripleShootEnemy : Enemy
     }
 
     IEnumerator ShootinCorutine(){
-        GameObject bullet;
         while(true){
-            bullet = Instantiate(_bullet,transform.position,Quaternion.Euler(0,0,0));
-            bullet.GetComponent<EnemyLaser>().SetDamageAndSpeed(_bulletDamage,_bulletSpeed);
+            int angelBetweenLaser = 2 * _volleyLaserSpread / (_countLaserToFire-1);
 
-            bullet = Instantiate(_bullet,transform.position,Quaternion.Euler(0,0,45));
-            bullet.GetComponent<EnemyLaser>().SetDamageAndSpeed(_bulletDamage,_bulletSpeed);
-
-            bullet = Instantiate(_bullet,transform.position,Quaternion.Euler(0,0,-45));
-            bullet.GetComponent<EnemyLaser>().SetDamageAndSpeed(_bulletDamage,_bulletSpeed);
+            for(int angle = -_volleyLaserSpread;angle<= _volleyLaserSpread;angle += angelBetweenLaser){
+                Instantiate(_bullet,transform.position,Quaternion.Euler(0,0,angle));  
+        }
 
             yield return new WaitForSeconds(_fireRate);
         }

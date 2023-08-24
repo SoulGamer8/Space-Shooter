@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class ShootingLaserState : BossState
@@ -30,7 +28,6 @@ public class ShootingLaserState : BossState
             int angelBetweenLaser = 2 * bossController._volleyLaserSpread / (bossController._countLaserToFire-1);
 
             for(int angle = -bossController._volleyLaserSpread;angle<= bossController._volleyLaserSpread;angle += angelBetweenLaser){
-                Debug.Log(angle);
                 GameObject bullet = GameObject.Instantiate(bossController._bullet,bossController.transform.position,Quaternion.Euler(0,0,angle));  
             }
 

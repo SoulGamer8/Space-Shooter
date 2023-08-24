@@ -100,6 +100,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 159d71dcd6063664f8b1f6e9975e1961, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _bossSpeed: 5
   _healthMax: 20
   _healthBarPrefab: {fileID: 8240833923308457376, guid: 2323dc7c55ec5884082b19b54308a606, type: 3}
   _percentStartStage2: 50
@@ -108,7 +109,15 @@ MonoBehaviour:
   _fireRateBullet: 2
   _countLaserToFire: 5
   _volleyLaserSpread: 60
-  _bossSpeed: 5
+  _beamObject:
+  - _beamParent: {fileID: 0}
+    _beamAttack: {fileID: 0}
+    _chargeBall: {fileID: 0}
+    _warningLine: {fileID: 0}
+  - _beamParent: {fileID: 0}
+    _beamAttack: {fileID: 0}
+    _chargeBall: {fileID: 0}
+    _warningLine: {fileID: 0}
   _missile: {fileID: 0}
   _fireRateMissile: 0
   _shield: {fileID: 0}

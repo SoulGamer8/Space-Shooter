@@ -1,10 +1,10 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class BossController : MonoBehaviour, IDamageable
 {
-    
+    [SerializeField] internal float _bossSpeed;
+
+
     #region Health
     [Header("Health")]
     [SerializeField] private int _healthMax;
@@ -25,12 +25,16 @@ public class BossController : MonoBehaviour, IDamageable
     
     #region Shooting Laser State
     [Header("Bullet")]
+
     [SerializeField] internal GameObject _bullet;
     [SerializeField] internal float _fireRateBullet;  
     [SerializeField] internal int _countLaserToFire;
     [SerializeField] internal int _volleyLaserSpread;
-    [SerializeField] internal float _bossSpeed;
+    
+    #endregion
 
+    #region Beam
+    [SerializeField] private BeamObject[] _beamObject;
     #endregion
 
     [Header("Missile")]

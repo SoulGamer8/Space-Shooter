@@ -1,7 +1,7 @@
 using UnityEngine;
 
 
-public abstract class Enemy : MonoBehaviour, IDamageable, ISpawnChanceWeight
+public abstract class Enemy : MonoBehaviour, IDamageable, ISpawnChanceWeight, ICanShoot, IMoveable
 {
     [Header("Enemy Settings")]
     [SerializeField] protected int _health=3;
@@ -14,11 +14,8 @@ public abstract class Enemy : MonoBehaviour, IDamageable, ISpawnChanceWeight
     [SerializeField] protected AudioClip _explosionSound;
 
     public abstract int GetSpawnChanceWeight();
-
-    protected abstract void DoMove();
-
-    protected abstract void DoShoot();
-
+    public virtual void Shoot(){}
+    public virtual void DoMove(){}
     public virtual void Damege(int damage){
         _health -= damage;
         if(_health < 0)

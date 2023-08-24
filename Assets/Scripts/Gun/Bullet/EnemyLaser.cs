@@ -28,9 +28,8 @@ public class EnemyLaser : Ammo
       DoMove();
     }
 
-     
 
-    protected override void DoMove(){
+    public override void DoMove(){
         transform.Translate(Vector3.up * _bulletSpeed * Time.deltaTime);
         
         if (_trippleShootIsActive)
@@ -41,6 +40,7 @@ public class EnemyLaser : Ammo
         if (transform.position.y > 10 || transform.position.y < -10)
             Dead();
     }
+
 
     public void Change(float isRight)
     {

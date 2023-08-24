@@ -3,7 +3,6 @@ using UnityEngine;
 public class AsteroidEnemy : Enemy
 {
     private AudioSource _audioSource;
-
     private Animator _animator;
 
     private void Awake(){
@@ -17,7 +16,7 @@ public class AsteroidEnemy : Enemy
         DoMove();
     }
 
-    protected override void DoMove(){
+    public override void DoMove(){
         transform.position += new Vector3(0, -1, 0) * Time.deltaTime * _speed;
         if (transform.position.y < -5)
         {
@@ -47,11 +46,6 @@ public class AsteroidEnemy : Enemy
         _audioSource.Play();
 
         Destroy(gameObject, _animator.GetCurrentAnimatorStateInfo(0).length);
-    }
-
-
-
-    protected override void DoShoot(){
     }
 
     public override int GetSpawnChanceWeight(){

@@ -10,7 +10,6 @@ public class Shoot : MonoBehaviour
 
     [Header("Bullet")]
     [SerializeField] private GameObject _bullet;
-    [SerializeField] private GameObject _tripleShoot;
     [SerializeField] private float _fireRate;
 
     [Header("Sound")]
@@ -21,7 +20,9 @@ public class Shoot : MonoBehaviour
     [SerializeField] private List<GameObject> _ammoUI;
     private  AmmoMissile _ammoMissile;
     
-    private bool _isTripleShootActive = false;
+    private int _volleyLaserSpread = 20;
+    private int _countLaserToFire  =3;
+    [SerializeField] private bool _isTripleShootActive = false;
     private Coroutine fire;
 
     private void Awake(){
@@ -67,19 +68,25 @@ public class Shoot : MonoBehaviour
 
     }
 
+    private void TrippleShoot(){
+         int angelBetweenLaser = 2 * _volleyLaserSpread / (_countLaserToFire-1);
+
+        for(int angle = -_volleyLaserSpread;angle<= _volleyLaserSpread;angle += angelBetweenLaser){
+            Debug.Log(angle);
+            GameObject bullet = GameObject.Instantiate(_bullet,transform.position,Quaternion.Euler(0,0,angle));  
+        }
+    }
+
     private IEnumerator Shooting(){
         while (true) 
         {
             if (_isTripleShootActive)
             {
-                Instantiate(_tripleShoot, new Vector3(transform.position.x - 0.2f, transform.position.y + 4.0f, 0), Quaternion.identity);
-                _tripleShoot.transform.GetChild(1).gameObject.GetComponent<PlayerLaser>().ActiveTrippleShot();
-                _tripleShoot.transform.GetChild(2).gameObject.GetComponent<PlayerLaser>().ActiveTrippleShot();
+                TrippleShoot();
             }
             else
             {
-                GameObject bullet;
-                bullet = Instantiate(_bullet, new Vector3(transform.position.x, transform.position.y + 1.5f, 0), Quaternion.identity);
+                Instantiate(_bullet, new Vector3(transform.position.x, transform.position.y + 1.5f, 0), Quaternion.identity);
             }
 
             PlaySoundSoot?.Invoke(_laserShoot);

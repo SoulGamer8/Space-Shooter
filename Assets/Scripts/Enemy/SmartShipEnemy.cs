@@ -1,4 +1,3 @@
-using System.Collections;
 using UnityEngine;
 
 public class SmartShipEnemy : Enemy
@@ -47,7 +46,7 @@ public class SmartShipEnemy : Enemy
                 DoMove();
                 break;
             case 1:
-                DoShoot();
+                Shoot();
                 break;
             case 2:
                 DoWait();
@@ -65,12 +64,12 @@ public class SmartShipEnemy : Enemy
         base.Damege(damage);
     }
 
-    protected override void DoMove(){
+    public override void DoMove(){
         startTime += Time.deltaTime;
         float percent = startTime/duration;
 
         transform.position = Vector3.Lerp(transform.position, _targetPosition, percent*_speed);
-        // transform.rotation =Quaternion.Lerp(transform.rotation,new Quaternion(0,0,360,0),percent);
+
         transform.Rotate(new Vector3(0, 0, 360) * Time.deltaTime);
         if(Vector3.Distance(transform.position, _targetPosition) < 0.1f){
             ChangeState(MovingState.Firing);
@@ -85,7 +84,7 @@ public class SmartShipEnemy : Enemy
         _targetPosition =  new Vector2(randomX,randomY);
     }
 
-    protected override void DoShoot(){
+    public override void Shoot(){
         GameObject bullet;
         Vector3 target = SetTarget();
         float angelToFire = Vector3.SignedAngle(Vector3.up ,target-transform.position, Vector3.forward);

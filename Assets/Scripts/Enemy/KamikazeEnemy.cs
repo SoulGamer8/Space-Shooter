@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class KamikazeEnemy : Enemy
@@ -56,7 +54,7 @@ public class KamikazeEnemy : Enemy
         _myState = state;
     }
 
-    protected override void DoMove()
+    public override void DoMove()
     {
         startTime += Time.deltaTime;
         float percent = startTime/duration;
@@ -107,12 +105,6 @@ public class KamikazeEnemy : Enemy
     protected override void Dead()
     {
         Destroy(gameObject);
-    }
-
-
-    protected override void DoShoot()
-    {
-        throw new System.NotImplementedException();
     }
 
     public override int GetSpawnChanceWeight()

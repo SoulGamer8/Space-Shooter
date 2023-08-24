@@ -23,7 +23,7 @@ public class PlayerLaser : Ammo
         _trippleShootIsActive = true;
     }
 
-    protected override void DoMove(){
+    public override void DoMove(){
         transform.Translate(Vector3.up * _bulletSpeed * Time.deltaTime);
 
         if (_trippleShootIsActive)
@@ -37,7 +37,6 @@ public class PlayerLaser : Ammo
 
     protected override void OnTriggerEnter2D(Collider2D collider){
         IDamageable damageable = collider.GetComponent<IDamageable>();
-        Debug.Log(damageable);
         if(damageable != null  && collider.tag =="Enemy")
         {
            

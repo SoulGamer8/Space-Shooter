@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(Collider2D),typeof(AudioSource),typeof(Animator))]
@@ -22,7 +21,7 @@ public class ShipEnemy : Enemy
         _audioSource = GetComponent<AudioSource>();
         _animator = GetComponent<Animator>();
 
-        DoShoot();
+        Shoot();
     }
 
     private void Update(){
@@ -30,7 +29,7 @@ public class ShipEnemy : Enemy
     }
 
     
-    protected override void DoMove(){
+    public override void DoMove(){
         transform.position += new Vector3(0, -1, 0) * Time.deltaTime * _speed;
         if (transform.position.y < -5)
         {
@@ -42,7 +41,7 @@ public class ShipEnemy : Enemy
        base.Damege(damage);
     }
 
-    protected override void DoShoot(){
+    public override void Shoot(){
        StartCoroutine(ShootRoutine());
     }
 

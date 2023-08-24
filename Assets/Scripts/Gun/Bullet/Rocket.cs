@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.AI;
 
 [RequireComponent(typeof(Rigidbody2D))]
-public class Rocket : Ammo
+public class Rocket : Ammo ,IDamageable
 {
     [SerializeField] private Transform _target;
 
@@ -13,9 +13,12 @@ public class Rocket : Ammo
     [SerializeField] private float _rotateSpeed = 200f;
 
     [SerializeField] private int _damage;
+    
+    private int _health = 1;
+
 
     private Rigidbody2D _rigiddody2D;
-    private Coroutine _timeWhenMissileSelfDestroy;
+
     
     void Awake()
     {
@@ -28,13 +31,13 @@ public class Rocket : Ammo
         DoMove();
     }
 
-    public void SetTarget()
+    private void SetTarget()
     {
         _target = GameObject.FindGameObjectWithTag("Enemy").transform;
     }
 
 
-    protected override void DoMove()
+    public override void DoMove()
     {
         if (_target == null)
             SetTarget();
@@ -78,5 +81,10 @@ public class Rocket : Ammo
         Destroy(this.gameObject);
     }
 
-
+    public void Damege(int damage)
+    {
+        _health -= damage;
+        if(_health <0)
+            Dead();
+    }
 }
