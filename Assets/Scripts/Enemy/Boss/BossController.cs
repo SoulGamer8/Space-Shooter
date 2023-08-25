@@ -34,7 +34,12 @@ public class BossController : MonoBehaviour, IDamageable
     #endregion
 
     #region Beam
-    [SerializeField] private BeamObject[] _beamObject;
+    [SerializeField] internal BeamObject[] _beamObject;
+    [SerializeField] internal float _trackingDuration = 120;
+    [SerializeField] internal float _trackingFlashTime = 0.1f;
+    [SerializeField] internal float _lockedFlashTime = 0.1f;
+    internal Transform _playerTransform;
+    
     #endregion
 
     [Header("Missile")]
@@ -51,9 +56,9 @@ public class BossController : MonoBehaviour, IDamageable
     SpawnState spawnState;
     ShootingLaserState shootLaserState;
     MissileState shootMissileState;
+    BeamState beamState;
+
     #endregion
-
-
 
     private void Awake() {
         bossStateMachine = new BossStateMachine();
@@ -61,19 +66,19 @@ public class BossController : MonoBehaviour, IDamageable
         spawnState = new SpawnState(this,bossStateMachine);
         shootLaserState = new ShootingLaserState(this,bossStateMachine);
         shootMissileState = new MissileState(this,bossStateMachine);
-
+        beamState = new BeamState(this,bossStateMachine);
 
         _curentlyHealth = _healthMax;
         GameObject healthBarUI;
         healthBarUI = GameObject.FindGameObjectWithTag("HealthBar");
+        
         _healthBar = Instantiate(_healthBarPrefab,healthBarUI.transform).GetComponent<BossHealthBar>();
         _healthBar.SetValueMax(_healthMax);
     }
 
-
     private void Start() {
         bossStateMachine.Initialize(spawnState);
-        
+        _playerTransform = GameObject.FindWithTag("Player").transform;
     }
 
     private void Update() {
@@ -81,7 +86,7 @@ public class BossController : MonoBehaviour, IDamageable
     }
 
     public void NextStage(){
-        bossStateMachine.ChangeState(shootLaserState);
+        bossStateMachine.ChangeState(beamState);
     }
 
     #region Damage
