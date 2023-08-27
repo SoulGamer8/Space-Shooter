@@ -35,9 +35,11 @@ public class BossController : MonoBehaviour, IDamageable
 
     #region Beam
     [SerializeField] internal BeamObject[] _beamObject;
-    [SerializeField] internal float _trackingDuration = 120;
-    [SerializeField] internal float _trackingFlashTime = 0.1f;
-    [SerializeField] internal float _lockedFlashTime = 0.1f;
+    [SerializeField] internal float _beamAttackTime;
+    [SerializeField] internal float _trackingDuration;
+    [SerializeField] internal float _timetoLock;
+    [SerializeField] internal float _trackingFlashTime;
+    [SerializeField] internal float _lockedFlashTime ;
     internal Transform _playerTransform;
     
     #endregion
@@ -53,10 +55,10 @@ public class BossController : MonoBehaviour, IDamageable
     #region State Machine
     BossStateMachine bossStateMachine;
 
-    SpawnState spawnState;
-    ShootingLaserState shootLaserState;
-    MissileState shootMissileState;
-    BeamState beamState;
+    public SpawnState spawnState;
+    public ShootingLaserState shootLaserState;
+    public MissileState shootMissileState;
+    public BeamState beamState;
 
     #endregion
 
@@ -83,10 +85,6 @@ public class BossController : MonoBehaviour, IDamageable
 
     private void Update() {
         bossStateMachine.currentEnemyState.UpdateState();
-    }
-
-    public void NextStage(){
-        bossStateMachine.ChangeState(beamState);
     }
 
     #region Damage
