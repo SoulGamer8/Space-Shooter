@@ -34,6 +34,7 @@ public class BossController : MonoBehaviour, IDamageable
     #endregion
 
     #region Beam
+    [Header("Beam")]
     [SerializeField] internal BeamObject[] _beamObject;
     [SerializeField] internal float _beamAttackTime;
     [SerializeField] internal float _trackingDuration;
@@ -44,9 +45,13 @@ public class BossController : MonoBehaviour, IDamageable
     
     #endregion
 
+    #region Missile State
     [Header("Missile")]
-    [SerializeField] private GameObject _missile;
-    [SerializeField] private float _fireRateMissile;
+    [SerializeField] internal GameObject _missile;
+    [SerializeField] internal float _fireRateMissile;
+    [SerializeField] internal int _amountMissilesVolley;
+    [SerializeField] internal Transform[] _spawnMissile;
+    #endregion
 
     [Header("Shield")]
     [SerializeField] private GameObject _shield;

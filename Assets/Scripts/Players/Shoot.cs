@@ -72,8 +72,7 @@ public class Shoot : MonoBehaviour
          int angelBetweenLaser = 2 * _volleyLaserSpread / (_countLaserToFire-1);
 
         for(int angle = -_volleyLaserSpread;angle<= _volleyLaserSpread;angle += angelBetweenLaser){
-            Debug.Log(angle);
-            GameObject bullet = GameObject.Instantiate(_bullet,transform.position,Quaternion.Euler(0,0,angle));  
+            GameObject.Instantiate(_bullet,transform.position,Quaternion.Euler(0,0,angle));  
         }
     }
 

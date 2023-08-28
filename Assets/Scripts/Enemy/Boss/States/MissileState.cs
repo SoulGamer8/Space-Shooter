@@ -1,25 +1,29 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class MissileState : BossState
 {
-    public MissileState(BossController bossController, BossStateMachine bossStateMachine) : base(bossController, bossStateMachine)
-    {
+    private float _timer;
+    private int _curentlyMissilesVolley;
+
+    public MissileState(BossController bossController, BossStateMachine bossStateMachine) : base(bossController, bossStateMachine){}
+
+    public override void OnEnter(){
     }
 
-    public override void OnEnter()
-    {
-        throw new System.NotImplementedException();
+    
+    public override void UpdateState(){
+        _timer += Time.deltaTime;
+        if(_timer >= bossController._fireRateMissile){
+                GameObject.Instantiate(bossController._missile,bossController._spawnMissile[0].position,Quaternion.Euler(0,0,180));
+                GameObject.Instantiate(bossController._missile,bossController._spawnMissile[1].position,Quaternion.Euler(0,0,180));
+                _timer=0;
+                _curentlyMissilesVolley++;
+        }
+        if(_curentlyMissilesVolley >= bossController._amountMissilesVolley)
+            bossStateMachine.ChangeState(bossController.shootLaserState);
     }
 
-    public override void OnExit()
-    {
-        throw new System.NotImplementedException();
+    public override void OnExit(){
     }
 
-    public override void UpdateState()
-    {
-        throw new System.NotImplementedException();
-    }
 }

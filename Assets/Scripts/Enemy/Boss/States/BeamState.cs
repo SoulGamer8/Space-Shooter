@@ -1,6 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using System.Threading;
 using System.Threading.Tasks;
 using UnityEngine;
 
@@ -20,7 +17,7 @@ public class BeamState : BossState
         ChangeState(BeamAttackState.Tracking);
         foreach(BeamObject beamObject in bossController._beamObject){
             beamObject._chargeBall.SetActive(true);
-            CountToTenAsync(beamObject._warningLine,bossController._trackingFlashTime);
+            TrackFlashingAsync(beamObject._warningLine,bossController._trackingFlashTime);
         }
 
         _defaultRotation =bossController._beamObject[0]._beamParent.transform.eulerAngles.z;
@@ -92,7 +89,7 @@ public class BeamState : BossState
     }
 
 
-    private async Task CountToTenAsync(GameObject warningLine,float flahTime){
+    private async void TrackFlashingAsync(GameObject warningLine,float flahTime){
         float flahTimeConvert = flahTime *1000;
         while (_currentBeamAttackState != BeamAttackState.Fire){
             await Task.Delay((int)flahTimeConvert);
