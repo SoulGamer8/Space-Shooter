@@ -53,9 +53,11 @@ public class BossController : MonoBehaviour, IDamageable
     [SerializeField] internal Transform[] _spawnMissile;
     #endregion
 
+    #region Shield
     [Header("Shield")]
-    [SerializeField] private GameObject _shield;
-    [SerializeField] private int _shieldHealth;
+    [SerializeField] internal GameObject _shield;
+    [SerializeField] internal GameObject[] _shipGenerator;
+    #endregion
 
     #region State Machine
     BossStateMachine bossStateMachine;

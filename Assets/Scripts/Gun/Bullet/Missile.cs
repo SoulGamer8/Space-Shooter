@@ -1,28 +1,23 @@
 using System.Collections;
-using System.Collections.Generic;
-using System.Net.Sockets;
 using UnityEngine;
-using UnityEngine.AI;
 
 [RequireComponent(typeof(Rigidbody2D))]
 public class Missile : Ammo ,IDamageable
 {
     [SerializeField] private bool _isEnemyMissile;
     [SerializeField] private Transform _target;
-
     [SerializeField] private float _speed = 5f;
     [SerializeField] private float _rotateSpeed = 200f;
-
     [SerializeField] private int _damage;
-    
-    private int _health = 1;
+    [SerializeField] private int _health = 1;
 
 
     private Rigidbody2D _rigiddody2D;
-
+    private Animator _animator;
     
     void Awake(){
         _rigiddody2D = GetComponent<Rigidbody2D>();
+        _animator = GetComponent<Animator>();
         StartCoroutine(TimeWhenSelfDestroy());
     }
 
@@ -73,7 +68,9 @@ public class Missile : Ammo ,IDamageable
 
     
     protected override void Dead(){
-        Destroy(gameObject);
+        _animator.SetTrigger("Dead");
+        Destroy(gameObject, _animator.GetCurrentAnimatorStateInfo(0).length);
+
     }
 
     
