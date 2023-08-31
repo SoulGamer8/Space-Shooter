@@ -56,7 +56,9 @@ public class BossController : MonoBehaviour, IDamageable
     #region Shield
     [Header("Shield")]
     [SerializeField] internal GameObject _shield;
-    [SerializeField] internal GameObject[] _shipGenerator;
+    [SerializeField] internal GameObject _shieldGenerator;
+    [SerializeField] internal float _weekShieldOpacity;
+
     #endregion
 
     #region State Machine
@@ -66,6 +68,7 @@ public class BossController : MonoBehaviour, IDamageable
     public ShootingLaserState shootLaserState;
     public MissileState shootMissileState;
     public BeamState beamState;
+    public ShieldState shieldState;
 
     #endregion
 
@@ -76,6 +79,7 @@ public class BossController : MonoBehaviour, IDamageable
         shootLaserState = new ShootingLaserState(this,bossStateMachine);
         shootMissileState = new MissileState(this,bossStateMachine);
         beamState = new BeamState(this,bossStateMachine);
+        shieldState = new ShieldState(this,bossStateMachine);
 
         _curentlyHealth = _healthMax;
         GameObject healthBarUI;
@@ -113,6 +117,11 @@ public class BossController : MonoBehaviour, IDamageable
     }
 
     #endregion
+
+
+    public void ShieldGeneratorDead(){
+        shieldState.ShieldGeneratorDestroy();
+    }
 
     private void Dead(){
         Destroy(this.gameObject);

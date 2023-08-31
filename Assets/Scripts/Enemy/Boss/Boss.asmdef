@@ -2,7 +2,8 @@
     "name": "Boss",
     "rootNamespace": "",
     "references": [
-        "GUID:f97eafeb2bab49b4bb3ed3dd1cca3176"
+        "GUID:f97eafeb2bab49b4bb3ed3dd1cca3176",
+        "GUID:73e936302e2edad40bb72eb83fcf4357"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

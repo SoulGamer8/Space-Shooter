@@ -16,7 +16,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &5980369219246489788
 Transform:
   m_ObjectHideFlags: 0
@@ -301,8 +301,9 @@ MonoBehaviour:
   _spawnMissile:
   - {fileID: 3226698467268306475}
   - {fileID: 1337452208245636564}
-  _shield: {fileID: 0}
-  _shipGenerator: []
+  _shield: {fileID: 1008348633491259140}
+  _shieldGenerator: {fileID: 3136197385242522864, guid: 503f993177b0e7d45a00e92ff287902e, type: 3}
+  _weekShieldOpacity: 0.4
 --- !u!82 &141167393
 AudioSource:
   m_ObjectHideFlags: 0
