@@ -13,6 +13,7 @@ namespace Boss{
 
         public override void OnEnter()
         {
+            bossController._bossMove.SetSpeed(8);
         }
 
         public override void UpdateState(){
@@ -28,6 +29,7 @@ namespace Boss{
         
         public override void OnExit()
         {
+            bossController._bossMove.SetSpeed(0);
         }
 
     }

@@ -5,23 +5,12 @@ namespace Boss{
     {
         private float _timer;
 
-        private Transform transform;
-        private Vector3 _patruling;
-        private float _speed;
         public ShootingLaserState(BossController bossController, BossStateMachine bossStateMachine) : base(bossController, bossStateMachine){
 
         }
 
         public override void OnEnter(){
-
-            _speed = bossController._bossSpeed;
-
-            transform = bossController.transform;
-            _patruling = new Vector3(6,transform.position.y);
-        }
-
-        public override void OnExit(){
-            
+            bossController._bossMove.SetSpeed(8);
         }
 
         public override void UpdateState(){
@@ -36,10 +25,10 @@ namespace Boss{
             }
 
             _timer +=Time.deltaTime;
-
-            transform.position = Vector3.MoveTowards(transform.position, _patruling, _speed *Time.deltaTime);
-            if(Vector3.Distance(transform.position, _patruling) < 0.5f)
-                _patruling.x *=-1;
+        }
+        
+        public override void OnExit(){
+            bossController._bossMove.SetSpeed(0);
         }
     }
 }

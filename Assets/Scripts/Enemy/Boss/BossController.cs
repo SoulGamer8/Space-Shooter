@@ -75,6 +75,7 @@ namespace Boss{
         internal  Coroutine _changeStateToMissleStateRoutine;
         
         internal BossHealth bossHealth;
+        internal BossMove _bossMove;
         private void Awake() {
             bossStateMachine = new BossStateMachine();
 
@@ -85,6 +86,9 @@ namespace Boss{
             shieldState = new ShieldState(this,bossStateMachine);
             idleState = new IdleState(this,bossStateMachine);
             smartLaserState = new SmartLaserState(this,bossStateMachine);
+
+            bossHealth = GetComponent<BossHealth>();
+            _bossMove =  GetComponent<BossMove>();
         }
 
         private void Start() {
