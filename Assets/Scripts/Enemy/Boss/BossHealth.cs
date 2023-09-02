@@ -52,15 +52,13 @@ namespace Boss{
             _healthBar.SetValueMax(_healthMax);
         }
 
-        public void Damege(int damage)
-        {
+        public void Damege(int damage){
             if(!bossController._isShieldActive)
                 _curentlyHealth -= damage;
-
             if(_curentlyHealth < (_percentStartStage2*_healthMax)/100 && !bossController._isSecondStage)
-            StartCoroutine(OnHalfHPRoutine());
-            if (_curentlyHealth < 0)
-                Dead();
+                StartCoroutine(SecondStageRoutine());
+            else if (_curentlyHealth <= 0)
+                StartCoroutine(DeathEffectsRoutine());
             UpdateHealthBar();
         }
 
@@ -68,7 +66,7 @@ namespace Boss{
             _healthBar.UpdateUI(_curentlyHealth);
         }
         
-        private IEnumerator OnHalfHPRoutine(){
+        private IEnumerator SecondStageRoutine(){
             bossController. _isShieldActive = true;
             bossController._isSecondStage = true;
             bossController.bossStateMachine.ChangeState(bossController.idleState);
@@ -89,6 +87,15 @@ namespace Boss{
             StopCoroutine(bossController._changeStateToMissleStateRoutine);
         }
 
+        private IEnumerator DeathEffectsRoutine(){
+            _cameraManager.CameraShake(0.2f, _deathExplosionDuration);
+            yield return MiniExplosionsRoutine(_phaseTwoHitboxes, _deathExplosionDuration);
+
+            GameObject explosion = Instantiate(_explosion, this.transform.position, Quaternion.identity);
+            explosion.transform.localScale = new Vector3(_deathExplosionScale, _deathExplosionScale, 1);
+            Destroy(this.gameObject, 0.3f);
+        }
+
         private IEnumerator MiniExplosionsRoutine(GameObject hitBoxesExplode,float duration){
             float timer = 0;
             float nextExplosionTime = 0;
@@ -101,13 +108,13 @@ namespace Boss{
                 yield return null;
                 timer +=Time.deltaTime;
             }
-
         }
-
+         
         private void MiniExplosions(GameObject hitBoxsParent){
             Vector3 explodeScale = new Vector3(_miniExposionScale,_miniExposionScale,1);
             int hitboxCount = hitBoxsParent.transform.childCount;
             for(int i = 0; i< hitboxCount;i++){
+                Debug.Log(i);
                 Collider2D hitbox = hitBoxsParent.transform.GetChild(i).GetComponent<Collider2D>();
                 Bounds hitboxArea = hitbox.bounds;
                 Vector3 randomPoint = new Vector3(
@@ -117,22 +124,6 @@ namespace Boss{
                 newExplosion.transform.localScale = explodeScale;
             }
         }
-        
 
-        IEnumerator DeathEffects(){
-            _cameraManager.CameraShake(0.2f, _deathExplosionDuration);
-            yield return MiniExplosionsRoutine(_phaseTwoHitboxes, _deathExplosionDuration);
-
-            _cameraManager.CameraShake(0.4f, 1f);
-            GameObject explosion = Instantiate(_explosion, this.transform.position, Quaternion.identity);
-            explosion.transform.localScale = new Vector3(_deathExplosionScale, _deathExplosionScale, 1);
-            Destroy(this.gameObject, 0.3f);
-        }
-
-
-
-        private void Dead(){
-            Destroy(this.gameObject);
-        }
     }
 }

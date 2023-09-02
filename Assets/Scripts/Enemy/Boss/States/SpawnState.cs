@@ -20,8 +20,10 @@ namespace Boss{
 
         public override void UpdateState(){
             _transform.position = Vector3.MoveTowards(_transform.position,bossController._target,0.2f* _speed);
-            if(Vector3.Distance(_transform.position,bossController._target)<0.1f)
+            if(Vector3.Distance(_transform.position,bossController._target)<0.1f){
                 bossStateMachine.ChangeState(bossController.shootLaserState);
+                bossController.NextState();
+            }
         }
     }
 }

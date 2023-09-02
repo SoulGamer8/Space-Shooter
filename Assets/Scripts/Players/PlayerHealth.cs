@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.PackageManager;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -56,9 +57,8 @@ public class PlayerHealth : MonoBehaviour,IDamageable
         _playerSoundManager = GetComponent<PlayerSoundManager>();
         FindHealthBar();
         _powerUpWeightController = PowerUpWeightController.instance;
-
-        
-        Debug.Log(_powerUpWeightController);
+        if(_powerUpWeightController == null)
+              throw new System.NullReferenceException("Power Up Weight Controller not found");
     }
 
     public void Spawn(PlayersController playersController){

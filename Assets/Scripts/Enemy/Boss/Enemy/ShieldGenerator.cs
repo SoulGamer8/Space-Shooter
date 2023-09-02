@@ -22,12 +22,8 @@ namespace Boss{
         private void Start(){
             _bossTransform = GameObject.FindGameObjectWithTag("Enemy").transform;
 
-            //  _angel = Vector3.Angle(transform.position, _bossTransform.position - transform.position);
-
-
             _angel = Vector3.SignedAngle(transform.position , _bossTransform.position - transform.position,transform.forward);
 
-            Debug.Log(_angel);
         }
 
         protected override void OnTriggerEnter2D(Collider2D collider){
