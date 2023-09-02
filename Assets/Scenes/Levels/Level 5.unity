@@ -1636,7 +1636,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
 --- !u!114 &1515778603 stripped
 MonoBehaviour:
@@ -1969,9 +1969,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cc11ee48f914738438c9365b675dbf51, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _totalShakingTime: 0.3
   _shakeIntensity: 0.3
-  _shakeTime: 0.05
 --- !u!1001 &7194414404583449018
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1985,7 +1983,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8204935097494954050, guid: 3296dd91b5551da4884ebe059684b151, type: 3}
       propertyPath: m_RootOrder
-      value: 8
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 8204935097494954050, guid: 3296dd91b5551da4884ebe059684b151, type: 3}
       propertyPath: m_LocalPosition.x

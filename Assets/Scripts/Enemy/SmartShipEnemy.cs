@@ -91,7 +91,6 @@ public class SmartShipEnemy : Enemy
         
         bullet = Instantiate(_bullet, new Vector3(transform.position.x,transform.position.y, 0),Quaternion.Euler(0,0,angelToFire));
         bullet.GetComponent<SmartEnemyLaser>().SetDamage(_damage);
-        bullet.GetComponent<SmartEnemyLaser>().SetTarget(target);
         bullet.GetComponent<SmartEnemyLaser>().SetSpeed(_speedBullet);
         ChangeState(MovingState.Waiting);
     }

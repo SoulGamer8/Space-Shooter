@@ -4,13 +4,30 @@ using UnityEngine;
 
 public class SmartEnemyLaser : Ammo
 {
-    private int _bulletSpeed;
-    private int _bulletDamage;
-    private Vector3 _playerPosition;
-    
-    public void SetTarget(Vector3 target){
-        Vector3 temp = transform.position - target;
-       _playerPosition = target - temp*2;
+    private int _bulletSpeed = 8;
+    private int _bulletDamage = 1;
+
+    private Vector3 _target;
+
+    private  void Awake() {
+        SetTarget();
+    }
+
+    // public void SetTarget(Vector3 target){
+    //     Vector3 temp = transform.position - target;
+    //    _playerPosition = target - temp*2;
+    // }
+
+        
+    private void SetTarget(){
+        GameObject[] player = GameObject.FindGameObjectsWithTag("Player");
+        int randomPlayer = UnityEngine.Random.Range(0, player.Length);
+        Vector3 playerPosition  = player[randomPlayer].transform.position;
+        _target = playerPosition - (transform.position - playerPosition)*2;
+
+
+        float angelToFire = Vector3.SignedAngle(Vector3.up ,playerPosition-transform.position, Vector3.forward);
+        transform.rotation = Quaternion.Euler(0,0,angelToFire);
     }
 
     public void SetSpeed(int speed){
@@ -28,9 +45,9 @@ public class SmartEnemyLaser : Ammo
     public override void DoMove()
     {
 
-        transform.position = Vector3.MoveTowards(transform.position, _playerPosition, 1*Time.deltaTime*_bulletSpeed);
+        transform.position = Vector3.MoveTowards(transform.position, _target, 1*Time.deltaTime*_bulletSpeed);
 
-        if (transform.position.y > 10 || transform.position.y < -10 ||(Vector3.Distance(transform.position, _playerPosition) < 0.1f))
+        if (transform.position.y > 10 || transform.position.y < -10 ||(Vector3.Distance(transform.position, _target) < 0.1f))
             Dead();
     }
 

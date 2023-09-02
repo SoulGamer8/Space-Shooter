@@ -3,9 +3,7 @@ using UnityEngine;
 
 public class CameraManager : MonoBehaviour
 {
-    [SerializeField] private float _totalShakingTime = 0.3f;
     [SerializeField] private float _shakeIntensity = 0.3f;
-    [SerializeField] private float _shakeTime =0.05f;
 
     private Vector3 _basePosition;
 
@@ -14,7 +12,7 @@ public class CameraManager : MonoBehaviour
     } 
 
     public void CameraShake(float totalShakingTime, float shakeTime){
-        StartCoroutine(CameraShakeRoutine());
+        StartCoroutine(CameraShakeRoutine(totalShakingTime,shakeTime));
     }
 
     private Vector3 GetShakeDiraction(){
@@ -26,16 +24,16 @@ public class CameraManager : MonoBehaviour
         return Quaternion.Euler(0,0,randomAngle) * lastDiraction;
     }
 
-    private IEnumerator CameraShakeRoutine(){
-       float timeRemaining = _totalShakingTime;
+    private IEnumerator CameraShakeRoutine(float totalShakingTime,float shakeTime){
+       float timeRemaining = totalShakingTime;
        Vector3 shakeDirection =  GetShakeDiraction();
        WaitForEndOfFrame wait = new WaitForEndOfFrame();
 
        while(timeRemaining > 0){
             Vector3 shakeTarget = _basePosition + shakeDirection * _shakeIntensity;
-            float currentTime = -_shakeTime;
-            while(currentTime < _shakeTime){
-                float progress = Mathf.Abs(currentTime) / _shakeTime;
+            float currentTime = -shakeTime;
+            while(currentTime < shakeTime){
+                float progress = Mathf.Abs(currentTime) / shakeTime;
 
                 Vector3 interpolatePosition = Vector3.Lerp(shakeTarget,_basePosition,progress);
                 transform.position = interpolatePosition;
