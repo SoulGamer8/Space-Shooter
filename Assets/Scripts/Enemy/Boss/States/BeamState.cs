@@ -7,6 +7,8 @@ public class BeamState : BossState
     private float _timerFlash;
     private float _defaultRotation;
     private  Vector3 _maxChargeSixe;
+    private int _curentlyAmountVolleyBeam;
+
     private enum BeamAttackState{Tracking,Locked,Fire}
     BeamAttackState _currentBeamAttackState;
 
@@ -14,15 +16,9 @@ public class BeamState : BossState
 
     public override void OnEnter(){
         _maxChargeSixe = bossController._beamObject[0]._chargeBall.transform.localScale;
-        ChangeState(BeamAttackState.Tracking);
-        foreach(BeamObject beamObject in bossController._beamObject){
-            beamObject._chargeBall.SetActive(true);
-            TrackFlashingAsync(beamObject._warningLine,bossController._trackingFlashTime);
-        }
+        _defaultRotation =bossController._beamObject[0]._beamParent.transform.eulerAngles.z;  
 
-        _defaultRotation =bossController._beamObject[0]._beamParent.transform.eulerAngles.z;
-
-       
+        StartTracking();
     }
 
     public override void UpdateState(){
@@ -41,6 +37,15 @@ public class BeamState : BossState
     }
 
     #region  Traking
+
+    private void StartTracking(){
+        foreach(BeamObject beamObject in bossController._beamObject){
+            beamObject._chargeBall.SetActive(true);
+            TrackFlashingAsync(beamObject._warningLine,bossController._trackingFlashTime);
+        }
+        ChangeState(BeamAttackState.Tracking);
+    }
+
     private void Tracking(){
         float progress = _timer/bossController._trackingDuration;
         Vector3 chargeBallScale = Vector3.Lerp(Vector3.zero,_maxChargeSixe,progress);
@@ -79,15 +84,24 @@ public class BeamState : BossState
 
     private void Fire(){
         _timer +=Time.deltaTime;
-        foreach (BeamObject obj in bossController._beamObject)
-        {
-            obj._chargeBall.SetActive(false);
-            obj._beamAttack.SetActive(true);
+        foreach (BeamObject beamObject in bossController._beamObject){
+            beamObject._chargeBall.SetActive(false);
+            beamObject._beamAttack.SetActive(true);
+            _curentlyAmountVolleyBeam++;
         }
-        if(_timer >= bossController._beamAttackTime)
+        if(_timer >= bossController._beamAttackTime){
+            TurnOffBeams();    
+            StartTracking();
+        }
+        if(bossController._amountBeamVolley >= _curentlyAmountVolleyBeam)
             bossStateMachine.ChangeState(bossController.shootLaserState);
     }
 
+    private void TurnOffBeams(){
+        foreach(BeamObject beamObject in bossController._beamObject){
+            beamObject._beamAttack.SetActive(false);
+        }
+    }
 
     private async void TrackFlashingAsync(GameObject warningLine,float flahTime){
         float flahTimeConvert = flahTime *1000;

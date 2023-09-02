@@ -16,12 +16,12 @@ public class SpawnState : BossState
     }
 
     public override void OnExit(){
-
+        bossController.StartFirstStage();
     }
 
     public override void UpdateState(){
         _transform.position = Vector3.MoveTowards(_transform.position,bossController._target,0.2f* _speed);
         if(Vector3.Distance(_transform.position,bossController._target)<0.1f)
-            bossStateMachine.ChangeState(bossController.shieldState);
+            bossStateMachine.ChangeState(bossController.shootLaserState);
     }
 }

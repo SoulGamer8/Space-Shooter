@@ -11,10 +11,9 @@ public class CameraManager : MonoBehaviour
 
     private void Start() {
         _basePosition = transform.position;
-        CameraShake();
     } 
 
-    public void CameraShake(){
+    public void CameraShake(float totalShakingTime, float shakeTime){
         StartCoroutine(CameraShakeRoutine());
     }
 

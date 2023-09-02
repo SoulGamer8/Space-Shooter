@@ -27,9 +27,12 @@ public class ShieldState : BossState
         bossController._shield.GetComponent<SpriteRenderer>().color = tmp;
     }
 
-    public override void UpdateState(){}
+    public override void UpdateState(){
+        bossController.transform.position = Vector3.MoveTowards(bossController.transform.position,bossController._target,0.1f);
+    }
 
     public override void OnExit(){
         bossController._shield.SetActive(false);
+        bossController._isShieldActive = false;
     }
 }
