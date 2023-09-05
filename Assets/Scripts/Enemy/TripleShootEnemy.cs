@@ -52,14 +52,14 @@ public class TripleShootEnemy : Enemy
         }
     }
 
-    public override void DoMove(){
+    public void DoMove(){
 
         transform.position = Vector3.Lerp(transform.position, _patruling, 0.3f*_speed * Time.deltaTime);
         if(Vector3.Distance(transform.position, _patruling) < 0.1f)
             _patruling.x *=-1;
     }
 
-    public override void Shoot(){
+    public void Shoot(){
         StartCoroutine(ShootinCorutine());
     }
 

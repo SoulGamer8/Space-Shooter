@@ -138,7 +138,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2bc05db724e4c8c4ba389a2c2e821434, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 0.1
+  _speed: 0
   _takeCoinSound: {fileID: 0}
 --- !u!50 &5071000286812297629
 Rigidbody2D:

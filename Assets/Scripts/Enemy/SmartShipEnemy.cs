@@ -3,11 +3,8 @@ using UnityEngine;
 public class SmartShipEnemy : Enemy
 {
     [Header("Soot")]
-    [SerializeField] private float _fireRate;
     [SerializeField] private GameObject _bullet;
     [SerializeField] private int _speedBullet;
-    [SerializeField] private float _timeToFire;
-    [SerializeField] private float _timeToMove;
 
 
     enum MovingState{Moving,Firing,Waiting}
@@ -20,9 +17,9 @@ public class SmartShipEnemy : Enemy
     private Vector2 _targetPosition;
 
 
-    float duration = 5.0f;
+    private float duration = 5.0f;
 
-    float startTime;
+    private float _timer;
 
     [SerializeField] private float _timeWait;
 
@@ -56,7 +53,7 @@ public class SmartShipEnemy : Enemy
     }
 
     private void ChangeState(MovingState newState){
-        startTime = 0;
+        _timer = 0;
         _myState = newState;
     }
 
@@ -64,9 +61,8 @@ public class SmartShipEnemy : Enemy
         base.Damege(damage);
     }
 
-    public override void DoMove(){
-        startTime += Time.deltaTime;
-        float percent = startTime/duration;
+    public void DoMove(){
+        float percent = _timer/duration;
 
         transform.position = Vector3.Lerp(transform.position, _targetPosition, percent*_speed);
 
@@ -78,13 +74,13 @@ public class SmartShipEnemy : Enemy
         }
     }
 
-    protected void SetTargetPosition(){
+    private void SetTargetPosition(){
         int randomX = Random.Range(-9,9);
         int randomY = Random.Range(0,6);
         _targetPosition =  new Vector2(randomX,randomY);
     }
 
-    public override void Shoot(){
+    public void Shoot(){
         GameObject bullet;
         Vector3 target = SetTarget();
         float angelToFire = Vector3.SignedAngle(Vector3.up ,target-transform.position, Vector3.forward);
@@ -96,8 +92,8 @@ public class SmartShipEnemy : Enemy
     }
 
     private void DoWait(){
-        startTime += Time.deltaTime;
-        if(startTime >= _timeWait)
+        _timer += Time.deltaTime;
+        if(_timer >= _timeWait)
             ChangeState(MovingState.Moving);
     }
     private Vector3 SetTarget(){

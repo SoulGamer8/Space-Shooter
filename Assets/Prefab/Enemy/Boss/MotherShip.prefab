@@ -399,6 +399,7 @@ GameObject:
   - component: {fileID: 4200082751996759214}
   - component: {fileID: 4549950797816840861}
   - component: {fileID: 3215291960892262864}
+  - component: {fileID: 1027921282615281220}
   - component: {fileID: 6101397581328865804}
   - component: {fileID: 141167393}
   - component: {fileID: 271302821}
@@ -521,6 +522,18 @@ MonoBehaviour:
   _deathExplosionDuration: 2
   _phaseTwoHitboxes: {fileID: 453936896152365332}
   _deathExplosionScale: 5
+--- !u!114 &1027921282615281220
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1905426798733778595}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c7f3cea6d596458438f37085508e89eb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &6101397581328865804
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -555,6 +568,7 @@ MonoBehaviour:
   _trackingFlashTime: 0.25
   _lockedFlashTime: 0.1
   _amountBeamVolley: 3
+  _soundBeamAttack: {fileID: 8300000, guid: 6d49007f6baec3e48ae40e47f4e94756, type: 3}
   _missile: {fileID: 4081181018936694162, guid: 851bbfa9eb810b04aa96207082dd5636, type: 3}
   _fireRateMissile: 1
   _amountMissilesVolley: 3
@@ -580,10 +594,10 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: f4b0bde49e2b654438155ffaf1af3d00, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 1
-  m_Pitch: 1
+  m_Volume: 0.61
+  m_Pitch: 1.02
   Loop: 0
   Mute: 0
   Spatialize: 0

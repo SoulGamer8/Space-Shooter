@@ -32,7 +32,7 @@ public class SpeedEnemy : Enemy
     }
 
   
-    public override void DoMove()
+    public void DoMove()
     {
         Vector2 pos = transform.position;
 

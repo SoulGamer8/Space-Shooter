@@ -19,7 +19,6 @@ namespace Boss{
         [SerializeField] internal float _fireRateBullet;  
         [SerializeField] internal int _countLaserToFire;
         [SerializeField] internal int _volleyLaserSpread;
-        
         #endregion
 
         #region Beam State
@@ -31,6 +30,7 @@ namespace Boss{
         [SerializeField] internal float _trackingFlashTime;
         [SerializeField] internal float _lockedFlashTime;
         [SerializeField] internal int _amountBeamVolley;
+        [SerializeField] internal AudioClip _soundBeamAttack;
         internal Transform _playerTransform;
         
         #endregion
@@ -74,8 +74,9 @@ namespace Boss{
         
         internal  Coroutine _changeStateToMissleStateRoutine;
         
-        internal BossHealth bossHealth;
+        internal BossHealth _bossHealth;
         internal BossMove _bossMove;
+        internal BossAudioManager _bossAudioManager;
         private void Awake() {
             bossStateMachine = new BossStateMachine();
 
@@ -87,8 +88,9 @@ namespace Boss{
             idleState = new IdleState(this,bossStateMachine);
             smartLaserState = new SmartLaserState(this,bossStateMachine);
 
-            bossHealth = GetComponent<BossHealth>();
+            _bossHealth = GetComponent<BossHealth>();
             _bossMove =  GetComponent<BossMove>();
+            _bossAudioManager = GetComponent<BossAudioManager>();
         }
 
         private void Start() {
@@ -111,21 +113,20 @@ namespace Boss{
         public void NextState(){
             if(_isSecondStage){
                 bossStateMachine.ChangeState(smartLaserState);
-                _changeStateToMissleStateRoutine = StartCoroutine(ChangeStateToMissleStateRoutine(5));
+                _changeStateToMissleStateRoutine = StartCoroutine(ChangeStateToMissleStateCoroutine(5));
             }
             else{
                 bossStateMachine.ChangeState(shootLaserState);
-                _changeStateToMissleStateRoutine = StartCoroutine(ChangeStateToMissleStateRoutine(5));
+                _changeStateToMissleStateRoutine = StartCoroutine(ChangeStateToMissleStateCoroutine(5));
             }
         }
 
-        private IEnumerator ChangeStateToMissleStateRoutine(float time){
-            Debug.Log("Start");
+        private IEnumerator ChangeStateToMissleStateCoroutine(float time){
             yield return new WaitForSeconds(time);
             bossStateMachine.ChangeState(missileState);
         }
 
-        private IEnumerator SpawnShield(){
+        private IEnumerator SpawnShieldCoroutine(){
             yield return new WaitForSeconds(10);
             bossStateMachine.ChangeState(shieldState);
         }

@@ -15,7 +15,7 @@ public class Mine : MonoBehaviour
 
 
     private void OnTriggerEnter2D(Collider2D collider) {
-         IDamageable damageable = collider.GetComponent<IDamageable>();
+        IDamageable damageable = collider.GetComponent<IDamageable>();
         if(collider.tag== "Player"){
             damageable.Damege(_damage);
             Dead();

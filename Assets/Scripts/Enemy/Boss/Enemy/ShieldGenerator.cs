@@ -2,7 +2,7 @@
 using UnityEngine;
 
 namespace Boss{
-    public class ShieldGenerator : Enemy
+    public class ShieldGenerator : Enemy, IMoveable, ICanShoot
     {
         
         [SerializeField] private GameObject _beam;
@@ -36,7 +36,7 @@ namespace Boss{
             DoMove();
         }
 
-        public override void DoMove(){
+        public void DoMove(){
 
             transform.position = Vector3.MoveTowards(transform.position,_targetPosotion,_speed*Time.deltaTime);
             if(Vector3.Distance(transform.position,_targetPosotion)< 0.1f){
@@ -54,7 +54,7 @@ namespace Boss{
 
         }
 
-        public override void Shoot(){
+        public void Shoot(){
             _beam.SetActive(true);
         }
 

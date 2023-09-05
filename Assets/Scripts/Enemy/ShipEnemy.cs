@@ -2,7 +2,7 @@ using System.Collections;
 using UnityEngine;
 
 [RequireComponent(typeof(Collider2D),typeof(AudioSource),typeof(Animator))]
-public class ShipEnemy : Enemy
+public class ShipEnemy : Enemy, IMoveable, ICanShoot
 {
     [Header("Bullet")]
     [SerializeField] private GameObject _bullet;
@@ -29,7 +29,7 @@ public class ShipEnemy : Enemy
     }
 
     
-    public override void DoMove(){
+    public void DoMove(){
         transform.position += new Vector3(0, -1, 0) * Time.deltaTime * _speed;
         if (transform.position.y < -5)
         {
@@ -41,7 +41,7 @@ public class ShipEnemy : Enemy
        base.Damege(damage);
     }
 
-    public override void Shoot(){
+    public  void Shoot(){
        StartCoroutine(ShootRoutine());
     }
 

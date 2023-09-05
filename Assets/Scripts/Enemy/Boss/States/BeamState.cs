@@ -32,6 +32,7 @@ namespace Boss{
                     Locked();
                     break;
                 case 2:
+                    bossController._bossAudioManager.PlaySound(bossController._soundBeamAttack);
                     Fire();
                     break;
             }
@@ -64,7 +65,7 @@ namespace Boss{
 
         }
 
-        void RotateBeams()
+        private void RotateBeams()
         {
             foreach (BeamObject obj in bossController._beamObject)
             {
@@ -73,7 +74,7 @@ namespace Boss{
             }
         }
 
-        protected static void RotateToVector(GameObject obj, Vector3 targetDirection, float defaultZ){
+        private void RotateToVector(GameObject obj, Vector3 targetDirection, float defaultZ){
             float myCurrentAngle = obj.transform.rotation.eulerAngles.z - defaultZ;
             Vector3 myCurrentFacing = Quaternion.Euler(0, 0, myCurrentAngle) * Vector3.down;
             float angleToRotate = Vector3.SignedAngle(myCurrentFacing, targetDirection, Vector3.forward);
@@ -81,7 +82,7 @@ namespace Boss{
         }
         #endregion
 
-        void Locked(){
+        private void Locked(){
             if (_timer >= bossController._timetoLock)
                 ChangeState(BeamAttackState.Fire);
         }

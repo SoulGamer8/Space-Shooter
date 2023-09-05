@@ -11,8 +11,8 @@ public class CameraManager : MonoBehaviour
         _basePosition = transform.position;
     } 
 
-    public void CameraShake(float totalShakingTime, float shakeTime){
-        StartCoroutine(CameraShakeRoutine(totalShakingTime,shakeTime));
+    public void CameraShake(float totalShakingTime, float shakeTime,bool isFade){
+        StartCoroutine(CameraShakeRoutine(totalShakingTime,shakeTime,isFade));
     }
 
     private Vector3 GetShakeDiraction(){
@@ -24,13 +24,14 @@ public class CameraManager : MonoBehaviour
         return Quaternion.Euler(0,0,randomAngle) * lastDiraction;
     }
 
-    private IEnumerator CameraShakeRoutine(float totalShakingTime,float shakeTime){
+    private IEnumerator CameraShakeRoutine(float totalShakingTime,float shakeTime,bool isFade){
        float timeRemaining = totalShakingTime;
        Vector3 shakeDirection =  GetShakeDiraction();
        WaitForEndOfFrame wait = new WaitForEndOfFrame();
 
        while(timeRemaining > 0){
-            Vector3 shakeTarget = _basePosition + shakeDirection * _shakeIntensity;
+            float magniude = isFade ? Mathf.Lerp(0,_shakeIntensity,timeRemaining/shakeTime) :_shakeIntensity;
+            Vector3 shakeTarget = _basePosition + shakeDirection * magniude;
             float currentTime = -shakeTime;
             while(currentTime < shakeTime){
                 float progress = Mathf.Abs(currentTime) / shakeTime;

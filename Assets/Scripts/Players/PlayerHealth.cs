@@ -15,12 +15,17 @@ public class PlayerHealth : MonoBehaviour,IDamageable
     [Header("Health")]
     [SerializeField]private GameObject[] _healthBarArray;
     [SerializeField] private int _health = 3;
-    [SerializeField] private float _timeWhenPlayerInvulnerability;
+    [SerializeField] private AudioClip _soudTakeDamage;
 
     private int _curentlyHealth;
     private HealthBar _healthBar;
     #endregion
 
+    [Header("Invicible")]
+    
+    [SerializeField] private float _timeWhenPlayerInvulnerability;
+    [SerializeField] private float _invicibleAlpa;
+    
     #region  Shield
     [Header("Shield")]
     [SerializeField] private GameObject _shield;
@@ -44,6 +49,8 @@ public class PlayerHealth : MonoBehaviour,IDamageable
     #endregion
 
     #region Component
+    private PlayerSoundManager playerSoundManager;
+    private CameraManager _cameraManager;
     private PolygonCollider2D _polygonCollider2D;
     private Animator _animator;
     private PlayersController _playersController;
@@ -51,11 +58,16 @@ public class PlayerHealth : MonoBehaviour,IDamageable
     #endregion
 
     private void Awake(){
+        FindHealthBar();
+
         _curentlyHealth = _health;
+
         _animator = GetComponent<Animator>();
         _polygonCollider2D = GetComponent<PolygonCollider2D>();
         _playerSoundManager = GetComponent<PlayerSoundManager>();
-        FindHealthBar();
+        _cameraManager = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CameraManager>();
+        playerSoundManager = GetComponent<PlayerSoundManager>();
+
         _powerUpWeightController = PowerUpWeightController.instance;
         if(_powerUpWeightController == null)
               throw new System.NullReferenceException("Power Up Weight Controller not found");
@@ -79,6 +91,8 @@ public class PlayerHealth : MonoBehaviour,IDamageable
             _curentlyHealth -= damage;
             UpdateHealthBar();
             SpawnFireOnEngine();
+            _cameraManager.CameraShake(_timeWhenPlayerInvulnerability,0.1f,true);
+            playerSoundManager.PlaySound(_soudTakeDamage);
             StartCoroutine(InvulnerabilityRoutine());
             if (_curentlyHealth <= 0)
                 Dead();
@@ -90,7 +104,6 @@ public class PlayerHealth : MonoBehaviour,IDamageable
     private void SpawnFireOnEngine(){
         if (_curentlyHealth - 1 >= 0)
         {
-            Debug.Log(_fireOnEngine.Length - _curentlyHealth);
             GameObject fire = Instantiate(_fireOnEngine[_fireOnEngine.Length - _curentlyHealth], transform);
             _fireOnEngineInstiate.Add(fire);
         }
@@ -103,6 +116,8 @@ public class PlayerHealth : MonoBehaviour,IDamageable
         _animator.SetTrigger("PlayerDead");
         Destroy(gameObject, 1f);
     }
+
+
 
     #region HealthBar
     private void FindHealthBar(){
@@ -158,26 +173,22 @@ public class PlayerHealth : MonoBehaviour,IDamageable
     }
     
     private IEnumerator InvulnerabilityRoutine(){
-        Coroutine blink = StartCoroutine(BlinkRoutine());
         _polygonCollider2D.enabled = false;
-        yield return new WaitForSeconds(_timeWhenPlayerInvulnerability);
-        StopCoroutine(blink);
-        _polygonCollider2D.enabled = true;
-        
-    }
+        float timer = 0;
 
-    private IEnumerator BlinkRoutine(){
         SpriteRenderer spriteRenderer = this.gameObject.GetComponent<SpriteRenderer>();
-        var tempColor = spriteRenderer.color;
-        while(true){  
-            tempColor.a = 1f;
-            spriteRenderer.color = tempColor;
-            yield return new WaitForSeconds(0.1f);
-            tempColor.a = 0f;
-            spriteRenderer.color = tempColor;
-            yield return new WaitForSeconds(0.1f);
+        Color myColor = spriteRenderer.color;
+        Color myAlphaColor = new Color(myColor.r,myColor.g,myColor.b,_invicibleAlpa);
 
+        while(timer <_timeWhenPlayerInvulnerability){
+            timer += Time.deltaTime;
+            float lerpProgress = Mathf.Pow(Mathf.Sin(timer *(Mathf.PI/2)/_timeWhenPlayerInvulnerability),2);
+            spriteRenderer.color = Color.Lerp(myColor,myAlphaColor,lerpProgress);
+            yield return null;
         }
+
+        spriteRenderer.color = myColor;
+        _polygonCollider2D.enabled = true;
     }
     #endregion
 }

@@ -46,8 +46,8 @@ namespace Boss{
         private void Repeir(){
             _timer += Time.deltaTime;
             if(_timer >= 1){
-                bossController.bossHealth._curentlyHealth +=1;
-                bossController.bossHealth.UpdateHealthBar();
+                bossController._bossHealth._curentlyHealth +=1;
+                bossController._bossHealth.UpdateHealthBar();
                 _timer =0;    
             }
         }

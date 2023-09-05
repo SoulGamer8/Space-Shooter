@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class KamikazeEnemy : Enemy
+public class KamikazeEnemy : Enemy,IMoveable
 {
 
     [Header("Enemy Settings")]
@@ -54,7 +54,7 @@ public class KamikazeEnemy : Enemy
         _myState = state;
     }
 
-    public override void DoMove()
+    public void DoMove()
     {
         startTime += Time.deltaTime;
         float percent = startTime/duration;

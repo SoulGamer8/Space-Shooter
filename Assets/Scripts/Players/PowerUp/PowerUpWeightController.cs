@@ -1,13 +1,8 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PowerUpWeightController : MonoBehaviour
 {
     public static PowerUpWeightController instance;
-
-
 
     [SerializeField] private GameObject[] _powerUp;
 
@@ -32,5 +27,10 @@ public class PowerUpWeightController : MonoBehaviour
 
     public void ChangeSpawnChacneWeightRespawn(int weight){
         _powerUp[2].GetComponent<PowerUp>().ChangeSpawnChacneWeight(weight);
+    }
+
+    public void OnNotify(object value)
+    {
+        Debug.Log(value);
     }
 }

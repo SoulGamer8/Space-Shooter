@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 4401288704736392230}
   - component: {fileID: 4401288704736392249}
   - component: {fileID: 4401288704736392248}
+  - component: {fileID: 4264159394295754680}
   m_Layer: 0
   m_Name: Kamikaze Enemy
   m_TagString: Enemy
@@ -182,3 +183,24 @@ PolygonCollider2D:
       - {x: 0.475, y: -1.11}
       - {x: 0.505, y: -1.02}
       - {x: 0.505, y: -0.84999996}
+--- !u!50 &4264159394295754680
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4401288704736392251}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0

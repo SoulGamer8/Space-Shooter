@@ -21,13 +21,13 @@ public class SpawnMineEnemy : Enemy
             Dead();
     }
 
-    public override void DoMove(){
+    public void DoMove(){
         transform.position +=new Vector3(0,-1,0)*Time.deltaTime *_speed;
         if(transform.position.y<-6)
             Dead();
     }
 
-    public override void Shoot(){
+    public void Shoot(){
         StartCoroutine(SpawnMine());
     }
 

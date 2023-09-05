@@ -12,6 +12,7 @@ TagManager:
   - Missiles
   - HealthBar
   - AmmoUI
+  - BossManager
   layers:
   - Default
   - TransparentFX

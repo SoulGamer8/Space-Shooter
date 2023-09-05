@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class AsteroidEnemy : Enemy
+public class AsteroidEnemy : Enemy, IMoveable
 {
     private AudioSource _audioSource;
     private Animator _animator;
@@ -16,7 +16,7 @@ public class AsteroidEnemy : Enemy
         DoMove();
     }
 
-    public override void DoMove(){
+    public void DoMove(){
         transform.position += new Vector3(0, -1, 0) * Time.deltaTime * _speed;
         if (transform.position.y < -5)
         {
