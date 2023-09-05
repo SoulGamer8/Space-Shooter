@@ -27,7 +27,7 @@ public class BossManager : MonoBehaviour
         StartCoroutine(SpawnBossCoroutine());
     }
 
-    public void BossDie(){
+    public void LevelComplete(){
         _completeLevelMenu.SetActive(true);
         SetStar();
     }
@@ -48,7 +48,7 @@ public class BossManager : MonoBehaviour
     }
 
     private IEnumerator TimeBossFightCoroutine(){
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(120);
         _starAmmount --;
         Debug.Log(_starAmmount);
     }

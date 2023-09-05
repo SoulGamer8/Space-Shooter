@@ -1,7 +1,5 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Analytics;
 using UnityEngine.Events;
 
 public class SpawnManager : MonoBehaviour
@@ -10,10 +8,12 @@ public class SpawnManager : MonoBehaviour
     public event UnityAction<int> enemyKilledEvent;
 
     [Header("Enemy")]
+    [SerializeField] private bool _isEnemySpawn = true;
     [SerializeField] private GameObject[] _enemiesArray;
     [SerializeField] private int _spawnRate;
 
     [Header("PowerUp")]
+    [SerializeField] private bool _isPowerUpSpawn= true;
     [SerializeField] private GameObject[] _powerUpsArray;
     [SerializeField] private float _timeSpawnPowerUp;
     [Header("Coin")]
@@ -25,23 +25,22 @@ public class SpawnManager : MonoBehaviour
     [SerializeField] private float _chanceSpawnCoin;
 
 
-    private IEnumerator _spawnEnemyRoutine;
+    [SerializeField]  private int _sumScore;
 
-
-    private void Start()
-    {
-        StartCoroutine(SpawnEnemy());
-        StartCoroutine(SpawnPowerUp());
+    private void Start(){
+        if(_isEnemySpawn)
+            StartCoroutine(SpawnEnemyCoroutine());
+        if(_isPowerUpSpawn)
+            StartCoroutine(SpawnPowerUpCoroutine());
     }
 
-    public void PlayerDeath()
-    {
+    public void PlayerDeath(){
         StopAllCoroutines();
     }
 
-    public void KilledEnemy(int score, GameObject enemy)
-    {
+    public void KilledEnemy(int score, GameObject enemy){
         enemyKilledEvent?.Invoke(score);
+        _sumScore +=score;
     }
 
     private GameObject ChooseWeightedItem(GameObject[] objects){
@@ -59,12 +58,10 @@ public class SpawnManager : MonoBehaviour
                 return objects[i];
             random -= weight[i];
         }
-        Debug.Log("Somithing is ChooseWeightedItem");
         return null;
     }
 
-    private IEnumerator SpawnEnemy()
-    {
+    private IEnumerator SpawnEnemyCoroutine(){
         while (true)
         {
             Vector3 randomPosition = new Vector3(Random.Range(-8, 8), transform.position.y, 0);
@@ -78,7 +75,7 @@ public class SpawnManager : MonoBehaviour
         }
     }
 
-    private IEnumerator SpawnPowerUp(){
+    private IEnumerator SpawnPowerUpCoroutine(){
         while(true){
             Vector3 randomPosition = new Vector3(Random.Range(-8, 8), transform.position.y, 0);
             yield return new WaitForSeconds(_timeSpawnPowerUp);

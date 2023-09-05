@@ -94,7 +94,8 @@ namespace Boss{
             GameObject explosion = Instantiate(_explosion, this.transform.position, Quaternion.identity);
             explosion.transform.localScale = new Vector3(_deathExplosionScale, _deathExplosionScale, 1);
 
-            GameObject.FindGameObjectWithTag("BossManager").GetComponent<BossManager>().BossDie();
+            GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerMovement>().LevelComplete();
+
             Destroy(this.gameObject, 0.3f);
         }
 
@@ -125,6 +126,5 @@ namespace Boss{
                 newExplosion.transform.localScale = explodeScale;
             }
         }
-
     }
 }

@@ -65,12 +65,14 @@ public class PlayerMovement : MonoBehaviour
     }
 
     private void OnExit(){
-        transform.position = Vector3.Lerp(transform.position,new Vector3(transform.position.x,10),0.2f);
+        transform.position = Vector3.Lerp(transform.position,new Vector3(transform.position.x,10),0.1f);
+        if(Vector3.Distance(transform.position,new Vector3(transform.position.x,10))<0.1f)
+            GameObject.FindGameObjectWithTag("LevelManager").GetComponent<LevelProgressManager>().LevelComplete();
     }
 
     
     public void LevelComplete(){
-        _myState = MovingState.Exit;
+       StartCoroutine(WaitBossDied());
     }
 
     public void OnMovevmentPerformed(InputAction.CallbackContext value){
@@ -104,4 +106,11 @@ public class PlayerMovement : MonoBehaviour
         _isSpeedPowerUpActive = false;
     }
     #endregion
+
+    
+    private IEnumerator WaitBossDied(){
+        yield return new WaitForSeconds(2);
+         _myState = MovingState.Exit;
+
+    }
 }

@@ -89,6 +89,8 @@ public class PlayerHealth : MonoBehaviour,IDamageable
         }
         else{
             _curentlyHealth -= damage;
+            GameObject.FindGameObjectWithTag("LevelManager").GetComponent<LevelProgressManager>().PlayerTakeDamage();
+
             UpdateHealthBar();
             SpawnFireOnEngine();
             _cameraManager.CameraShake(_timeWhenPlayerInvulnerability,0.1f,true);

@@ -101,7 +101,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _speed: 2
-  _spawnChanceWeight: 1
+  _spawnChanceWeight: 0
   _powerUpId: 3
   _soundTakePowerUp: {fileID: 8300000, guid: 5ee343246919d2b4bba63ae629e95494, type: 3}
 --- !u!82 &9041732239795225332
