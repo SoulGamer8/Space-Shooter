@@ -27,7 +27,7 @@ public class GameManager : MonoBehaviour
         {
             { "levelNumber", SceneManager.GetActiveScene().name},
         };
-        GameObject.FindGameObjectWithTag("Enemy").GetComponent<AudioSource>().enabled =false;
+        GameObject.FindGameObjectWithTag("Enemy").GetComponent<AudioSource>();
         
         AnalyticsService.Instance.CustomData("PlayerDead",parameters);
         _gameOverScreen.SetActive(true);

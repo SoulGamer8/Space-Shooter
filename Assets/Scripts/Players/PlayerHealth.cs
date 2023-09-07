@@ -57,6 +57,8 @@ public class PlayerHealth : MonoBehaviour,IDamageable
     private PowerUpWeightController _powerUpWeightController;
     #endregion
 
+
+
     private void Awake(){
         FindHealthBar();
 
@@ -95,12 +97,32 @@ public class PlayerHealth : MonoBehaviour,IDamageable
             SpawnFireOnEngine();
             _cameraManager.CameraShake(_timeWhenPlayerInvulnerability,0.1f,true);
             playerSoundManager.PlaySound(_soudTakeDamage);
-            StartCoroutine(InvulnerabilityRoutine());
+            StartCoroutine(InvulnerabilityCoroutine());
             if (_curentlyHealth <= 0)
                 Dead();
             _playerSoundManager.PlaySound(_hitSound);
         }
+    }
+
+    private IEnumerator InvulnerabilityCoroutine(){
+        _polygonCollider2D.enabled = false;
+        float timer = 0;
+
         
+        SpriteRenderer spriteRenderer =  this.gameObject.GetComponent<SpriteRenderer>();
+        Color myColor = spriteRenderer.color;
+        
+        Color myAlphaColor = new Color(myColor.r,myColor.g,myColor.b,_invicibleAlpa);
+
+        while(timer <_timeWhenPlayerInvulnerability){
+            timer += Time.deltaTime;
+            float lerpProgress = Mathf.Pow(Mathf.Sin(timer *(Mathf.PI/2)/_timeWhenPlayerInvulnerability),2);
+            spriteRenderer.color = Color.Lerp(myColor,myAlphaColor,lerpProgress);
+            yield return null;
+        }
+
+        spriteRenderer.color = myColor;
+        _polygonCollider2D.enabled = true;
     }
 
     private void SpawnFireOnEngine(){
@@ -156,10 +178,18 @@ public class PlayerHealth : MonoBehaviour,IDamageable
 
     public void ActivateShild(){
         _curentlyShieldHealth = _shieldHealth;
-        StartCoroutine(SheildRoutine());
+        StartCoroutine(SheildCoroutine());
         _sheild = Instantiate(_shield, new Vector3(transform.position.x, transform.position.y, 0), Quaternion.identity,transform);
         _isShieldActivate = true;
     }
+
+    
+    private IEnumerator SheildCoroutine(){
+        yield return new WaitForSeconds(_timeWhenActiveShild);
+        _isShieldActivate = false;
+        Destroy(_sheild);
+    }
+    
 
     public void RespawnPlayer(){
         _playersController.RespawnPlayer();
@@ -167,30 +197,6 @@ public class PlayerHealth : MonoBehaviour,IDamageable
     }
     #endregion
 
-    #region Routine
-    private IEnumerator SheildRoutine(){
-        yield return new WaitForSeconds(_timeWhenActiveShild);
-        _isShieldActivate = false;
-        Destroy(_sheild);
-    }
-    
-    private IEnumerator InvulnerabilityRoutine(){
-        _polygonCollider2D.enabled = false;
-        float timer = 0;
 
-        SpriteRenderer spriteRenderer = this.gameObject.GetComponent<SpriteRenderer>();
-        Color myColor = spriteRenderer.color;
-        Color myAlphaColor = new Color(myColor.r,myColor.g,myColor.b,_invicibleAlpa);
-
-        while(timer <_timeWhenPlayerInvulnerability){
-            timer += Time.deltaTime;
-            float lerpProgress = Mathf.Pow(Mathf.Sin(timer *(Mathf.PI/2)/_timeWhenPlayerInvulnerability),2);
-            spriteRenderer.color = Color.Lerp(myColor,myAlphaColor,lerpProgress);
-            yield return null;
-        }
-
-        spriteRenderer.color = myColor;
-        _polygonCollider2D.enabled = true;
-    }
-    #endregion
+   
 }

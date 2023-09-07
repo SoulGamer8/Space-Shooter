@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 5753047922043332650}
   - component: {fileID: 5753047922043332648}
   - component: {fileID: 5753047922043332651}
+  - component: {fileID: -1001348285515488953}
   m_Layer: 0
   m_Name: Spawn Mine Enemy
   m_TagString: Enemy
@@ -101,9 +102,9 @@ MonoBehaviour:
   _health: 3
   _speed: 4
   _damage: 1
-  _score: 1
-  _spawnChanceWeight: 1
-  _explosionSound: {fileID: 0}
+  _score: 5
+  _spawnChanceWeight: 8
+  _explosion: {fileID: 6054925638629271669, guid: 9af9c30a9ac037943b082dd24ec5280f, type: 3}
   _minePrefab: {fileID: 4910969230209893057, guid: e68e0ffdceea1434181f89586affcdd9, type: 3}
   _timeSpawn: 1
 --- !u!60 &5753047922043332651
@@ -116,7 +117,7 @@ PolygonCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -142,3 +143,24 @@ PolygonCollider2D:
       - {x: 0.36499998, y: -0.52}
       - {x: 0.39499998, y: -0.48}
       - {x: 0.39499998, y: -0.22}
+--- !u!50 &-1001348285515488953
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5753047922043332652}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0

@@ -6,8 +6,6 @@ public class TripleShootEnemy : Enemy
 
     [Header("Bullet")]
     [SerializeField] private GameObject _bullet;
-    [SerializeField] private int _bulletDamage;
-    [SerializeField] private int _bulletSpeed;
     [SerializeField] private float _fireRate;
 
     private Vector3 _targetPosition;
@@ -18,7 +16,10 @@ public class TripleShootEnemy : Enemy
     private int _volleyLaserSpread = 40;
     private int _countLaserToFire = 3;
 
-    private void Start() {
+
+    public override void Start() {
+        base.Start();
+        
         _targetPosition = new Vector3(transform.position.x,4);
     }
 
@@ -44,7 +45,7 @@ public class TripleShootEnemy : Enemy
 
     private void StartMoving(){
         
-        transform.position = Vector3.Lerp(transform.position, _targetPosition, 0.01f);
+        transform.position = Vector3.MoveTowards(transform.position, _targetPosition, 0.01f);
 
         if(Vector3.Distance(transform.position, _targetPosition) < 0.1f){
             ChangeState(MovingState.Moving);
@@ -64,11 +65,19 @@ public class TripleShootEnemy : Enemy
     }
 
     protected override void OnTriggerEnter2D(Collider2D collider){
-        throw new System.NotImplementedException();
+        IDamageable damageable = collider.GetComponent<IDamageable>();
+        if(collider.tag == "Player")
+            damageable.Damege(1);
     }
 
+
     protected override void Dead(){
-        throw new System.NotImplementedException();
+        StopAllCoroutines();
+        _speed = 0;
+
+
+        Instantiate(_explosion);
+        Destroy(gameObject);
     }
 
     public override int GetSpawnChanceWeight(){

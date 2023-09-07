@@ -10,10 +10,7 @@ public class SmartShipEnemy : Enemy
     enum MovingState{Moving,Firing,Waiting}
     MovingState _myState;
 
-    private AudioSource _audioSource;
 
-    private Animator _animator;
-    
     private Vector2 _targetPosition;
 
 
@@ -24,11 +21,7 @@ public class SmartShipEnemy : Enemy
     [SerializeField] private float _timeWait;
 
 
-
-
     private void Awake(){
-        _audioSource = GetComponent<AudioSource>();
-        _animator = GetComponent<Animator>();
         SetTargetPosition();
         ChangeState(MovingState.Moving);
     }
@@ -55,10 +48,6 @@ public class SmartShipEnemy : Enemy
     private void ChangeState(MovingState newState){
         _timer = 0;
         _myState = newState;
-    }
-
-    public override void Damege(int damage){
-        base.Damege(damage);
     }
 
     public void DoMove(){
@@ -100,29 +89,6 @@ public class SmartShipEnemy : Enemy
         GameObject[] player = GameObject.FindGameObjectsWithTag("Player");
         int randomPlayer = UnityEngine.Random.Range(0, player.Length);
         return player[randomPlayer].transform.position;
-    }
-
-    protected override void OnTriggerEnter2D(Collider2D collider)
-    {
-        IDamageable damageable = collider.GetComponent<IDamageable>();
-        if(damageable != null)
-        {
-            damageable.Damege(_damage);
-            Dead();
-        }
-    }
-
-    protected override void Dead()
-    {
-        StopAllCoroutines();
-
-        _animator.SetTrigger("IsEnemyDead");
-        this.GetComponent<BoxCollider2D>().enabled = false;
-
-        _audioSource.clip = _explosionSound;
-        _audioSource.Play();
-
-        Destroy(gameObject, 2.8f);
     }
 
     public override int GetSpawnChanceWeight()

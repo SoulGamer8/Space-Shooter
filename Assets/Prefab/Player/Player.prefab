@@ -108,7 +108,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _speed: 15
   _timeWhenActiveSpeedPowerUp: 4
-  _speedPowerUp: 0
+  _speedPowerUp: 10
+  _myState: 0
 --- !u!114 &719033182039605505
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -128,7 +129,7 @@ MonoBehaviour:
   _ammoUI:
   - {fileID: 2459200411177510462, guid: 4959eaa1f78b31e4f8eac5d879f321d5, type: 3}
   - {fileID: 3805997343180953413, guid: 81a3c4ac51ba2ee4c83fd865405c4748, type: 3}
-  _isTripleShootActive: 1
+  _isTripleShootActive: 0
 --- !u!114 &719033182039605501
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -211,7 +212,7 @@ AudioSource:
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
-  Priority: 128
+  Priority: 256
   DopplerLevel: 1
   MinDistance: 1
   MaxDistance: 500

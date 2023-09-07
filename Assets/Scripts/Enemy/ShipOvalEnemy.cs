@@ -20,7 +20,9 @@ public class ShipOvalEnemy : Enemy, ICanShoot, IMoveable
     #endregion
     public override int GetSpawnChanceWeight() => _spawnChanceWeight;
 
-    void Start(){
+
+    public override void Start(){
+        base.Start();
         positions = new Vector3[divisons +1];
         dangle = 2*Mathf.PI /divisons;
         Shoot();
@@ -54,20 +56,6 @@ public class ShipOvalEnemy : Enemy, ICanShoot, IMoveable
 
     public void Shoot(){
         StartCoroutine(ShootCoroutine());
-    }
-
-    protected override void OnTriggerEnter2D(Collider2D collider){
-        IDamageable damageable =  collider.GetComponent<IDamageable>();
-          if(collider.tag== "Player"){
-            damageable.Damege(_damage);
-           Damege(1);
-        }
-    }
-
-    public override void Damege(int damage) => base.Damege(damage);
-
-    protected override void Dead(){
-        Destroy(this.gameObject);
     }
 
     private IEnumerator ShootCoroutine(){

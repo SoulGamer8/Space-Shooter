@@ -99,12 +99,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af1dc1fe269230841861f9fb69c7fa2b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _health: 3
+  _health: 2
   _speed: 2
   _damage: 1
-  _score: 1
-  _spawnChanceWeight: 4
-  _explosionSound: {fileID: 0}
+  _score: 5
+  _spawnChanceWeight: 10
+  _explosion: {fileID: 6054925638629271669, guid: 9af9c30a9ac037943b082dd24ec5280f, type: 3}
   _timeWait: 2
 --- !u!60 &4401288704736392248
 PolygonCollider2D:

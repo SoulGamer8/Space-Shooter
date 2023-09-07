@@ -15,32 +15,14 @@ public class SpawnMineEnemy : Enemy
         DoMove();
     }
 
-    public override void Damege(int damage){
-        _health -=damage;
-        if(_health <0)
-            Dead();
-    }
-
     public void DoMove(){
         transform.position +=new Vector3(0,-1,0)*Time.deltaTime *_speed;
         if(transform.position.y<-6)
-            Dead();
+            Destroy(this.gameObject);
     }
 
     public void Shoot(){
         StartCoroutine(SpawnMine());
-    }
-
-    protected override void OnTriggerEnter2D(Collider2D collider){
-        IDamageable damageable = collider.GetComponent<IDamageable>();
-        if(collider.tag== "Player"){
-            damageable.Damege(_damage);
-            Dead();
-        }
-    }
-
-    protected override void Dead(){
-        Destroy(gameObject);
     }
 
     private IEnumerator SpawnMine(){

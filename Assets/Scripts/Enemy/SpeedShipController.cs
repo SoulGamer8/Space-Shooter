@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+ using System.Collections.Generic;
 using UnityEngine;
 
 public class SpeedShipController : MonoBehaviour, ISpawnChanceWeight
@@ -12,15 +12,13 @@ public class SpeedShipController : MonoBehaviour, ISpawnChanceWeight
     [SerializeField] private bool _isNegetive = false;
     
     [SerializeField] private int _spawnChanceWeight;
-    
+
     private float _positionY;
 
     private void Start() {
         _positionY = transform.position.y;
         Spawn();
     }
-
-
 
     private void Spawn(){
         GameObject ship;

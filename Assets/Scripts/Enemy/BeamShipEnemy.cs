@@ -22,7 +22,9 @@ public class BeamShipEnemy : Enemy, IMoveable, ICanShoot
         _myState = newState;
     }
 
-    private  void Start() {
+    public override  void Start() {
+        base.Start();
+        
         _playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
         _maxChargeBall = _beamObject._chargeBall.transform.localScale;
 
@@ -90,16 +92,4 @@ public class BeamShipEnemy : Enemy, IMoveable, ICanShoot
             ChangeState(MovingState.Moving);
         }
     }
-
-    protected override void Dead(){
-        Destroy(gameObject);
-    }
-
-    protected override void OnTriggerEnter2D(Collider2D collider){
-        IDamageable damageable = collider.GetComponent<IDamageable>();
-        if(collider.tag == "Player")
-            damageable.Damege(1);
-    }
-
-   
 }

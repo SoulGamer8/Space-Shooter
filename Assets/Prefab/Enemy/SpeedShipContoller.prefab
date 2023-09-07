@@ -50,4 +50,4 @@ MonoBehaviour:
   _amplitede: 5
   _frequency: 1
   _isNegetive: 0
-  _spawnChanceWeight: 900
+  _spawnChanceWeight: 10

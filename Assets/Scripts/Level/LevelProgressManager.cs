@@ -18,7 +18,7 @@ public class LevelProgressManager : MonoBehaviour
     [SerializeField] private GameObject _boss;
 
     [ConditionalHide("_isHasBoss", true)]
-    [SerializeField] private AudioClip _bossSpawnAudio;
+    [SerializeField] private AudioClip[] _bossSpawnAudio;
 
     [ConditionalHide("_isHasBoss", true)]
     [SerializeField] private AudioClip _alarmSound;
@@ -58,7 +58,6 @@ public class LevelProgressManager : MonoBehaviour
 
     #region Boss
     private void StartBossFight(){
-        _audioSource.PlayOneShot(_bossSpawnAudio);
         StartCoroutine(TextSpawnBossCoroutine());
     }
 
@@ -69,24 +68,32 @@ public class LevelProgressManager : MonoBehaviour
         SpawnBoss();
     }
 
+    private void SpawnBoss(){
+        float randomSound = Random.Range(0f,1f);
+        Debug.Log(randomSound);
+        if(randomSound <0.1f)
+            _audioSource.PlayOneShot(_bossSpawnAudio[0]);
+        else
+            _audioSource.PlayOneShot(_bossSpawnAudio[1]);
+        
+        StartCoroutine(SpawnBossCoroutine());
+    }
+
     private IEnumerator SpawnBossCoroutine(){
-        yield return new WaitForSeconds(_bossSpawnAudio.length-1);
+        yield return new WaitForSeconds(_bossSpawnAudio[0].length-1);
         Instantiate(_boss);
         text.gameObject.SetActive(false);
         StartCoroutine(TimeBossFightCoroutine());
     }
 
-    private void SpawnBoss(){
-        _audioSource.PlayOneShot(_bossSpawnAudio);
-        StartCoroutine(SpawnBossCoroutine());
-    }
+
 
     private IEnumerator TimeBossFightCoroutine(){
         yield return new WaitForSeconds(120);
         _starAmmount --;
     }
     #endregion
-    
+
     public void LevelComplete(){
         _completeLevelMenu.SetActive(true);
         SetStar();

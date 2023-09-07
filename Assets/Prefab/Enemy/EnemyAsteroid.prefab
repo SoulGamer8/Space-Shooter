@@ -105,8 +105,8 @@ MonoBehaviour:
   _speed: 4
   _damage: 1
   _score: 1
-  _spawnChanceWeight: 10
-  _explosionSound: {fileID: 8300000, guid: a885c043fab7e46438bba03ba9dab6bc, type: 3}
+  _spawnChanceWeight: 20
+  _explosion: {fileID: 6054925638629271669, guid: 9af9c30a9ac037943b082dd24ec5280f, type: 3}
 --- !u!61 &4446468468296184438
 BoxCollider2D:
   m_ObjectHideFlags: 0

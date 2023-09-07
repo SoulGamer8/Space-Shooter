@@ -15,13 +15,10 @@ public class KamikazeEnemy : Enemy,IMoveable
     float duration = 10.0f;
     float startTime;
 
-    private void Start(){
-        _player =  GameObject.FindGameObjectWithTag("Player");
-    }
+    public override void Start(){
+        base.Start();
 
-    public override void Damege(int damage)
-    {
-       base.Damege(damage);
+        _player =  GameObject.FindGameObjectWithTag("Player");
     }
 
     private void Update() {
@@ -92,21 +89,7 @@ public class KamikazeEnemy : Enemy,IMoveable
     private void SetRotationAngel(){
         _targetRotation = Vector3.SignedAngle(Vector3.up ,_player.transform.position-transform.position, Vector3.forward);
     }
-
-    protected override void OnTriggerEnter2D(Collider2D collider)
-    {
-        IDamageable damageable = collider.GetComponent<IDamageable>();
-        if(collider.tag== "Player"){
-            damageable.Damege(_damage);
-            Dead();
-        }
-    }
-
-    protected override void Dead()
-    {
-        Destroy(gameObject);
-    }
-
+    
     public override int GetSpawnChanceWeight()
     {
        return _spawnChanceWeight;

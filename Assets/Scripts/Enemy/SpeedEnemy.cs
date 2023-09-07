@@ -1,6 +1,5 @@
 using UnityEngine;
 
-[RequireComponent(typeof(Animator))]
 public class SpeedEnemy : Enemy
 {
     private float sinCenterY;
@@ -15,7 +14,8 @@ public class SpeedEnemy : Enemy
         _isNegetive = isNegetive;
     }
 
-    private void Start() {
+    public override void Start() {
+        base.Start();
         sinCenterY = transform.position.x;
       
     }
@@ -24,16 +24,7 @@ public class SpeedEnemy : Enemy
         DoMove();
     }
 
-
-
-    public override void Damege(int damage)
-    {
-        base.Damege(damage);
-    }
-
-  
-    public void DoMove()
-    {
+    public void DoMove(){
         Vector2 pos = transform.position;
 
         float sin = Mathf.Sin((pos.y*_amplitede)/_frequency);
@@ -48,27 +39,10 @@ public class SpeedEnemy : Enemy
 
 
         if(transform.position.y < -6)
-            Dead();
+           Destroy(this.gameObject);
     }
 
-    protected override void OnTriggerEnter2D(Collider2D collider)
-    {
-        IDamageable damageable = collider.GetComponent<IDamageable>();
-        if(collider.tag== "Player"){
-            damageable.Damege(_damage);
-            Dead();
-        }
-    }
-
-    protected override void Dead()
-    {
-        Destroy(this.gameObject);
-        // Destroy(gameObject, this.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).length);
-    }
-
-
-    public override int GetSpawnChanceWeight()
-    {
+    public override int GetSpawnChanceWeight(){
        return _spawnChanceWeight;
     }
 }
