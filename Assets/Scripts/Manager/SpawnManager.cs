@@ -38,7 +38,7 @@ public class SpawnManager : MonoBehaviour
         StopAllCoroutines();
     }
 
-    public void KilledEnemy(int score, GameObject enemy){
+    public void KilledEnemy(int score){
         enemyKilledEvent?.Invoke(score);
         _sumScore +=score;
     }

@@ -14,7 +14,7 @@ public class EnemyLaser : Ammo
         IDamageable damageable = collider.GetComponent<IDamageable>();
         if(damageable != null && collider.tag =="Player")
         {
-            damageable.Damege(_bulletDamage);
+            damageable.Damage(_bulletDamage);
             Dead();
         }
     }

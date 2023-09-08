@@ -6,7 +6,7 @@ public class KamikazeEnemy : Enemy,IMoveable
     [Header("Enemy Settings")]
     [SerializeField] private float _timeWait =1f;
 
-    enum MovingState{Moving,Rotating,Waitint}
+    enum MovingState{Moving,Rotating,Waiting}
     MovingState _myState;
 
     private GameObject _player;
@@ -59,11 +59,10 @@ public class KamikazeEnemy : Enemy,IMoveable
         transform.position = Vector3.Lerp(transform.position, _targetPosition, percent*_speed);
 
         if(Vector3.Distance(transform.position, _targetPosition)<0.01f){
-            ChangeState(MovingState.Waitint);
+            ChangeState(MovingState.Waiting);
         }
     }
 
-    
     private void DoRotate(){
         startTime += Time.deltaTime;
         float percent = startTime/duration;
@@ -89,9 +88,5 @@ public class KamikazeEnemy : Enemy,IMoveable
     private void SetRotationAngel(){
         _targetRotation = Vector3.SignedAngle(Vector3.up ,_player.transform.position-transform.position, Vector3.forward);
     }
-    
-    public override int GetSpawnChanceWeight()
-    {
-       return _spawnChanceWeight;
-    }
+
 }

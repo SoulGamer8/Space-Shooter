@@ -17,8 +17,4 @@ public class AsteroidEnemy : Enemy, IMoveable
         if (transform.position.y < -5)
             Destroy(this.gameObject);
     }
-
-    public override int GetSpawnChanceWeight(){
-       return _spawnChanceWeight;
-    }
 }

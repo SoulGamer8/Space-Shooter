@@ -87,10 +87,10 @@ public class PlayerMovement : MonoBehaviour
         _animator.SetFloat("Vector2", vector2.x);
     }
 
-    private void CalculatedMovment(Vector2 moveVecntor){
+    private void CalculatedMovment(Vector2 moveVector){
         float speed = _isSpeedPowerUpActive ? _speedPowerUp : _speed;
 
-        _rb.velocity = moveVecntor * speed;
+        _rb.velocity = moveVector * speed;
     }
 
     #region PowerUp

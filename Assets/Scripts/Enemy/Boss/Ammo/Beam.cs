@@ -7,6 +7,6 @@ public class Beam : MonoBehaviour
     private  void OnTriggerEnter2D(Collider2D collider){
         IDamageable damageable = collider.GetComponent<IDamageable>();
         if(damageable != null && collider.tag =="Player")
-            damageable.Damege(_bulletDamage);
+            damageable.Damage(_bulletDamage);
     }
 }

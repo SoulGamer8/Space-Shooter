@@ -7,9 +7,9 @@ public class SpeedShipController : MonoBehaviour, ISpawnChanceWeight
     [SerializeField] private List<GameObject> _speedShipList;
 
     [SerializeField] private int _maxAmountShip;
-    [SerializeField] private float _amplitede;
+    [SerializeField] private float _amplitude;
     [SerializeField] private float _frequency;
-    [SerializeField] private bool _isNegetive = false;
+    [SerializeField] private bool _isNegative = false;
     
     [SerializeField] private int _spawnChanceWeight;
 
@@ -24,14 +24,14 @@ public class SpeedShipController : MonoBehaviour, ISpawnChanceWeight
         GameObject ship;
         for(int i=0;i<_maxAmountShip;i++){
             ship = Instantiate(_speedShip,new Vector3(transform.position.x,_positionY),Quaternion.identity,transform);
-            SetSetingShip(ship);
+            SetSettingShip(ship);
             _speedShipList.Add(ship);
             _positionY +=1.5f;
         }
     }
 
-    private void SetSetingShip(GameObject ship){
-        ship.GetComponent<SpeedEnemy>().SetSin(_amplitede,_frequency,_isNegetive);
+    private void SetSettingShip(GameObject ship){
+        ship.GetComponent<SpeedEnemy>().SetSin(_amplitude,_frequency,_isNegative);
     }
 
     public int GetSpawnChanceWeight(){

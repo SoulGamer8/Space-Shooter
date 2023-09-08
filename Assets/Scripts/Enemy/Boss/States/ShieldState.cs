@@ -4,8 +4,8 @@ namespace Boss{
     public class ShieldState : BossState
     {
         private float _timer;
-        private int _curentlyShieldGenerator = 2;
-        private bool _isSieldSpawn= false;
+        private int _currentlyShieldGenerator = 2;
+        private bool _isShieldSpawn= false;
 
         public ShieldState(BossController bossController, BossStateMachine bossStateMachine) : base(bossController, bossStateMachine){}
 
@@ -15,17 +15,17 @@ namespace Boss{
         }
 
 
-        private void SpawnShieldGeneraotr(){
+        private void SpawnShieldGenerator(){
             GameObject.Instantiate(bossController._shieldGenerator,new Vector3(8,10,0),Quaternion.Euler(0,0,0),bossController.transform);
             GameObject.Instantiate(bossController._shieldGenerator,new Vector3(-8,10,0),Quaternion.Euler(0,0,0),bossController.transform);
-            _isSieldSpawn = true;
+            _isShieldSpawn = true;
         }
 
         public void ShieldGeneratorDestroy(){
-            _curentlyShieldGenerator--;
+            _currentlyShieldGenerator--;
             WeekShield();
             
-            if(_curentlyShieldGenerator<=0)
+            if(_currentlyShieldGenerator<=0)
             bossStateMachine.ChangeState(bossController.beamState);
         }
 
@@ -37,16 +37,16 @@ namespace Boss{
 
         public override void UpdateState(){
             bossController.transform.position = Vector3.MoveTowards(bossController.transform.position,bossController._target,0.1f);
-            if(Vector3.Distance(bossController.transform.position,bossController._target)<0.1f && !_isSieldSpawn)
-                SpawnShieldGeneraotr();
-            if(_isSieldSpawn)
-                Repeir();
+            if(Vector3.Distance(bossController.transform.position,bossController._target)<0.1f && !_isShieldSpawn)
+                SpawnShieldGenerator();
+            if(_isShieldSpawn)
+                Repair();
         }
 
-        private void Repeir(){
+        private void Repair(){
             _timer += Time.deltaTime;
             if(_timer >= 1){
-                bossController._bossHealth._curentlyHealth +=1;
+                bossController._bossHealth._currentlyHealth +=1;
                 bossController._bossHealth.UpdateHealthBar();
                 _timer =0;    
             }

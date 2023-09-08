@@ -10,14 +10,14 @@ public class Mine : MonoBehaviour
 
     private void Awake() {
         _animator = GetComponent<Animator>();
-        StartCoroutine(SelfDestroy());
+        StartCoroutine(SelfDestroyCoroutine());
     }
 
 
     private void OnTriggerEnter2D(Collider2D collider) {
         IDamageable damageable = collider.GetComponent<IDamageable>();
         if(collider.tag== "Player"){
-            damageable.Damege(_damage);
+            damageable.Damage(_damage);
             Dead();
         }
     }
@@ -30,7 +30,7 @@ public class Mine : MonoBehaviour
     }
 
 
-    private IEnumerator SelfDestroy(){
+    private IEnumerator SelfDestroyCoroutine(){
         yield return new WaitForSeconds(_timeToSelfDestroy);
         Dead();
     } 

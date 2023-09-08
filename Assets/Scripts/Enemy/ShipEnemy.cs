@@ -21,25 +21,20 @@ public class ShipEnemy : Enemy, IMoveable, ICanShoot
         transform.position += new Vector3(0, -1, 0) * Time.deltaTime * _speed;
         if (transform.position.y < -5)
         {
-            transform.parent.GetComponent<SpawnManager>().KilledEnemy(0, this.gameObject);
             Destroy(gameObject);
         }
     }
 
     public  void Shoot(){
-       StartCoroutine(ShootRoutine());
+       StartCoroutine(ShootCoroutine());
     }
 
-    IEnumerator ShootRoutine(){
+    IEnumerator ShootCoroutine(){
         while (true)
         {
             Instantiate(_bullet, new Vector3(transform.position.x,transform.position.y - 2.1f, 0),Quaternion.identity,transform);
             yield return new WaitForSeconds(_fireRate);
         }
        
-    }
-
-    public override int GetSpawnChanceWeight(){
-       return _spawnChanceWeight;
     }
 }

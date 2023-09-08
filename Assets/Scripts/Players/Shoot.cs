@@ -49,7 +49,7 @@ public class Shoot : MonoBehaviour
 
     }
 
-    public void TakeTripelShoot(){
+    public void TakeTripleShoot(){
         _isTripleShootActive = true;
         StartCoroutine(ActivePowerUp());
     }
@@ -68,7 +68,7 @@ public class Shoot : MonoBehaviour
 
     }
 
-    private void TrippleShoot(){
+    private void TripleShoot(){
          int angelBetweenLaser = 2 * _volleyLaserSpread / (_countLaserToFire-1);
 
         for(int angle = -_volleyLaserSpread;angle<= _volleyLaserSpread;angle += angelBetweenLaser){
@@ -81,7 +81,7 @@ public class Shoot : MonoBehaviour
         {
             if (_isTripleShootActive)
             {
-                TrippleShoot();
+                TripleShoot();
             }
             else
             {

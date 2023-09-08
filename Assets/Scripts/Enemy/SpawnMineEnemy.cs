@@ -22,17 +22,13 @@ public class SpawnMineEnemy : Enemy
     }
 
     public void Shoot(){
-        StartCoroutine(SpawnMine());
+        StartCoroutine(SpawnMineCoroutine());
     }
 
-    private IEnumerator SpawnMine(){
+    private IEnumerator SpawnMineCoroutine(){
         while(true){
             Instantiate(_minePrefab,transform.position,Quaternion.identity);
             yield return new WaitForSeconds(_timeSpawn);
         }
-    }
-
-    public override int GetSpawnChanceWeight(){
-        return _spawnChanceWeight;
     }
 }

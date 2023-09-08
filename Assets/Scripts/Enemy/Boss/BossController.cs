@@ -26,7 +26,7 @@ namespace Boss{
         [SerializeField] internal BeamObject[] _beamObject;
         [SerializeField] internal float _beamAttackTime;
         [SerializeField] internal float _trackingDuration;
-        [SerializeField] internal float _timetoLock;
+        [SerializeField] internal float _timeToLock;
         [SerializeField] internal float _trackingFlashTime;
         [SerializeField] internal float _lockedFlashTime;
         [SerializeField] internal int _amountBeamVolley;
@@ -72,7 +72,7 @@ namespace Boss{
 
         #endregion
         
-        internal  Coroutine _changeStateToMissleStateRoutine;
+        internal  Coroutine _changeStateToMissileStateRoutine;
         
         internal BossHealth _bossHealth;
         internal BossMove _bossMove;
@@ -113,15 +113,15 @@ namespace Boss{
         public void NextState(){
             if(_isSecondStage){
                 bossStateMachine.ChangeState(smartLaserState);
-                _changeStateToMissleStateRoutine = StartCoroutine(ChangeStateToMissleStateCoroutine(5));
+                _changeStateToMissileStateRoutine = StartCoroutine(ChangeStateToMissileStateCoroutine(5));
             }
             else{
                 bossStateMachine.ChangeState(shootLaserState);
-                _changeStateToMissleStateRoutine = StartCoroutine(ChangeStateToMissleStateCoroutine(5));
+                _changeStateToMissileStateRoutine = StartCoroutine(ChangeStateToMissileStateCoroutine(5));
             }
         }
 
-        private IEnumerator ChangeStateToMissleStateCoroutine(float time){
+        private IEnumerator ChangeStateToMissileStateCoroutine(float time){
             yield return new WaitForSeconds(time);
             bossStateMachine.ChangeState(missileState);
         }

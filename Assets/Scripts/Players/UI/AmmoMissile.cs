@@ -20,7 +20,7 @@ public class AmmoMissile : MonoBehaviour
         if(_curentlyMissile>0){
             _ammo[_curentlyMissile-1].gameObject.SetActive(false);
             _curentlyMissile--;
-            _powerUpWeightController.ChangeSpawnChacneWeightAmmo(10);
+            _powerUpWeightController.ChangeSpawnChanceWeightAmmo(10);
             return true;
         }
         else
@@ -31,7 +31,7 @@ public class AmmoMissile : MonoBehaviour
         if(_curentlyMissile<3){
             _ammo[_curentlyMissile].gameObject.SetActive(true);
             _curentlyMissile++;
-            _powerUpWeightController.ChangeSpawnChacneWeightAmmo(-10);
+            _powerUpWeightController.ChangeSpawnChanceWeightAmmo(-10);
         }
     }
 }

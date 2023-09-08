@@ -7,8 +7,8 @@ namespace Boss{
         private float _timer;
         private float _timerFlash;
         private float _defaultRotation;
-        private  Vector3 _maxChargeSixe;
-        private int _curentlyAmountVolleyBeam;
+        private  Vector3 _maxChargeSize;
+        private int _currentlyAmountVolleyBeam;
 
         private enum BeamAttackState{Tracking,Locked,Fire}
         BeamAttackState _currentBeamAttackState;
@@ -16,7 +16,7 @@ namespace Boss{
         public BeamState(BossController bossController, BossStateMachine bossStateMachine) : base(bossController, bossStateMachine){}
 
         public override void OnEnter(){
-            _maxChargeSixe = bossController._beamObject[0]._chargeBall.transform.localScale;
+            _maxChargeSize = bossController._beamObject[0]._chargeBall.transform.localScale;
             _defaultRotation =bossController._beamObject[0]._beamParent.transform.eulerAngles.z;  
 
             StartTracking();
@@ -38,10 +38,10 @@ namespace Boss{
             }
         }
 
-        #region  Traking
+        #region Tracking
 
         private void StartTracking(){
-            if( _curentlyAmountVolleyBeam >= bossController._amountBeamVolley)
+            if( _currentlyAmountVolleyBeam >= bossController._amountBeamVolley)
                 bossStateMachine.ChangeState(bossController.missileState);
             foreach(BeamObject beamObject in bossController._beamObject){
                 beamObject._chargeBall.SetActive(true);
@@ -53,7 +53,7 @@ namespace Boss{
 
         private void Tracking(){
             float progress = _timer/bossController._trackingDuration;
-            Vector3 chargeBallScale = Vector3.Lerp(Vector3.zero,_maxChargeSixe,progress);
+            Vector3 chargeBallScale = Vector3.Lerp(Vector3.zero,_maxChargeSize,progress);
             foreach(BeamObject beamObject in bossController._beamObject){
                 beamObject._chargeBall.transform.localScale = chargeBallScale;  
             }
@@ -83,7 +83,7 @@ namespace Boss{
         #endregion
 
         private void Locked(){
-            if (_timer >= bossController._timetoLock)
+            if (_timer >= bossController._timeToLock)
                 ChangeState(BeamAttackState.Fire);
         }
 
@@ -94,7 +94,7 @@ namespace Boss{
                 beamObject._beamAttack.SetActive(true);
             }
             if(_timer >= bossController._beamAttackTime){
-                _curentlyAmountVolleyBeam++;
+                _currentlyAmountVolleyBeam++;
                 TurnOffBeams();    
                 StartTracking();
             }
@@ -107,12 +107,12 @@ namespace Boss{
             }
         }
 
-        private async void TrackFlashingAsync(GameObject warningLine,float flahTime){
-            float flahTimeConvert = flahTime *1000;
+        private async void TrackFlashingAsync(GameObject warningLine,float flashTime){
+            float flashTimeConvert = flashTime *1000;
             while (_currentBeamAttackState != BeamAttackState.Fire){
-                await Task.Delay((int)flahTimeConvert);
+                await Task.Delay((int)flashTimeConvert);
                 warningLine.SetActive(true);
-                await Task.Delay((int)flahTimeConvert);
+                await Task.Delay((int)flashTimeConvert);
                 warningLine.SetActive(false);
             }
         }
@@ -123,8 +123,8 @@ namespace Boss{
         }
 
         public override void OnExit(){
-            foreach (BeamObject beamObect in bossController._beamObject){
-                    beamObect._beamParent.SetActive(false);
+            foreach (BeamObject beamObject in bossController._beamObject){
+                    beamObject._beamParent.SetActive(false);
                 }
         }
     }

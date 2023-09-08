@@ -1,4 +1,3 @@
-using System.Numerics;
 using System.Collections;
 using UnityEngine;
 
@@ -24,8 +23,9 @@ public abstract class Enemy : MonoBehaviour, IDamageable, ISpawnChanceWeight
         myColor = spriteRenderer.color;
     }
 
-
-    public abstract int GetSpawnChanceWeight();
+     public virtual int GetSpawnChanceWeight(){
+        return _spawnChanceWeight;
+    }
 
     public virtual void Damage(int damage){
         _health -= damage;
@@ -37,11 +37,12 @@ public abstract class Enemy : MonoBehaviour, IDamageable, ISpawnChanceWeight
     protected virtual void OnTriggerEnter2D(Collider2D collider){
         IDamageable damageable = collider.GetComponent<IDamageable>();
         if(collider.tag == "Player")
-            damageable.Damege(1);
+            damageable.Damage(1);
     }
     
     protected virtual void Dead(){
-        Instantiate(_explosion,transform.position);
+        GameObject.FindGameObjectWithTag("SpawnManager").GetComponent<SpawnManager>().KilledEnemy(_score);
+        Instantiate(_explosion,transform.position,Quaternion.identity);
         Destroy(gameObject);
     }
 

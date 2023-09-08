@@ -4,7 +4,7 @@ namespace Boss{
     public class MissileState : BossState
     {
         private float _timer;
-        private int _curentlyMissilesVolley;
+        private int _currentlyMissilesVolley;
 
         public MissileState(BossController bossController, BossStateMachine bossStateMachine) : base(bossController, bossStateMachine){}
 
@@ -17,9 +17,9 @@ namespace Boss{
                     GameObject.Instantiate(bossController._missile,bossController._gunMissile[0].position,Quaternion.Euler(0,0,180));
                     GameObject.Instantiate(bossController._missile,bossController._gunMissile[1].position,Quaternion.Euler(0,0,180));
                     _timer=0;
-                    _curentlyMissilesVolley++;
+                    _currentlyMissilesVolley++;
             }
-            if(_curentlyMissilesVolley >= bossController._amountMissilesVolley)
+            if(_currentlyMissilesVolley >= bossController._amountMissilesVolley)
                 bossController.NextState();
         }
 

@@ -9,7 +9,7 @@ public class TripleShootEnemy : Enemy
     [SerializeField] private float _fireRate;
 
     private Vector3 _targetPosition;
-    private Vector3 _patruling;
+    private Vector3 _patriliny;
 
     enum MovingState{Starting,Moving}
     private MovingState _myState;
@@ -40,7 +40,7 @@ public class TripleShootEnemy : Enemy
 
     private void ChangeState(MovingState myState){
         _myState = myState;
-        _patruling = new Vector3(6,transform.position.y);
+        _patriliny = new Vector3(6,transform.position.y);
     }
 
     private void StartMoving(){
@@ -55,19 +55,19 @@ public class TripleShootEnemy : Enemy
 
     public void DoMove(){
 
-        transform.position = Vector3.Lerp(transform.position, _patruling, 0.3f*_speed * Time.deltaTime);
-        if(Vector3.Distance(transform.position, _patruling) < 0.1f)
-            _patruling.x *=-1;
+        transform.position = Vector3.Lerp(transform.position, _patriliny, 0.3f*_speed * Time.deltaTime);
+        if(Vector3.Distance(transform.position, _patriliny) < 0.1f)
+            _patriliny.x *=-1;
     }
 
     public void Shoot(){
-        StartCoroutine(ShootinCorutine());
+        StartCoroutine(ShootCoroutine());
     }
 
     protected override void OnTriggerEnter2D(Collider2D collider){
         IDamageable damageable = collider.GetComponent<IDamageable>();
         if(collider.tag == "Player")
-            damageable.Damege(1);
+            damageable.Damage(1);
     }
 
 
@@ -84,7 +84,7 @@ public class TripleShootEnemy : Enemy
        return _spawnChanceWeight;
     }
 
-    IEnumerator ShootinCorutine(){
+    IEnumerator ShootCoroutine(){
         while(true){
             int angelBetweenLaser = 2 * _volleyLaserSpread / (_countLaserToFire-1);
 

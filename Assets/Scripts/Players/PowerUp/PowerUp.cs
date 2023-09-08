@@ -18,7 +18,7 @@ public class PowerUp : MonoBehaviour,ISpawnChanceWeight
         return _spawnChanceWeight;
     }
 
-    public void ChangeSpawnChacneWeight(int spawnChanceWeight){
+    public void ChangeSpawnChanceWeight(int spawnChanceWeight){
         _spawnChanceWeight += spawnChanceWeight;
     }
 
@@ -37,13 +37,13 @@ public class PowerUp : MonoBehaviour,ISpawnChanceWeight
             switch ((int)_powerUpId)
             {
                 case 0:
-                    collision.GetComponent<Shoot>().TakeTripelShoot();
+                    collision.GetComponent<Shoot>().TakeTripleShoot();
                     break;
                 case 1:
                     collision.GetComponent<PlayerMovement>().TakeSpeedPowerUp();
                     break;
                 case 2:
-                    collision.GetComponent<PlayerHealth>().ActivateShild();
+                    collision.GetComponent<PlayerHealth>().ActivateShied();
                     break;
                 case 3:
                     collision.GetComponent<PlayerHealth>().RespawnPlayer();

@@ -4,8 +4,6 @@ public class SmartShipEnemy : Enemy
 {
     [Header("Soot")]
     [SerializeField] private GameObject _bullet;
-    [SerializeField] private int _speedBullet;
-
 
     enum MovingState{Moving,Firing,Waiting}
     MovingState _myState;
@@ -75,8 +73,6 @@ public class SmartShipEnemy : Enemy
         float angelToFire = Vector3.SignedAngle(Vector3.up ,target-transform.position, Vector3.forward);
         
         bullet = Instantiate(_bullet, new Vector3(transform.position.x,transform.position.y, 0),Quaternion.Euler(0,0,angelToFire));
-        bullet.GetComponent<SmartEnemyLaser>().SetDamage(_damage);
-        bullet.GetComponent<SmartEnemyLaser>().SetSpeed(_speedBullet);
         ChangeState(MovingState.Waiting);
     }
 
@@ -89,10 +85,5 @@ public class SmartShipEnemy : Enemy
         GameObject[] player = GameObject.FindGameObjectsWithTag("Player");
         int randomPlayer = UnityEngine.Random.Range(0, player.Length);
         return player[randomPlayer].transform.position;
-    }
-
-    public override int GetSpawnChanceWeight()
-    {
-       return _spawnChanceWeight;
     }
 }

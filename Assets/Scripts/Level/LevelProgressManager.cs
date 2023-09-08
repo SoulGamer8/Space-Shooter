@@ -6,13 +6,13 @@ using Unity.Services.Analytics;
 using TMPro;
 public class LevelProgressManager : MonoBehaviour
 {
-    [SerializeField] private bool _isStandartLevel=true;
+    [SerializeField] private bool _isStandardLevel=true;
 
-    [ConditionalHide("_isStandartLevel", true)]
+    [ConditionalHide("_isStandardLevel", true)]
     [SerializeField] private float _timeHowLongLive;
 
 
-    [SerializeField] private bool _isBossLevel=true;
+    [SerializeField] private bool _isBossLevel = false;
     
     [ConditionalHide("_isHasBoss", true)]
     [SerializeField] private GameObject _boss;
@@ -22,7 +22,7 @@ public class LevelProgressManager : MonoBehaviour
 
     [ConditionalHide("_isHasBoss", true)]
     [SerializeField] private AudioClip _alarmSound;
-    
+     
     [ConditionalHide("_isHasBoss", true)]
     [SerializeField] private TextMeshProUGUI text;
 
@@ -30,7 +30,7 @@ public class LevelProgressManager : MonoBehaviour
     [Header("Level Complete")]
     [SerializeField] private GameObject _completeLevelMenu;
     [SerializeField] private StarsController _starsController;
-    private int _starAmmount = 3;
+    private int _starAmount = 3;
 
     private WalletManager _walletManager;
     private AudioSource _audioSource;
@@ -39,17 +39,17 @@ public class LevelProgressManager : MonoBehaviour
     private void Start(){
         _walletManager = WalletManager.instance;
         _audioSource =GetComponent<AudioSource>();
-        if(_isStandartLevel)
+        if(_isStandardLevel)
             StartCoroutine(TimerToCompleteLevelCoroutine());
         if(_isBossLevel)
             StartBossFight();
     }
 
     public void SetStar(){
-        _starsController.SetStar(_starAmmount);
+        _starsController.SetStar(_starAmount);
     }
 
-    #region Standart Level
+    #region Standard Level
     private IEnumerator TimerToCompleteLevelCoroutine(){
         yield return new WaitForSeconds(_timeHowLongLive);
         LevelComplete();
@@ -71,7 +71,7 @@ public class LevelProgressManager : MonoBehaviour
     private void SpawnBoss(){
         float randomSound = Random.Range(0f,1f);
         Debug.Log(randomSound);
-        if(randomSound <0.1f)
+        if(randomSound < 1f)
             _audioSource.PlayOneShot(_bossSpawnAudio[0]);
         else
             _audioSource.PlayOneShot(_bossSpawnAudio[1]);
@@ -90,7 +90,7 @@ public class LevelProgressManager : MonoBehaviour
 
     private IEnumerator TimeBossFightCoroutine(){
         yield return new WaitForSeconds(120);
-        _starAmmount --;
+        _starAmount --;
     }
     #endregion
 
@@ -119,7 +119,7 @@ public class LevelProgressManager : MonoBehaviour
     public void PlayerTakeDamage(){
         if(!_isPlayerTakeDamage){
             _isPlayerTakeDamage = true;
-            _starAmmount--;
+            _starAmount--;
         }
     }
 }

@@ -57,11 +57,11 @@ public class Missile : Ammo ,IDamageable
         IDamageable damageable = collider.GetComponent<IDamageable>();
         if(damageable == null) return;
         if(_isEnemyMissile && collider.tag =="Player"){
-            damageable.Damege(_damage);
+            damageable.Damage(_damage);
             Dead();
         }
         if(!_isEnemyMissile && collider.tag =="Enemy"){
-            damageable.Damege(_damage);
+            damageable.Damage(_damage);
             Dead();
         }
     }
@@ -79,7 +79,7 @@ public class Missile : Ammo ,IDamageable
         Destroy(this.gameObject);
     }
 
-    public void Damege(int damage){
+    public void Damage(int damage){
         Debug.Log(_health);
         _health -= damage;
         if(_health <0)

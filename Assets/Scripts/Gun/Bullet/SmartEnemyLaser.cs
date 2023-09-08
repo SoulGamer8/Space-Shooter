@@ -4,21 +4,13 @@ using UnityEngine;
 
 public class SmartEnemyLaser : Ammo
 {
-    private int _bulletSpeed = 8;
-    private int _bulletDamage = 1;
-
     private Vector3 _target;
 
     private  void Awake() {
         SetTarget();
     }
 
-    // public void SetTarget(Vector3 target){
-    //     Vector3 temp = transform.position - target;
-    //    _playerPosition = target - temp*2;
-    // }
 
-        
     private void SetTarget(){
         GameObject[] player = GameObject.FindGameObjectsWithTag("Player");
         int randomPlayer = UnityEngine.Random.Range(0, player.Length);
@@ -28,14 +20,6 @@ public class SmartEnemyLaser : Ammo
 
         float angelToFire = Vector3.SignedAngle(Vector3.up ,playerPosition-transform.position, Vector3.forward);
         transform.rotation = Quaternion.Euler(0,0,angelToFire);
-    }
-
-    public void SetSpeed(int speed){
-        _bulletSpeed = speed;
-    }
-
-    public void SetDamage(int damage){
-        _bulletDamage = damage;
     }
 
     private void Update() {
@@ -57,7 +41,7 @@ public class SmartEnemyLaser : Ammo
         
         if(damageable != null  && collider.tag != "Enemy")
         {
-            damageable.Damege(_bulletDamage);
+            damageable.Damage(_bulletDamage);
             Dead();
         }
     }

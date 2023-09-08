@@ -1,6 +1,4 @@
-using System;
 using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Networking;
@@ -14,17 +12,14 @@ public class PostHightScoreController : MonoBehaviour
     private string secretKey = "mySecretKey";
     private int _score;
 
-
-    public void SendScoreBtn()
-    {
+    public void SendScoreBtn(){
         _score = PlayerPrefs.GetInt("bestScore");
         string name = nameTextInput.text;
         StartCoroutine(PostScores(name, _score));
     }
 
 
-    IEnumerator PostScores(string name, int score)
-    {
+    IEnumerator PostScores(string name, int score){
         string hash = Md5Sum(name + score + secretKey);
 
 
@@ -49,8 +44,7 @@ public class PostHightScoreController : MonoBehaviour
         this.gameObject.SetActive(false );
     }
 
-    public string Md5Sum(string strToEncrypt)
-    {
+    public string Md5Sum(string strToEncrypt){
         System.Text.UTF8Encoding ue = new System.Text.UTF8Encoding();
         byte[] bytes = ue.GetBytes(strToEncrypt);
         // encrypt bytes

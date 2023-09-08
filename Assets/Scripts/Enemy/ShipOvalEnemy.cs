@@ -12,19 +12,18 @@ public class ShipOvalEnemy : Enemy, ICanShoot, IMoveable
 
     #region  Oval Size
     [Header("Oval size")]
-    [SerializeField] float a,b;
-    [SerializeField] private int divisons;
-    [SerializeField] private Vector3[] positions;
-    private float dangle;
-    private int curentlyDivision=20;
+    [SerializeField] private float _width;
+    [SerializeField] private float _height;
+    [SerializeField] private int _divisions;
+    [SerializeField] private Vector3[] _positions;
+    private float _dangle;
+    private int _currentlyDivision=20;
     #endregion
-    public override int GetSpawnChanceWeight() => _spawnChanceWeight;
-
 
     public override void Start(){
         base.Start();
-        positions = new Vector3[divisons +1];
-        dangle = 2*Mathf.PI /divisons;
+        _positions = new Vector3[_divisions +1];
+        _dangle = 2*Mathf.PI /_divisions;
         Shoot();
         CreateOval();
     }
@@ -34,22 +33,22 @@ public class ShipOvalEnemy : Enemy, ICanShoot, IMoveable
     }
 
     public void DoMove(){
-        transform.position = Vector3.MoveTowards(transform.position,positions[curentlyDivision],0.1f);
-        if(Vector3.Distance(transform.position,positions[curentlyDivision]) <0.1f){
-                if(curentlyDivision >= divisons)
-                    curentlyDivision=0;
+        transform.position = Vector3.MoveTowards(transform.position,_positions[_currentlyDivision],0.1f);
+        if(Vector3.Distance(transform.position,_positions[_currentlyDivision]) <0.1f){
+                if(_currentlyDivision >= _divisions)
+                    _currentlyDivision=0;
                 else
-                    curentlyDivision++;
+                    _currentlyDivision++;
             }
     }
 
     private void CreateOval(){
         float angle= 0;
         Vector3 position = new Vector3(0,5,0);
-        for(int i = 0; i < divisons+1;i++,angle +=dangle){
-            position.x = a * Mathf.Cos(angle);
-            position.y = b * Mathf.Sin(angle)+5;
-            positions[i] = position;
+        for(int i = 0; i < _divisions+1;i++,angle +=_dangle){
+            position.x = _width * Mathf.Cos(angle);
+            position.y = _height * Mathf.Sin(angle)+5;
+            _positions[i] = position;
         }
         
     }

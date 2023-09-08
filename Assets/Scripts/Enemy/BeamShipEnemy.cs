@@ -15,8 +15,7 @@ public class BeamShipEnemy : Enemy, IMoveable, ICanShoot
     private Transform _playerTransform;
     
     private Vector3 _maxChargeBall;
-    public override int GetSpawnChanceWeight() => _spawnChanceWeight;
-
+    
     private void ChangeState(MovingState newState){
         _timer = 0;
         _myState = newState;

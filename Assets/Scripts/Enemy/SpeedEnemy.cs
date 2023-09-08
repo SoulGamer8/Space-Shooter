@@ -4,14 +4,14 @@ public class SpeedEnemy : Enemy
 {
     private float sinCenterY;
 
-    private float _amplitede;
+    private float _amplitude;
     private float _frequency;
-    private bool _isNegetive = false;
+    private bool _isNegative = false;
 
-    public void SetSin(float amplitede,float frequency,bool isNegetive){
-        _amplitede = amplitede;
+    public void SetSin(float amplitude,float frequency,bool isNegative){
+        _amplitude = amplitude;
         _frequency = frequency;
-        _isNegetive = isNegetive;
+        _isNegative = isNegative;
     }
 
     public override void Start() {
@@ -27,8 +27,8 @@ public class SpeedEnemy : Enemy
     public void DoMove(){
         Vector2 pos = transform.position;
 
-        float sin = Mathf.Sin((pos.y*_amplitede)/_frequency);
-        if(_isNegetive)
+        float sin = Mathf.Sin((pos.y*_amplitude)/_frequency);
+        if(_isNegative)
             sin *=-1;
         pos.x = sinCenterY + sin;
 
@@ -40,9 +40,5 @@ public class SpeedEnemy : Enemy
 
         if(transform.position.y < -6)
            Destroy(this.gameObject);
-    }
-
-    public override int GetSpawnChanceWeight(){
-       return _spawnChanceWeight;
     }
 }

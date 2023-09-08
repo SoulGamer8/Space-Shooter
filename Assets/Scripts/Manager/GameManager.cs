@@ -41,7 +41,7 @@ public class GameManager : MonoBehaviour
 
     public void RestartGame()
     {
-        if (_isAllPlayerDied  && _score.MenuOpen())
+        if (_isAllPlayerDied  && _score.IsNewRecordMenuOpen())
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 

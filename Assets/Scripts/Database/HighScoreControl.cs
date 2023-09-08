@@ -1,6 +1,4 @@
-using System;
 using System.Collections;
-using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using TMPro;
 using UnityEngine;
@@ -9,29 +7,23 @@ using UnityEngine.Networking;
 
 public class HighScoreControl : MonoBehaviour
 {
-
     [SerializeField] private TextMeshProUGUI nameResultText;
     [SerializeField] private TextMeshProUGUI scoreResultText;
 
+    private string highScoreURL ="http://localhost/HighScore/display.php";
 
-    private string highscoreURL ="http://localhost/HighScore/display.php";
-
-    private void Start()
-    {
+    private void Start(){
         GetScoreBtn();
     }
 
-
-    private void GetScoreBtn()
-    {
+    private void GetScoreBtn(){
         nameResultText.text = "Player: \n \n";
         scoreResultText.text = "Score: \n \n";
         StartCoroutine(GetScores());
     }
    
-    IEnumerator GetScores()
-    {
-        UnityWebRequest hs_get = UnityWebRequest.Get(highscoreURL);
+    IEnumerator GetScores(){
+        UnityWebRequest hs_get = UnityWebRequest.Get(highScoreURL);
         yield return hs_get.SendWebRequest();
         if (hs_get.error != null)
             Debug.Log("There was an error getting the high score: "
@@ -55,7 +47,4 @@ public class HighScoreControl : MonoBehaviour
             }
         }
     }
-
-   
-    
 }

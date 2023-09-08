@@ -17,16 +17,16 @@ public class PowerUpWeightController : MonoBehaviour
         }
     }
 
-    public void ChangeSpawnChacneWeightAmmo(int weight){
-        _powerUp[0].GetComponent<PowerUp>().ChangeSpawnChacneWeight(weight);
+    public void ChangeSpawnChanceWeightAmmo(int weight){
+        _powerUp[0].GetComponent<PowerUp>().ChangeSpawnChanceWeight(weight);
     }
 
-    public void ChangeSpawnChacneWeightRepair(int weight){
-        _powerUp[1].GetComponent<PowerUp>().ChangeSpawnChacneWeight(weight);
+    public void ChangeSpawnChanceWeightRepair(int weight){
+        _powerUp[1].GetComponent<PowerUp>().ChangeSpawnChanceWeight(weight);
     }
 
-    public void ChangeSpawnChacneWeightRespawn(int weight){
-        _powerUp[2].GetComponent<PowerUp>().ChangeSpawnChacneWeight(weight);
+    public void ChangeSpawnChanceWeightRespawn(int weight){
+        _powerUp[2].GetComponent<PowerUp>().ChangeSpawnChanceWeight(weight);
     }
 
     public void OnNotify(object value)
