@@ -2,7 +2,7 @@ using System.Collections;
 using UnityEngine;
 
 
-public abstract class Enemy : MonoBehaviour, IDamageable, ISpawnChanceWeight
+public abstract class Enemy : MonoBehaviour, IDamageable, ISpawnChanceWeight, IScore
 {
     [Header("Enemy Settings")]
     [SerializeField] protected int _health=3;
@@ -62,5 +62,8 @@ public abstract class Enemy : MonoBehaviour, IDamageable, ISpawnChanceWeight
         spriteRenderer.color = myColor;
     }
 
-
+    public int GetScore()
+    {
+        return _score;
+    }
 }

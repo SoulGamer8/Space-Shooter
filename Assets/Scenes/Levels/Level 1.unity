@@ -11633,7 +11633,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _isStandardLevel: 1
-  _timeHowLongLive: 600
+  _timeHowLongLive: 20
   _isBossLevel: 0
   _boss: {fileID: 0}
   _bossSpawnAudio: []

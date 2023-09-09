@@ -41,4 +41,10 @@ public class SpeedEnemy : Enemy
         if(transform.position.y < -6)
            Destroy(this.gameObject);
     }
+
+
+    protected override void Dead(){
+        base.Dead();
+        transform.GetComponentInParent<SpeedShipController>().SpeedShipDead();
+    }
 }

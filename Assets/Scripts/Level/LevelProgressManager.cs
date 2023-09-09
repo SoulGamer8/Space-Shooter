@@ -14,16 +14,18 @@ public class LevelProgressManager : MonoBehaviour
 
     [SerializeField] private bool _isBossLevel = false;
     
-    [ConditionalHide("_isHasBoss", true)]
+    [ConditionalHide("_isBossLevel", true)]
     [SerializeField] private GameObject _boss;
 
-    [ConditionalHide("_isHasBoss", true)]
+    [ConditionalHide("_isBossLevel", true)]
+    [Header("Audio")]
     [SerializeField] private AudioClip[] _bossSpawnAudio;
+    [SerializeField] private AudioClip _bossSpawnAudioEaster;
 
-    [ConditionalHide("_isHasBoss", true)]
+    [ConditionalHide("_isBossLevel", true)]
     [SerializeField] private AudioClip _alarmSound;
      
-    [ConditionalHide("_isHasBoss", true)]
+    [ConditionalHide("_isBossLevel", true)]
     [SerializeField] private TextMeshProUGUI text;
 
 
@@ -52,7 +54,18 @@ public class LevelProgressManager : MonoBehaviour
     #region Standard Level
     private IEnumerator TimerToCompleteLevelCoroutine(){
         yield return new WaitForSeconds(_timeHowLongLive);
+        SetStarLevelStandard();
         LevelComplete();
+    }
+
+
+    private void SetStarLevelStandard(){
+        SpawnManager spawnManager =  GameObject.FindGameObjectWithTag("SpawnManager").GetComponent<SpawnManager>();
+        int sumSpawnScore = spawnManager.GetSumSpawnScore();
+        int  smuKilledEnemyScore = spawnManager.GetSumKilledEnemyScore();
+        Debug.Log((smuKilledEnemyScore * 100)/sumSpawnScore);
+        if((smuKilledEnemyScore * 100)/sumSpawnScore > 50)
+            Debug.Log((smuKilledEnemyScore * 100)/sumSpawnScore);
     } 
     #endregion
 
@@ -69,6 +82,9 @@ public class LevelProgressManager : MonoBehaviour
     }
 
     private void SpawnBoss(){
+
+        
+        if(_bossSpawnAudioEaster == null)
         float randomSound = Random.Range(0f,1f);
         Debug.Log(randomSound);
         if(randomSound < 1f)
@@ -101,7 +117,7 @@ public class LevelProgressManager : MonoBehaviour
         LevelManager._isWin = true;
         LevelManager._scene = SceneManager.GetActiveScene().name;
 
-        _walletManager.SaveMoney();
+        // _walletManager.SaveMoney();
         Analytics();
         Debug.Log("Level complete");
     }

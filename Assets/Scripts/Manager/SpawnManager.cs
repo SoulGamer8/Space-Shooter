@@ -24,8 +24,18 @@ public class SpawnManager : MonoBehaviour
     [Range(0f,1f)]
     [SerializeField] private float _chanceSpawnCoin;
 
+    [SerializeField] private int _sumSpawnScore= 0 ;
+    [SerializeField]  private int _sumKilledEnemyScore = 0;
 
-    [SerializeField]  private int _sumScore;
+
+    public int GetSumSpawnScore(){
+        return _sumSpawnScore;
+    }
+
+    public int GetSumKilledEnemyScore(){
+        return _sumKilledEnemyScore;
+    }
+
 
     private void Start(){
         if(_isEnemySpawn)
@@ -40,7 +50,11 @@ public class SpawnManager : MonoBehaviour
 
     public void KilledEnemy(int score){
         enemyKilledEvent?.Invoke(score);
-        _sumScore +=score;
+        _sumKilledEnemyScore +=score;
+    }
+
+    private void AddSumScore(int score){
+        _sumSpawnScore += score;
     }
 
     private GameObject ChooseWeightedItem(GameObject[] objects){
@@ -66,13 +80,19 @@ public class SpawnManager : MonoBehaviour
         {
             Vector3 randomPosition = new Vector3(Random.Range(-8, 8), transform.position.y, 0);
             GameObject randomEnemy = ChooseWeightedItem(_enemiesArray);
-            Instantiate(randomEnemy, randomPosition, Quaternion.identity, transform);
+            GameObject enemy =  Instantiate(randomEnemy, randomPosition, Quaternion.identity, transform);
+            
+            AddSumScore(enemy.GetComponent<IScore>().GetScore());
+            SpawnCoin(randomPosition);
 
-            float chance = Random.Range(0f, 1f);
-            if (chance >= _chanceSpawnCoin && _isSpawnCoin)
-                Instantiate(_coinPrefab, randomPosition, Quaternion.identity, transform);
             yield return new WaitForSeconds(_spawnRate);
         }
+    }
+
+    private void SpawnCoin(Vector3 randomPosition){
+        float chance = Random.Range(0f, 1f);
+        if (chance >= _chanceSpawnCoin && _isSpawnCoin)
+                Instantiate(_coinPrefab, randomPosition, Quaternion.identity, transform);
     }
 
     private IEnumerator SpawnPowerUpCoroutine(){
