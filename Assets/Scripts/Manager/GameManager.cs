@@ -11,6 +11,7 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] private GameObject _pauseMenu;
 
+    [SerializeField] private bool _isInfinityLevel=false;
 
 
     [SerializeField] private Score _score;
@@ -33,8 +34,9 @@ public class GameManager : MonoBehaviour
         _gameOverScreen.SetActive(true);
 
         spawnManager.PlayerDeath();
-
-        _score.OpenRecordMenu();
+        
+        if(_isInfinityLevel)
+            _score.OpenRecordMenu();
 
         _isAllPlayerDied = true;
     }

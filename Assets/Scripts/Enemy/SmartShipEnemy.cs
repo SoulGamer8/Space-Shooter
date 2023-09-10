@@ -49,6 +49,7 @@ public class SmartShipEnemy : Enemy
     }
 
     public void DoMove(){
+        _timer+=Time.deltaTime;
         float percent = _timer/duration;
 
         transform.position = Vector3.Lerp(transform.position, _targetPosition, percent*_speed);

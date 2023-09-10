@@ -35,7 +35,7 @@ Transform:
   m_GameObject: {fileID: 719033182039605512}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 2.75, y: -1.14, z: 10}
-  m_LocalScale: {x: 0.4, y: 0.4, z: 0.6}
+  m_LocalScale: {x: 0.6, y: 0.6, z: 0.6}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 719033182705352553}
@@ -149,17 +149,17 @@ MonoBehaviour:
   - {fileID: 1703989031570211199, guid: 5094165a1781ef544b0223b3279dae1f, type: 3}
   - {fileID: 3912512522151601194, guid: 61f2430d8a3fa144bbc5f35549552d7d, type: 3}
   _health: 3
-  _soudTakeDamage: {fileID: 8300000, guid: c469872d54d446c4598da945f04900b7, type: 3}
+  _saudTakeDamage: {fileID: 0}
   _timeWhenPlayerInvulnerability: 1
-  _invicibleAlpa: 0.2
-  _shield: {fileID: 8300780217632172099, guid: 3ae0af117f248854eab04f6010c6aa6c, type: 3}
+  _invincibleAlpha: 0
+  _shieldPrefab: {fileID: 0}
   _shieldHealth: 3
-  _timeWhenActiveShild: 4
+  _timeWhenActiveShield: 0
   _fireOnEngine:
   - {fileID: 7105434114188263568, guid: 60577ad41b86acb40b1ced2d6a3890aa, type: 3}
   - {fileID: 8574169450794588326, guid: 24320022ad1a5794c9b1ff88c0088d33, type: 3}
-  _fireOnEngineInstiate: []
-  _hitSound: {fileID: 0}
+  _fireOnEngineSpawn: []
+  _hitSound: {fileID: 8300000, guid: c469872d54d446c4598da945f04900b7, type: 3}
   _explosionSound: {fileID: 8300000, guid: a885c043fab7e46438bba03ba9dab6bc, type: 3}
 --- !u!114 &719033182039605496
 MonoBehaviour:

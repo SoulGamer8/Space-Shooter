@@ -47,7 +47,7 @@ MonoBehaviour:
   _speedShip: {fileID: 2805275978103990522, guid: d31b6408cabc8874689ecd8f894bea15, type: 3}
   _speedShipList: []
   _maxAmountShip: 5
-  _amplitede: 5
+  _amplitude: 5
   _frequency: 1
-  _isNegetive: 0
+  _isNegative: 0
   _spawnChanceWeight: 10

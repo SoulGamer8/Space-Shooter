@@ -36,8 +36,10 @@ public abstract class Enemy : MonoBehaviour, IDamageable, ISpawnChanceWeight, IS
 
     protected virtual void OnTriggerEnter2D(Collider2D collider){
         IDamageable damageable = collider.GetComponent<IDamageable>();
-        if(collider.tag == "Player")
+        if(collider.tag == "Player"){
             damageable.Damage(1);
+            Damage(1);
+        }
     }
     
     protected virtual void Dead(){

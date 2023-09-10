@@ -1,14 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.PackageManager;
 using UnityEngine;
 using UnityEngine.Events;
 
 public class PlayerHealth : MonoBehaviour,IDamageable
 {
     public UnityEvent UnityAction;
-
-    public event UnityAction PlayerDieEvent;
     public event UnityAction<AudioClip> PlayerDieSound;
 
     #region Health 
@@ -43,7 +40,6 @@ public class PlayerHealth : MonoBehaviour,IDamageable
 
     #region Sound
     [Header("Sound")]
-    [SerializeField] private AudioClip _hitSound;
     [SerializeField] private AudioClip _explosionSound;
     private PlayerSoundManager _playerSoundManager;
     #endregion
@@ -69,10 +65,6 @@ public class PlayerHealth : MonoBehaviour,IDamageable
         _playerSoundManager = GetComponent<PlayerSoundManager>();
         _cameraManager = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CameraManager>();
         playerSoundManager = GetComponent<PlayerSoundManager>();
-
-        _powerUpWeightController = PowerUpWeightController.instance;
-        if(_powerUpWeightController == null)
-              throw new System.NullReferenceException("Power Up Weight Controller not found");
     }
 
     public void Spawn(PlayersController playersController){
@@ -100,7 +92,6 @@ public class PlayerHealth : MonoBehaviour,IDamageable
             StartCoroutine(InvulnerabilityCoroutine());
             if (_currentlyHealth <= 0)
                 Dead();
-            _playerSoundManager.PlaySound(_hitSound);
         }
     }
 
@@ -134,14 +125,13 @@ public class PlayerHealth : MonoBehaviour,IDamageable
     }
 
     public void Dead(){
+        Debug.Log("Test");
         UnityAction?.Invoke();
-        PlayerDieEvent?.Invoke();
+        Debug.Log("Test2");
         PlayerDieSound?.Invoke(_explosionSound);
         _animator.SetTrigger("PlayerDead");
         Destroy(gameObject, 1f);
     }
-
-
 
     #region HealthBar
     private void FindHealthBar(){
