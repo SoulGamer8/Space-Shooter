@@ -125,9 +125,7 @@ public class PlayerHealth : MonoBehaviour,IDamageable
     }
 
     public void Dead(){
-        Debug.Log("Test");
         UnityAction?.Invoke();
-        Debug.Log("Test2");
         PlayerDieSound?.Invoke(_explosionSound);
         _animator.SetTrigger("PlayerDead");
         Destroy(gameObject, 1f);

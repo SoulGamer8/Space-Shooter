@@ -34,6 +34,26 @@ MonoBehaviour:
     m_Localized: Infinity game
     m_Metadata:
       m_Items: []
+  - m_Id: 838135302610944
+    m_Localized: Press "R" to restart
+    m_Metadata:
+      m_Items: []
+  - m_Id: 834915998130176
+    m_Localized: 'Score: {0}'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 838347484061696
+    m_Localized: Game Over
+    m_Metadata:
+      m_Items: []
+  - m_Id: 840754439938048
+    m_Localized: Resume
+    m_Metadata:
+      m_Items: []
+  - m_Id: 841373804421120
+    m_Localized: Exit
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

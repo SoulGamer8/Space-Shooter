@@ -31,6 +31,26 @@ MonoBehaviour:
     m_Key: InfinityGameButtonKey
     m_Metadata:
       m_Items: []
+  - m_Id: 834915998130176
+    m_Key: ScoreKey
+    m_Metadata:
+      m_Items: []
+  - m_Id: 838135302610944
+    m_Key: RestartKey
+    m_Metadata:
+      m_Items: []
+  - m_Id: 838347484061696
+    m_Key: GameOverKey
+    m_Metadata:
+      m_Items: []
+  - m_Id: 840754439938048
+    m_Key: ResumeKey
+    m_Metadata:
+      m_Items: []
+  - m_Id: 841373804421120
+    m_Key: ExitKey
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

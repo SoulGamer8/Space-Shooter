@@ -13,7 +13,7 @@ public class InputManager : MonoBehaviour
     private void OnEnable(){
         _input.Enable();
         _input.UI.Exit.performed += _ => _gameManager.PauseGame();
-        _input.UI.Restart.started += _ => _gameManager.RestartGame();
+        _input.UI.Restart.performed += _ => _gameManager.RestartGame();
     }
 
     private void OnDisable(){

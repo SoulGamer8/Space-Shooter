@@ -1,9 +1,12 @@
 using TMPro;
 using UnityEngine;
+using UnityEngine.Localization;
 
 public class Score : MonoBehaviour
 {
     [SerializeField] private SpawnManager _spawnManager;
+
+    [SerializeField] private LocalizedString localizedStringScore;
     [SerializeField] private TextMeshProUGUI _scoreText;
     [SerializeField] private TextMeshProUGUI _bestScoreText;
 
@@ -11,36 +14,40 @@ public class Score : MonoBehaviour
 
     [SerializeField] private bool _isInfinityLevel= false;
 
-    [SerializeField] private int _score;
-    [SerializeField] private int _bestScore= 0;
+    private int _score;
+    private int _bestScore= 0;
 
 
-    private void OnEnable()
-    {
+
+
+    private void OnEnable(){
         _spawnManager.enemyKilledEvent += AddScore;
+
+        localizedStringScore.Arguments = new object[] {_score};
+        localizedStringScore.StringChanged += UpdateUI;
     }
 
-    private void OnDisable()
-    {
+    private void OnDisable(){
         _spawnManager.enemyKilledEvent -= AddScore;
+        localizedStringScore.StringChanged -= UpdateUI;
     }
 
     private void Start(){
         _scoreText = this.GetComponent<TextMeshProUGUI>();
         LoadNumber();
-        UpdateUI();
         if(_isInfinityLevel)
             _bestScoreText.text = "Best Score: " + _bestScore.ToString();
     }
 
-    private void UpdateUI(){
-        _scoreText.text ="Score: " +  _score.ToString();
+    private void UpdateUI(string value){
+        _scoreText.text =value;
    
     }
 
     private void AddScore(int score){
         _score += score;
-        UpdateUI();
+        localizedStringScore.Arguments[0] = _score;
+        localizedStringScore.RefreshString();
     }
 
     public void OpenRecordMenu(){
@@ -52,6 +59,8 @@ public class Score : MonoBehaviour
     }
 
     public bool IsNewRecordMenuOpen(){
+        if(!_isInfinityLevel)
+            return false;
         return !_newBestScoreMenu.gameObject.activeSelf;
     }
 
@@ -61,6 +70,5 @@ public class Score : MonoBehaviour
 
     public void LoadNumber(){
         _bestScore = PlayerPrefs.GetInt("bestScore");
-        UpdateUI();
     }
 }

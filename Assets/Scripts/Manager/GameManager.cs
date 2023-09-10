@@ -1,8 +1,10 @@
+using System.ComponentModel;
 using Unity.Services.Analytics;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using Unity.Services.Core;
 using System.Collections.Generic;
+using System.Collections;
 
 public class GameManager : MonoBehaviour
 {
@@ -22,8 +24,7 @@ public class GameManager : MonoBehaviour
         await UnityServices.InitializeAsync();
     }
 
-    public void AllPlayerDead()
-    {
+    public void AllPlayerDead(){
         Dictionary<string, object> parameters = new Dictionary<string, object>()
         {
             { "levelNumber", SceneManager.GetActiveScene().name},
@@ -41,30 +42,38 @@ public class GameManager : MonoBehaviour
         _isAllPlayerDied = true;
     }
 
-    public void RestartGame()
-    {
-        if (_isAllPlayerDied  && _score.IsNewRecordMenuOpen())
-            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    public void RestartGame(){
+        if (_isAllPlayerDied  && (_score.IsNewRecordMenuOpen()|| !_isInfinityLevel))
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);  
     }
 
-    public void PauseGame()
-    {
+    #region Pause Menu
+    public void PauseGame(){
+        if(_pauseMenu.activeSelf){
+            ResumeGame();
+            return;
+        }
         _pauseMenu.SetActive(true);
         _pauseMenu.GetComponent<Animator>().SetTrigger("Activate Pause menu");
         Time.timeScale = 0f;
     }
 
-    public void ResumeGame()
-    {
-        _pauseMenu.SetActive(false);
-        Time.timeScale = 1f;
+    public void ResumeGame(){
+        StartCoroutine(ResumeGameCoroutine());
     }
 
-    public void QuitGame()
-    {
+    private IEnumerator ResumeGameCoroutine(){
+        _pauseMenu.GetComponent<Animator>().SetTrigger("Disable Pause Menu");
+        yield return new WaitForSecondsRealtime(_pauseMenu.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).length);
+        Time.timeScale = 1f;
+        _pauseMenu.SetActive(false);
+    }
+
+    public void QuitGame(){
         #if UNITY_EDITOR
         UnityEditor.EditorApplication.isPlaying = false;
         #endif
         Application.Quit();
     }
+    #endregion
 }
