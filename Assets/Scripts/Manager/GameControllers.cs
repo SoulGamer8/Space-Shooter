@@ -4,23 +4,22 @@ using UnityEngine;
 
 public class GameControllers : MonoBehaviour
 {
-    private bool connected = false;
+    private bool _isControllerConnected = false;
 
-    IEnumerator CheckForControllers()
-    {
+    IEnumerator CheckForControllers(){
         while (true)
         {
-            var controllers = Input.GetJoystickNames();
+            string[] controllers = Input.GetJoystickNames();
 
-            if (!connected && controllers.Length > 0)
+            if (!_isControllerConnected && controllers.Length > 0)
             {
-                connected = true;
+                _isControllerConnected = true;
                 Debug.Log("Connected");
 
             }
-            else if (connected && controllers.Length == 0)
+            else if (_isControllerConnected && controllers.Length == 0)
             {
-                connected = false;
+                _isControllerConnected = false;
                 Debug.Log("Disconnected");
             }
 

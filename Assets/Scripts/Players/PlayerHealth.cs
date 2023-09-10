@@ -5,7 +5,7 @@ using UnityEngine.Events;
 
 public class PlayerHealth : MonoBehaviour,IDamageable
 {
-    public UnityEvent UnityAction;
+    public UnityEvent PlayerDead;
     public event UnityAction<AudioClip> PlayerDieSound;
 
     #region Health 
@@ -69,7 +69,7 @@ public class PlayerHealth : MonoBehaviour,IDamageable
 
     public void Spawn(PlayersController playersController){
         _playersController = playersController;
-        UnityAction.AddListener(playersController.PlayerDead);
+        PlayerDead.AddListener(playersController.PlayerDead);
     }
 
     public void Damage(int damage){
@@ -125,7 +125,7 @@ public class PlayerHealth : MonoBehaviour,IDamageable
     }
 
     public void Dead(){
-        UnityAction?.Invoke();
+        PlayerDead?.Invoke();
         PlayerDieSound?.Invoke(_explosionSound);
         _animator.SetTrigger("PlayerDead");
         Destroy(gameObject, 1f);
@@ -162,7 +162,6 @@ public class PlayerHealth : MonoBehaviour,IDamageable
             _powerUpWeightController.ChangeSpawnChanceWeightRepair(-10);
         }
     }
-
 
     public void ActivateShied(){
         _currentlyShieldHealth = _shieldHealth;

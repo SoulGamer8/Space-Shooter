@@ -19,6 +19,7 @@ public class KamikazeEnemy : Enemy,IMoveable
         base.Start();
 
         _player =  GameObject.FindGameObjectWithTag("Player");
+        SetTarget();
     }
 
     private void Update() {
@@ -51,16 +52,11 @@ public class KamikazeEnemy : Enemy,IMoveable
         _myState = state;
     }
 
-    public void DoMove()
-    {
-        startTime += Time.deltaTime;
-        float percent = startTime/duration;
+    public void DoMove(){
+        transform.position = Vector3.Lerp(transform.position, _targetPosition, Time.deltaTime*_speed);
 
-        transform.position = Vector3.Lerp(transform.position, _targetPosition, percent*_speed);
-
-        if(Vector3.Distance(transform.position, _targetPosition)<0.01f){
+        if(Vector3.Distance(transform.position, _targetPosition)<0.01f)
             ChangeState(MovingState.Waiting);
-        }
     }
 
     private void DoRotate(){

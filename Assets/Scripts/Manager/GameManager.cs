@@ -10,7 +10,6 @@ public class GameManager : MonoBehaviour
 {
     [SerializeField] private GameObject _gameOverScreen;
     [SerializeField] private SpawnManager spawnManager;
-
     [SerializeField] private GameObject _pauseMenu;
 
     [SerializeField] private bool _isInfinityLevel=false;

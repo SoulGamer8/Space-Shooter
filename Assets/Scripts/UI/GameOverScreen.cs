@@ -15,13 +15,13 @@ public class GameOverScreen : MonoBehaviour
     private IEnumerator GameOverText()
     {
         _text = transform.GetChild(1).GetComponent<TextMeshProUGUI>();
-        Color mycolor = _text.color;
+        Color myColor = _text.color;
         Color newColor = new Color(1,1,1,0);
         while (true)
         {
             _text.color = newColor;
             yield return new WaitForSeconds(0.5f);
-            _text.color = mycolor;
+            _text.color = myColor;
             yield return new WaitForSeconds(0.5f);
         }
     }

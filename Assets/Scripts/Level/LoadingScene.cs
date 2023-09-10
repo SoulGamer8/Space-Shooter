@@ -10,18 +10,15 @@ public class LoadingScene : MonoBehaviour
     [SerializeField] private Slider _slider;
 
 
-    public void LoadScene(int sceneId)
-    {
+    public void LoadScene(int sceneId){
         StartCoroutine(LoadSceneAsync(sceneId));
     }
 
-    IEnumerator LoadSceneAsync(int sceneId)
-    {
+    IEnumerator LoadSceneAsync(int sceneId){
        AsyncOperation scene = SceneManager.LoadSceneAsync(sceneId);
         _loadingScene.SetActive(true);
         _slider = _loadingScene.transform.GetChild(0).gameObject.GetComponent<Slider>();
-        while (!scene.isDone)
-        {
+        while (!scene.isDone){
             float progressValue = Mathf.Clamp01(scene.progress / 0.9f);
             _slider.value = progressValue;
 

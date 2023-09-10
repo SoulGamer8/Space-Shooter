@@ -43,7 +43,7 @@ public class Shoot : MonoBehaviour
     public void FireBullet(InputAction.CallbackContext value){
        
         if (value.started)
-            fire = StartCoroutine(Shooting());
+            fire = StartCoroutine(ShootingCoroutine());
         if (value.canceled)
             StopCoroutine(fire);
 
@@ -51,7 +51,7 @@ public class Shoot : MonoBehaviour
 
     public void TakeTripleShoot(){
         _isTripleShootActive = true;
-        StartCoroutine(ActivePowerUp());
+        StartCoroutine(ActivePowerUpCoroutine());
     }
 
     public void TakeAmmo(){
@@ -62,7 +62,7 @@ public class Shoot : MonoBehaviour
             Instantiate(_rocket, new Vector3(transform.position.x - 0.2f, transform.position.y + 1.0f, 0), Quaternion.identity);
     }
 
-    private IEnumerator ActivePowerUp(){
+    private IEnumerator ActivePowerUpCoroutine(){
         yield return new WaitForSeconds(5.0f);
         _isTripleShootActive = false;
 
@@ -76,7 +76,7 @@ public class Shoot : MonoBehaviour
         }
     }
 
-    private IEnumerator Shooting(){
+    private IEnumerator ShootingCoroutine(){
         while (true) 
         {
             if (_isTripleShootActive)

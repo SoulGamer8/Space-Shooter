@@ -20,7 +20,6 @@ namespace SpaceShooter
        }
 
         private IEnumerator SetLocale(int localeID){
-            Debug.Log(localeID);
             _isActive = true;
             yield return LocalizationSettings.InitializationOperation;
             LocalizationSettings.SelectedLocale = LocalizationSettings.AvailableLocales.Locales[localeID];

@@ -51,6 +51,10 @@ MonoBehaviour:
     m_Key: ExitKey
     m_Metadata:
       m_Items: []
+  - m_Id: 944264271650816
+    m_Key: StartKey
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

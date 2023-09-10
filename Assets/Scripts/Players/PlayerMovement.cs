@@ -72,7 +72,7 @@ public class PlayerMovement : MonoBehaviour
 
     
     public void LevelComplete(){
-       StartCoroutine(WaitBossDied());
+       StartCoroutine(WaitBossDiedCoroutine());
     }
 
     public void OnMovevmentPerformed(InputAction.CallbackContext value){
@@ -95,12 +95,12 @@ public class PlayerMovement : MonoBehaviour
 
     #region PowerUp
     public void TakeSpeedPowerUp(){
-        StartCoroutine(SpeedPowerUp());
+        StartCoroutine(SpeedPowerUpCoroutine());
         _isSpeedPowerUpActive = true;
     }
 
 
-    private IEnumerator SpeedPowerUp(){
+    private IEnumerator SpeedPowerUpCoroutine(){
         yield return new WaitForSeconds(_timeWhenActiveSpeedPowerUp);
 
         _isSpeedPowerUpActive = false;
@@ -108,7 +108,7 @@ public class PlayerMovement : MonoBehaviour
     #endregion
 
     
-    private IEnumerator WaitBossDied(){
+    private IEnumerator WaitBossDiedCoroutine(){
         yield return new WaitForSeconds(2);
          _myState = MovingState.Exit;
 

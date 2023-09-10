@@ -2848,9 +2848,17 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1291573944}
     m_Modifications:
+    - target: {fileID: 4222123455471665822, guid: 09694df979642ea449ce4ac09c66bc08, type: 3}
+      propertyPath: m_Value
+      value: 0.03
+      objectReference: {fileID: 0}
     - target: {fileID: 4222123455608511706, guid: 09694df979642ea449ce4ac09c66bc08, type: 3}
       propertyPath: m_Name
       value: LoadingMenu
+      objectReference: {fileID: 0}
+    - target: {fileID: 4222123455608511706, guid: 09694df979642ea449ce4ac09c66bc08, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4222123455608511707, guid: 09694df979642ea449ce4ac09c66bc08, type: 3}
       propertyPath: m_Pivot.x
@@ -2935,6 +2943,10 @@ PrefabInstance:
     - target: {fileID: 4222123455608511707, guid: 09694df979642ea449ce4ac09c66bc08, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4222123456525199645, guid: 09694df979642ea449ce4ac09c66bc08, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8391391828755739581, guid: 09694df979642ea449ce4ac09c66bc08, type: 3}
       propertyPath: m_AnchoredPosition.x

@@ -44,7 +44,6 @@ public class TripleShootEnemy : Enemy
     }
 
     private void StartMoving(){
-        
         transform.position = Vector3.MoveTowards(transform.position, _targetPosition, 0.01f);
 
         if(Vector3.Distance(transform.position, _targetPosition) < 0.1f){
@@ -54,7 +53,6 @@ public class TripleShootEnemy : Enemy
     }
 
     public void DoMove(){
-
         transform.position = Vector3.Lerp(transform.position, _patriliny, 0.3f*_speed * Time.deltaTime);
         if(Vector3.Distance(transform.position, _patriliny) < 0.1f)
             _patriliny.x *=-1;
@@ -64,21 +62,6 @@ public class TripleShootEnemy : Enemy
         StartCoroutine(ShootCoroutine());
     }
 
-    protected override void OnTriggerEnter2D(Collider2D collider){
-        IDamageable damageable = collider.GetComponent<IDamageable>();
-        if(collider.tag == "Player")
-            damageable.Damage(1);
-    }
-
-
-    protected override void Dead(){
-        StopAllCoroutines();
-        _speed = 0;
-
-
-        Instantiate(_explosion);
-        Destroy(gameObject);
-    }
 
     public override int GetSpawnChanceWeight(){
        return _spawnChanceWeight;
@@ -90,7 +73,7 @@ public class TripleShootEnemy : Enemy
 
             for(int angle = -_volleyLaserSpread;angle<= _volleyLaserSpread;angle += angelBetweenLaser){
                 Instantiate(_bullet,transform.position,Quaternion.Euler(0,0,angle));  
-        }
+            }
 
             yield return new WaitForSeconds(_fireRate);
         }

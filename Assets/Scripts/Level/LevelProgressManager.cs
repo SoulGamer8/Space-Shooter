@@ -21,6 +21,7 @@ public class LevelProgressManager : MonoBehaviour
     [ConditionalHide("_isBossLevel", true)]
     [Header("Audio")]
     [SerializeField] private AudioClip _bossSpawnAudio;
+    [ConditionalHide("_isBossLevel", true)]
     [SerializeField] private AudioClip _bossSpawnAudioEaster;
 
     [ConditionalHide("_isBossLevel", true)]
@@ -33,20 +34,29 @@ public class LevelProgressManager : MonoBehaviour
     [Header("Level Complete")]
     [SerializeField] private GameObject _completeLevelMenu;
     [SerializeField] private StarsController _starsController;
-    [SerializeField] private int _starAmount = 1;
+    [SerializeField] private int _starAmount = 3;
+
+
 
     private AudioSource _audioSource;
     private bool _isPlayerTakeDamage =false;
+    private Coroutine _timerToCompleteLevelCoroutine;
+
 
     private void Start(){
         _audioSource =GetComponent<AudioSource>();
         if(_isStandardLevel)
-            StartCoroutine(TimerToCompleteLevelCoroutine());
+            _timerToCompleteLevelCoroutine = StartCoroutine(TimerToCompleteLevelCoroutine());
         if(_isBossLevel)
             StartBossFight();
     }
 
     #region Standard Level
+    
+    public void AllPlayerDead(){
+        StopCoroutine(_timerToCompleteLevelCoroutine);
+    }
+
     private IEnumerator TimerToCompleteLevelCoroutine(){
         yield return new WaitForSeconds(_timeHowLongLive);
         SetStarLevelStandard();
@@ -60,10 +70,10 @@ public class LevelProgressManager : MonoBehaviour
         Debug.Log((smuKilledEnemyScore * 100)/sumSpawnScore);
         if(sumSpawnScore == 0)
             return;
-        if((smuKilledEnemyScore * 100)/sumSpawnScore > _percentForSecondStar)
-            _starAmount++;
-         if((smuKilledEnemyScore * 100)/sumSpawnScore > _percentForThirdStar)
-            _starAmount++;
+        if((smuKilledEnemyScore * 100)/sumSpawnScore < _percentForSecondStar)
+            _starAmount--;
+         if((smuKilledEnemyScore * 100)/sumSpawnScore < _percentForThirdStar)
+            _starAmount--;
     } 
     #endregion
 
@@ -106,13 +116,13 @@ public class LevelProgressManager : MonoBehaviour
     }
     #endregion
 
+
     public void LevelComplete(){
         Debug.Log(_starAmount);
         _completeLevelMenu.SetActive(true);
         _starsController.SetStar(_starAmount);
         
-        // LevelManager._isWin = true;
-        // LevelManager._scene = SceneManager.GetActiveScene().name;
+        ControllerLevel._scene = SceneManager.GetActiveScene().name;
 
         Analytics();
         Debug.Log("Level complete");
