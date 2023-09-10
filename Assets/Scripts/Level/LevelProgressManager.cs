@@ -10,7 +10,8 @@ public class LevelProgressManager : MonoBehaviour
 
     [ConditionalHide("_isStandardLevel", true)]
     [SerializeField] private float _timeHowLongLive;
-
+    [SerializeField] private int _percentForSecondStar;
+    [SerializeField] private int _percentForThirdStar;
 
     [SerializeField] private bool _isBossLevel = false;
     
@@ -19,7 +20,7 @@ public class LevelProgressManager : MonoBehaviour
 
     [ConditionalHide("_isBossLevel", true)]
     [Header("Audio")]
-    [SerializeField] private AudioClip[] _bossSpawnAudio;
+    [SerializeField] private AudioClip _bossSpawnAudio;
     [SerializeField] private AudioClip _bossSpawnAudioEaster;
 
     [ConditionalHide("_isBossLevel", true)]
@@ -32,23 +33,17 @@ public class LevelProgressManager : MonoBehaviour
     [Header("Level Complete")]
     [SerializeField] private GameObject _completeLevelMenu;
     [SerializeField] private StarsController _starsController;
-    private int _starAmount = 3;
+    [SerializeField] private int _starAmount = 1;
 
-    private WalletManager _walletManager;
     private AudioSource _audioSource;
     private bool _isPlayerTakeDamage =false;
 
     private void Start(){
-        _walletManager = WalletManager.instance;
         _audioSource =GetComponent<AudioSource>();
         if(_isStandardLevel)
             StartCoroutine(TimerToCompleteLevelCoroutine());
         if(_isBossLevel)
             StartBossFight();
-    }
-
-    public void SetStar(){
-        _starsController.SetStar(_starAmount);
     }
 
     #region Standard Level
@@ -58,14 +53,17 @@ public class LevelProgressManager : MonoBehaviour
         LevelComplete();
     }
 
-
     private void SetStarLevelStandard(){
         SpawnManager spawnManager =  GameObject.FindGameObjectWithTag("SpawnManager").GetComponent<SpawnManager>();
         int sumSpawnScore = spawnManager.GetSumSpawnScore();
         int  smuKilledEnemyScore = spawnManager.GetSumKilledEnemyScore();
         Debug.Log((smuKilledEnemyScore * 100)/sumSpawnScore);
-        if((smuKilledEnemyScore * 100)/sumSpawnScore > 50)
-            Debug.Log((smuKilledEnemyScore * 100)/sumSpawnScore);
+        if(sumSpawnScore == 0)
+            return;
+        if((smuKilledEnemyScore * 100)/sumSpawnScore > _percentForSecondStar)
+            _starAmount++;
+         if((smuKilledEnemyScore * 100)/sumSpawnScore > _percentForThirdStar)
+            _starAmount++;
     } 
     #endregion
 
@@ -78,25 +76,22 @@ public class LevelProgressManager : MonoBehaviour
         _audioSource.PlayOneShot(_alarmSound);
         text.gameObject.SetActive(true);
         yield return new WaitForSeconds(2);
-        SpawnBoss();
+        PlayAudioSpawnBoss();
     }
 
-    private void SpawnBoss(){
+    private void PlayAudioSpawnBoss(){
+        AudioClip audioSpawnBoss = _bossSpawnAudio;
 
-        
-        if(_bossSpawnAudioEaster == null)
         float randomSound = Random.Range(0f,1f);
-        Debug.Log(randomSound);
         if(randomSound < 1f)
-            _audioSource.PlayOneShot(_bossSpawnAudio[0]);
-        else
-            _audioSource.PlayOneShot(_bossSpawnAudio[1]);
-        
-        StartCoroutine(SpawnBossCoroutine());
+            _audioSource.PlayOneShot(_bossSpawnAudioEaster);
+
+        _audioSource.PlayOneShot(audioSpawnBoss);
+        StartCoroutine(SpawnBossCoroutine(audioSpawnBoss));
     }
 
-    private IEnumerator SpawnBossCoroutine(){
-        yield return new WaitForSeconds(_bossSpawnAudio[0].length-1);
+    private IEnumerator SpawnBossCoroutine(AudioClip audioSpawnBoss){
+        yield return new WaitForSeconds(audioSpawnBoss.length-1);
         Instantiate(_boss);
         text.gameObject.SetActive(false);
         StartCoroutine(TimeBossFightCoroutine());
@@ -106,18 +101,19 @@ public class LevelProgressManager : MonoBehaviour
 
     private IEnumerator TimeBossFightCoroutine(){
         yield return new WaitForSeconds(120);
+        Debug.Log("test");
         _starAmount --;
     }
     #endregion
 
     public void LevelComplete(){
+        Debug.Log(_starAmount);
         _completeLevelMenu.SetActive(true);
-        SetStar();
+        _starsController.SetStar(_starAmount);
         
-        LevelManager._isWin = true;
-        LevelManager._scene = SceneManager.GetActiveScene().name;
+        // LevelManager._isWin = true;
+        // LevelManager._scene = SceneManager.GetActiveScene().name;
 
-        // _walletManager.SaveMoney();
         Analytics();
         Debug.Log("Level complete");
     }
@@ -133,7 +129,7 @@ public class LevelProgressManager : MonoBehaviour
     }
 
     public void PlayerTakeDamage(){
-        if(!_isPlayerTakeDamage){
+        if(!_isPlayerTakeDamage && _isBossLevel){
             _isPlayerTakeDamage = true;
             _starAmount--;
         }

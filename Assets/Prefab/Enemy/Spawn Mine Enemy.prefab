@@ -103,7 +103,7 @@ MonoBehaviour:
   _speed: 4
   _damage: 1
   _score: 5
-  _spawnChanceWeight: 8
+  _spawnChanceWeight: 2
   _explosion: {fileID: 6054925638629271669, guid: 9af9c30a9ac037943b082dd24ec5280f, type: 3}
   _minePrefab: {fileID: 4910969230209893057, guid: e68e0ffdceea1434181f89586affcdd9, type: 3}
   _timeSpawn: 1

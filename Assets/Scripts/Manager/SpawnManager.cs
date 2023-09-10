@@ -46,6 +46,9 @@ public class SpawnManager : MonoBehaviour
 
     public void PlayerDeath(){
         StopAllCoroutines();
+        for(int i=0;i<transform.childCount;i++){
+            Destroy(transform.GetChild(i).gameObject);
+        }
     }
 
     public void KilledEnemy(int score){

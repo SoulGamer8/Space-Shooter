@@ -78,7 +78,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 3154912113cbb4a498df6f571c74e18c, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 706de2889f9a14d4cba6e3f321b753a8, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -108,8 +108,6 @@ MonoBehaviour:
   _spawnChanceWeight: 20
   _explosion: {fileID: 6054925638629271669, guid: 9af9c30a9ac037943b082dd24ec5280f, type: 3}
   _bullet: {fileID: 4978602119496610123, guid: 549d2344a1ab50740bca83a07d31901b, type: 3}
-  _bulletDamage: 0
-  _bulletSpeed: 0
   _fireRate: 1.5
 --- !u!95 &3175444527686205786
 Animator:

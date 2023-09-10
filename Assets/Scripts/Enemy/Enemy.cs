@@ -29,7 +29,7 @@ public abstract class Enemy : MonoBehaviour, IDamageable, ISpawnChanceWeight, IS
 
     public virtual void Damage(int damage){
         _health -= damage;
-        if(_health < 0)
+        if(_health <= 0)
             Dead();
         StartCoroutine(TakeDamageCoroutine());
     }

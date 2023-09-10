@@ -15,7 +15,7 @@ public class PlayerHealth : MonoBehaviour,IDamageable
     [Header("Health")]
     [SerializeField]private GameObject[] _healthBarArray;
     [SerializeField] private int _health = 3;
-    [SerializeField] private AudioClip _soudTakeDamage;
+    [SerializeField] private AudioClip _saudTakeDamage;
 
     private int _currentlyHealth;
     private HealthBar _healthBar;
@@ -39,7 +39,7 @@ public class PlayerHealth : MonoBehaviour,IDamageable
 
     [Header("VFX")]
     [SerializeField] private GameObject[] _fireOnEngine;
-    [SerializeField] private List<GameObject> _fireOnEngineInstiate;
+    [SerializeField] private List<GameObject> _fireOnEngineSpawn;
 
     #region Sound
     [Header("Sound")]
@@ -96,7 +96,7 @@ public class PlayerHealth : MonoBehaviour,IDamageable
             UpdateHealthBar();
             SpawnFireOnEngine();
             _cameraManager.CameraShake(_timeWhenPlayerInvulnerability,0.1f,true);
-            playerSoundManager.PlaySound(_soudTakeDamage);
+            playerSoundManager.PlaySound(_saudTakeDamage);
             StartCoroutine(InvulnerabilityCoroutine());
             if (_currentlyHealth <= 0)
                 Dead();
@@ -129,7 +129,7 @@ public class PlayerHealth : MonoBehaviour,IDamageable
         if (_currentlyHealth - 1 >= 0)
         {
             GameObject fire = Instantiate(_fireOnEngine[_fireOnEngine.Length - _currentlyHealth], transform);
-            _fireOnEngineInstiate.Add(fire);
+            _fireOnEngineSpawn.Add(fire);
         }
     }
 
@@ -168,8 +168,8 @@ public class PlayerHealth : MonoBehaviour,IDamageable
         if (_currentlyHealth != _health)
         {
             _currentlyHealth++;
-            Destroy(_fireOnEngineInstiate[_fireOnEngineInstiate.Count - 1]);
-            _fireOnEngineInstiate.RemoveAt(_fireOnEngineInstiate.Count-1);
+            Destroy(_fireOnEngineSpawn[_fireOnEngineSpawn.Count - 1]);
+            _fireOnEngineSpawn.RemoveAt(_fireOnEngineSpawn.Count-1);
             UpdateHealthBar();
             _powerUpWeightController.ChangeSpawnChanceWeightRepair(-10);
         }
@@ -191,9 +191,8 @@ public class PlayerHealth : MonoBehaviour,IDamageable
     }
     
 
-    public void RespawnPlayer(){
-        _playersController.RespawnPlayer();
-
+    public void ReSpawnPlayer(){
+        _playersController.ReSpawnPlayer();
     }
     #endregion
 

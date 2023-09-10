@@ -28,7 +28,7 @@ public class PlayersController : MonoBehaviour
 
 
 
-    public void RespawnPlayer()
+    public void ReSpawnPlayer()
     {
         if (_playerAlive < 2)
         {

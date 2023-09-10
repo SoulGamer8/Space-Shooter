@@ -12,6 +12,7 @@ public class StarsController : MonoBehaviour
     private int _currentStar;
 
     public void SetStar(int star){
+        Debug.Log(star);
        _myStar = star;
     }
 

@@ -46,7 +46,7 @@ public class PowerUp : MonoBehaviour,ISpawnChanceWeight
                     collision.GetComponent<PlayerHealth>().ActivateShied();
                     break;
                 case 3:
-                    collision.GetComponent<PlayerHealth>().RespawnPlayer();
+                    collision.GetComponent<PlayerHealth>().ReSpawnPlayer();
                     break;
                 case 4:
                     collision.GetComponent<PlayerHealth>().TakeHeal(); 
