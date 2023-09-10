@@ -16,21 +16,20 @@ public class LoadingLevel : MonoBehaviour
     [SerializeField] private GameObject _menu;
 
     private Transform _startLevel;
+    private Texture _imageLock;
 
 
+    private void Start(){
+        _imageLock = GetComponent<RawImage>().texture;
 
-    private void Start()
-    {
-        int test = PlayerPrefs.GetInt(this.gameObject.name);
-        if (test== 1)
+        int isOpen = PlayerPrefs.GetInt(this.gameObject.name);
+        if (isOpen== 1)
             _isOpen = true;
         if (_isOpen)
-            ChangeImage();
-
+            ChangeImage(_openLevelTexture);
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
+    private void OnTriggerEnter2D(Collider2D collision){
         if (_isOpen)
             OpenMenu();
     }
@@ -48,15 +47,21 @@ public class LoadingLevel : MonoBehaviour
     }
 
 
-    private void ChangeImage()
+    private void ChangeImage(Texture image)
     {
-        this.gameObject.GetComponent<RawImage>().texture = _openLevelTexture;
+        this.gameObject.GetComponent<RawImage>().texture = image;
     }
 
     public void OpenLevel()
     {
         _isOpen = true;
-        ChangeImage();
+        ChangeImage(_openLevelTexture);
+        PlayerPrefs.SetInt(this.gameObject.name, 1);
+    }
+
+    public void CloseLevel(){
+        _isOpen = false;
+        ChangeImage(_imageLock);
         PlayerPrefs.SetInt(this.gameObject.name, 1);
     }
 }

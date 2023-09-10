@@ -456,7 +456,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8706921636322224463, guid: 0a047bc0c3428fd47921c108f562b100, type: 3}
       propertyPath: m_RootOrder
-      value: 4
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 8706921636322224463, guid: 0a047bc0c3428fd47921c108f562b100, type: 3}
       propertyPath: m_LocalPosition.x
@@ -6228,7 +6228,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 6927475856937220953, guid: eebb0c5fa7206fc468f0523b34f43e41, type: 3}
       propertyPath: m_RootOrder
-      value: 5
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 6927475856937220953, guid: eebb0c5fa7206fc468f0523b34f43e41, type: 3}
       propertyPath: m_LocalPosition.x
@@ -11632,15 +11632,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a21f5b08e14dbb44abcddf4e7565eb3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _isStandardLevel: 1
+  _isStandardLevel: 0
   _timeHowLongLive: 20
+  _percentForSecondStar: 20
+  _percentForThirdStar: 50
   _isBossLevel: 0
   _boss: {fileID: 0}
-  _bossSpawnAudio: []
+  _bossSpawnAudio: {fileID: 0}
+  _bossSpawnAudioEaster: {fileID: 0}
   _alarmSound: {fileID: 0}
   text: {fileID: 0}
   _completeLevelMenu: {fileID: 2059729755}
   _starsController: {fileID: 1690528366}
+  _starAmount: 1
 --- !u!4 &1931776585
 Transform:
   m_ObjectHideFlags: 0
