@@ -71,6 +71,10 @@ MonoBehaviour:
     m_Key: DoneKey
     m_Metadata:
       m_Items: []
+  - m_Id: 1521444273807360
+    m_Key: "\u0406"
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

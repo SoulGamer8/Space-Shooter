@@ -16,7 +16,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &5314617143605107288
 Transform:
   m_ObjectHideFlags: 0
@@ -188,10 +188,8 @@ MonoBehaviour:
   _damage: 1
   _score: 1
   _spawnChanceWeight: 0
-  _explosionSound: {fileID: 0}
-  _targetPosotion: {x: -8.56, y: 0.2, z: 0}
-  _angel: 123.9
-  _beam: {fileID: 0}
+  _explosion: {fileID: 6054925638629271669, guid: 9af9c30a9ac037943b082dd24ec5280f, type: 3}
+  _beam: {fileID: 1825097683416373249}
 --- !u!61 &7000078754586357797
 BoxCollider2D:
   m_ObjectHideFlags: 0

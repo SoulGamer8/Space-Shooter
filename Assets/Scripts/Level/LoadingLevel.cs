@@ -12,18 +12,25 @@ public class LoadingLevel : MonoBehaviour
 
     [SerializeField] private GameObject _menu;
 
+
+    [SerializeField] private GameObject[] _stars;
+    [SerializeField] private Sprite _star;
+    public static int _maxStars;
+
+
     private Transform _startLevel;
     private Texture _imageLock;
 
-
     private void Start(){
         _imageLock = GetComponent<RawImage>().texture;
-
+        _maxStars = PlayerPrefs.GetInt(this.gameObject.name + "Stars");
         int isOpen = PlayerPrefs.GetInt(this.gameObject.name);
         if (isOpen== 1)
             _isOpen = true;
         if (_isOpen)
             ChangeImage(_openLevelTexture);
+
+        GetStars();
     }
 
     private void OnTriggerEnter2D(Collider2D collision){
@@ -40,7 +47,7 @@ public class LoadingLevel : MonoBehaviour
 
     private void OpenMenu(){
         _menu.SetActive(true);
-        _startLevel = _menu.transform.GetChild(0);
+        _startLevel = _menu.transform.GetChild(1);
         _startLevel.GetComponent<Button>().onClick.AddListener(() => _loadingScene.LoadScene(_LevelID));
     }
 
@@ -61,4 +68,22 @@ public class LoadingLevel : MonoBehaviour
         ChangeImage(_imageLock);
         PlayerPrefs.SetInt(this.gameObject.name, 0);
     }
+
+
+    #region Stars
+    private void GetStars(){
+        for(int i = 0; i < _menu.transform.GetChild(0).childCount; i++){
+            _stars[i] = _menu.transform.GetChild(0).GetChild(i).gameObject;
+            Debug.Log(_stars[i]);
+        }
+        OpenStars();
+    }
+
+    private void OpenStars(){
+        for(int i = 0; i < _maxStars; i++){
+            _stars[i].GetComponent<SpriteRenderer>().sprite = _star;
+        }
+    }
+
+    #endregion
 }

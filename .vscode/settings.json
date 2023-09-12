@@ -59,6 +59,7 @@
     },
     "omnisharp.enableRoslynAnalyzers": true,
     "cSpell.words": [
+        "rigiddody",
         "Traking"
     ]
 }

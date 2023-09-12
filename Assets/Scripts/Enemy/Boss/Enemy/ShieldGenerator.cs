@@ -34,16 +34,8 @@ namespace Boss{
         public void DoMove(){
 
             transform.position = Vector3.MoveTowards(transform.position,_targetPosition,_speed*Time.deltaTime);
-            if(Vector3.Distance(transform.position,_targetPosition)< 0.1f){
-
+            if(Vector3.Distance(transform.position,_targetPosition)< 0.1f)
                 transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.Euler(0,0,transform.rotation.y - _angel/1.5f),0.1f);
-
-                // transform.LookAt(_bossTransform.position-transform.position,Vector3.forward);
-
-
-                // var targetRotation = Quaternion.LookRotation(_bossTransform.position - transform.position);
-                // transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, RotationSpeed * Time.deltaTime);
-            }
             if(transform.rotation ==  Quaternion.Euler(0,0,transform.rotation.y - _angel/1.5f))
                 Shoot();
 
@@ -52,5 +44,10 @@ namespace Boss{
         public void Shoot(){
             _beam.SetActive(true);
         }
+
+        protected override void Dead(){
+            GetComponentInParent<BossController>().ShieldGeneratorDead();
+            base.Dead();
+        }
     }
-    }
+}

@@ -119,6 +119,8 @@ public class LevelProgressManager : MonoBehaviour
     public void LevelComplete(){
         _completeLevelMenu.SetActive(true);
         _starsController.SetStar(_starAmount);
+
+        Debug.Log(this.gameObject.name + "Stars");
         
         ControllerLevel._scene = SceneManager.GetActiveScene().name;
 

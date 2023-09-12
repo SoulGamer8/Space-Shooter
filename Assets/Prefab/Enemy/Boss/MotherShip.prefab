@@ -495,8 +495,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 69cc5cdf82c3e904b97ff7e294e9a569, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 0
-  _patrulingArea: {x: 10, y: 3.45, z: 0}
+  _speed: 5
+  _patrollingArea: {x: 6, y: 3, z: 0}
 --- !u!114 &3215291960892262864
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -516,11 +516,11 @@ MonoBehaviour:
   _explosion: {fileID: 6054925638629271669, guid: 9af9c30a9ac037943b082dd24ec5280f, type: 3}
   _miniExplosionFrequency: 5
   _secondPhaseSprite: {fileID: 21300000, guid: 1449f7a69764a87468004ea1b0111fd2, type: 3}
-  _phaseOneHitboxes: {fileID: 1160157821468769808}
+  _phaseOneHitBoxes: {fileID: 1160157821468769808}
   _phaseExplosionPoints: {fileID: 6053940048218511264}
-  _miniExposionScale: 0.2
+  _miniExplosionScale: 5
   _deathExplosionDuration: 2
-  _phaseTwoHitboxes: {fileID: 453936896152365332}
+  _phaseTwoHitBoxes: {fileID: 453936896152365332}
   _deathExplosionScale: 5
 --- !u!114 &1027921282615281220
 MonoBehaviour:
@@ -564,7 +564,7 @@ MonoBehaviour:
     _warningLine: {fileID: 3131465681225636068}
   _beamAttackTime: 0.5
   _trackingDuration: 1
-  _timetoLock: 0.3
+  _timeToLock: 0
   _trackingFlashTime: 0.25
   _lockedFlashTime: 0.1
   _amountBeamVolley: 3
