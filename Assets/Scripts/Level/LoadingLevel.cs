@@ -31,21 +31,21 @@ public class LoadingLevel : MonoBehaviour
             OpenMenu();
     }
 
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        _menu.SetActive(false);
+    private void OnTriggerExit2D(Collider2D collision){
+        if (_isOpen){
+            _menu.SetActive(false);
+            _startLevel.GetComponent<Button>().onClick.RemoveAllListeners();
+    }
     }
 
-    private void OpenMenu()
-    {
+    private void OpenMenu(){
         _menu.SetActive(true);
         _startLevel = _menu.transform.GetChild(0);
         _startLevel.GetComponent<Button>().onClick.AddListener(() => _loadingScene.LoadScene(_LevelID));
     }
 
 
-    private void ChangeImage(Texture image)
-    {
+    private void ChangeImage(Texture image){
         this.gameObject.GetComponent<RawImage>().texture = image;
     }
 
@@ -59,6 +59,6 @@ public class LoadingLevel : MonoBehaviour
     public void CloseLevel(){
         _isOpen = false;
         ChangeImage(_imageLock);
-        PlayerPrefs.SetInt(this.gameObject.name, 1);
+        PlayerPrefs.SetInt(this.gameObject.name, 0);
     }
 }

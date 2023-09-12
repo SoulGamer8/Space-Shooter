@@ -7,6 +7,7 @@ public class Score : MonoBehaviour
     [SerializeField] private SpawnManager _spawnManager;
 
     [SerializeField] private LocalizedString localizedStringScore;
+     [SerializeField] private LocalizedString localizedStringBestScore;
     [SerializeField] private TextMeshProUGUI _scoreText;
     [SerializeField] private TextMeshProUGUI _bestScoreText;
 
@@ -17,31 +18,34 @@ public class Score : MonoBehaviour
     private int _score;
     private int _bestScore= 0;
 
-
-
-
     private void OnEnable(){
         _spawnManager.enemyKilledEvent += AddScore;
 
         localizedStringScore.Arguments = new object[] {_score};
         localizedStringScore.StringChanged += UpdateUI;
+
+        localizedStringBestScore.Arguments = new object[] {_bestScore};
+        localizedStringBestScore.StringChanged +=UpdateBestScore;
     }
 
     private void OnDisable(){
         _spawnManager.enemyKilledEvent -= AddScore;
         localizedStringScore.StringChanged -= UpdateUI;
+        localizedStringBestScore.StringChanged -=UpdateBestScore;
+
     }
 
     private void Start(){
         _scoreText = this.GetComponent<TextMeshProUGUI>();
         LoadNumber();
-        if(_isInfinityLevel)
-            _bestScoreText.text = "Best Score: " + _bestScore.ToString();
     }
 
     private void UpdateUI(string value){
         _scoreText.text =value;
-   
+    }
+
+    private void UpdateBestScore(string value){
+        _bestScoreText.text = value;
     }
 
     private void AddScore(int score){
@@ -70,5 +74,8 @@ public class Score : MonoBehaviour
 
     public void LoadNumber(){
         _bestScore = PlayerPrefs.GetInt("bestScore");
+
+        localizedStringBestScore.Arguments[0] = _bestScore;
+        localizedStringBestScore.RefreshString();
     }
 }

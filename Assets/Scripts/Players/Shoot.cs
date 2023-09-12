@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 public class Shoot : MonoBehaviour
 {
@@ -25,9 +26,18 @@ public class Shoot : MonoBehaviour
     [SerializeField] private bool _isTripleShootActive = false;
     private Coroutine fire;
 
-    private void Awake(){
-       SpawnAmmoUI();
+    void OnEnable(){
+        SceneManager.sceneLoaded += OnSceneLoaded;
     }
+
+    void OnDisable(){
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
+    void OnSceneLoaded(Scene scene, LoadSceneMode mode){
+        SpawnAmmoUI();
+    }
+
 
     private void SpawnAmmoUI(){
         GameObject[] players = GameObject.FindGameObjectsWithTag("Player");

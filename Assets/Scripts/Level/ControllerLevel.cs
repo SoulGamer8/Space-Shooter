@@ -7,12 +7,13 @@ public class ControllerLevel : MonoBehaviour
 
     public static string _scene;
 
-    private void Start(){
+    private void Start() {
         LevelComplete();
     }
 
-    private void LevelComplete(){
+    public void LevelComplete(){
         int levelNumber = _levels.FindIndex(obj => obj.name == _scene);
-        _levels[levelNumber+1].GetComponent<LoadingLevel>().OpenLevel();
+        if(levelNumber != -1)
+            _levels[levelNumber+1].GetComponent<LoadingLevel>().OpenLevel();
     }
 }

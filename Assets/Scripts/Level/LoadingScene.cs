@@ -17,14 +17,16 @@ public class LoadingScene : MonoBehaviour
     IEnumerator LoadSceneAsync(int sceneId){
        AsyncOperation scene = SceneManager.LoadSceneAsync(sceneId);
         _loadingScene.SetActive(true);
-        _slider = _loadingScene.transform.GetChild(0).gameObject.GetComponent<Slider>();
+        // _slider = _loadingScene.transform.GetChild(0).gameObject.GetComponent<Slider>();
+        
+        scene.allowSceneActivation = false;
         while (!scene.isDone){
-            float progressValue = Mathf.Clamp01(scene.progress / 0.9f);
-            _slider.value = progressValue;
-
+            _slider.value = scene.progress ;
+            if (scene.progress >= 0.9f){
+                scene.allowSceneActivation = true;
+            }
             yield return null;
         }
-
     }
 
 }

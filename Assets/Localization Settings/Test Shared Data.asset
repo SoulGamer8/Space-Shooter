@@ -55,6 +55,22 @@ MonoBehaviour:
     m_Key: StartKey
     m_Metadata:
       m_Items: []
+  - m_Id: 1516918082920448
+    m_Key: BestScoreKey
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1517978860150784
+    m_Key: RecordKey
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1518327633305600
+    m_Key: NickNameKey
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1518592004481024
+    m_Key: DoneKey
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

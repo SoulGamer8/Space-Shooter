@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.SceneManagement;
 
 public class PlayerHealth : MonoBehaviour,IDamageable
 {
@@ -53,19 +54,30 @@ public class PlayerHealth : MonoBehaviour,IDamageable
     private PowerUpWeightController _powerUpWeightController;
     #endregion
 
-
-
     private void Awake(){
-        FindHealthBar();
 
         _currentlyHealth = _health;
 
         _animator = GetComponent<Animator>();
         _polygonCollider2D = GetComponent<PolygonCollider2D>();
         _playerSoundManager = GetComponent<PlayerSoundManager>();
-        _cameraManager = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CameraManager>();
+
         playerSoundManager = GetComponent<PlayerSoundManager>();
     }
+
+    void OnEnable(){
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    void OnDisable(){
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
+    void OnSceneLoaded(Scene scene, LoadSceneMode mode){
+        _cameraManager = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CameraManager>();
+        FindHealthBar();
+    }
+
 
     public void Spawn(PlayersController playersController){
         _playersController = playersController;
@@ -159,7 +171,7 @@ public class PlayerHealth : MonoBehaviour,IDamageable
             Destroy(_fireOnEngineSpawn[_fireOnEngineSpawn.Count - 1]);
             _fireOnEngineSpawn.RemoveAt(_fireOnEngineSpawn.Count-1);
             UpdateHealthBar();
-            _powerUpWeightController.ChangeSpawnChanceWeightRepair(-10);
+            // _powerUpWeightController.ChangeSpawnChanceWeightRepair(-10);
         }
     }
 

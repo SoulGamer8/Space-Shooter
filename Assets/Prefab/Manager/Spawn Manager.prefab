@@ -44,10 +44,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 771a7c57cc3e4c748a8d48fdedb2c8f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _enemyPrefab:
+  _isEnemySpawn: 1
+  _enemiesArray:
+  - {fileID: 6548689771352952639, guid: 425dbec7ccf8f514d90bc67289bb05da, type: 3}
+  - {fileID: 2570665423033589922, guid: 132e3495917335346ae32c9527814ad4, type: 3}
   - {fileID: 3694844299455940872, guid: 412fbcd1bae7afa4bb7b5f5a124b432e, type: 3}
   - {fileID: 6478411585412796229, guid: 875650dd098e674479e944706d76e11c, type: 3}
-  _spawnRate: 0
-  _enemyList: []
+  - {fileID: 4401288704736392251, guid: e3c7396bf270aa04eb3757306ecb261c, type: 3}
+  - {fileID: 4910969230209893057, guid: e68e0ffdceea1434181f89586affcdd9, type: 3}
+  - {fileID: 7184916895266175629, guid: 89df89baf7ba03644be1a94227a06522, type: 3}
+  - {fileID: 9145592627855830254, guid: 28c53d692154519499ff2f39aea4adde, type: 3}
+  - {fileID: 5753047922043332652, guid: 6146cf32ea7d7e647bcebaeafb65570a, type: 3}
+  - {fileID: 2805275978103990522, guid: d31b6408cabc8874689ecd8f894bea15, type: 3}
+  _spawnRate: 2
+  _isPowerUpSpawn: 1
+  _powerUpsArray:
+  - {fileID: 312599950750045297, guid: c83662d0d62406e4cac51d598cccfecb, type: 3}
+  - {fileID: 1962149739858341712, guid: 5f0a59c14ac16494bb9b4ff3822539e1, type: 3}
+  - {fileID: 5744669851517557007, guid: eda2ab619d689934aa28936259ed38f6, type: 3}
+  - {fileID: 6031965873052742763, guid: 3704c4085c768584d812f02ee881ecc4, type: 3}
+  - {fileID: 4999118602094741899, guid: b8ff3d352834e9a419beed4fc355eaac, type: 3}
+  _timeSpawnPowerUp: 0
+  _isSpawnCoin: 0
   _coinPrefab: {fileID: 5071000286812297601, guid: e66e3b76d7ff359409b9678f65ec32fb, type: 3}
   _chanceSpawnCoin: 0.203
+  _sumSpawnScore: 0
+  _sumKilledEnemyScore: 0

@@ -1,0 +1,74 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &5720767574361382799
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5720767574361382784}
+  - component: {fileID: 5720767574361382785}
+  - component: {fileID: 5720767574361382798}
+  m_Layer: 0
+  m_Name: Level Manager
+  m_TagString: LevelManager
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5720767574361382784
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5720767574361382799}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -5.01623, y: -32.8378, z: -0.034421366}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5720767574361382785
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5720767574361382799}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3a21f5b08e14dbb44abcddf4e7565eb3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _isStandardLevel: 1
+  _timeHowLongLive: 30
+  _percentForSecondStar: 20
+  _percentForThirdStar: 50
+  _isBossLevel: 0
+  _boss: {fileID: 0}
+  _bossSpawnAudio: {fileID: 0}
+  _bossSpawnAudioEaster: {fileID: 0}
+  _alarmSound: {fileID: 0}
+  text: {fileID: 0}
+  _completeLevelMenu: {fileID: 0}
+  _starsController: {fileID: 0}
+  _starAmount: 3
+--- !u!114 &5720767574361382798
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5720767574361382799}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 853d58bde07b8ab4793356fd51a08f2b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _loadingScene: {fileID: 0}
+  _slider: {fileID: 0}

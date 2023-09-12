@@ -67,7 +67,6 @@ public class LevelProgressManager : MonoBehaviour
         SpawnManager spawnManager =  GameObject.FindGameObjectWithTag("SpawnManager").GetComponent<SpawnManager>();
         int sumSpawnScore = spawnManager.GetSumSpawnScore();
         int  smuKilledEnemyScore = spawnManager.GetSumKilledEnemyScore();
-        Debug.Log((smuKilledEnemyScore * 100)/sumSpawnScore);
         if(sumSpawnScore == 0)
             return;
         if((smuKilledEnemyScore * 100)/sumSpawnScore < _percentForSecondStar)
@@ -118,7 +117,6 @@ public class LevelProgressManager : MonoBehaviour
 
 
     public void LevelComplete(){
-        Debug.Log(_starAmount);
         _completeLevelMenu.SetActive(true);
         _starsController.SetStar(_starAmount);
         

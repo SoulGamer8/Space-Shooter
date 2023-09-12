@@ -1243,6 +1243,63 @@ MonoBehaviour:
   references:
     version: 2
     RefIds: []
+--- !u!1001 &1417112511
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 719033182039605508, guid: 516e5d93e69182e48bbfc27b7a8a7563, type: 3}
+      propertyPath: m_RootOrder
+      value: 13
+      objectReference: {fileID: 0}
+    - target: {fileID: 719033182039605508, guid: 516e5d93e69182e48bbfc27b7a8a7563, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -7.51
+      objectReference: {fileID: 0}
+    - target: {fileID: 719033182039605508, guid: 516e5d93e69182e48bbfc27b7a8a7563, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 3.13
+      objectReference: {fileID: 0}
+    - target: {fileID: 719033182039605508, guid: 516e5d93e69182e48bbfc27b7a8a7563, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 719033182039605508, guid: 516e5d93e69182e48bbfc27b7a8a7563, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 719033182039605508, guid: 516e5d93e69182e48bbfc27b7a8a7563, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 719033182039605508, guid: 516e5d93e69182e48bbfc27b7a8a7563, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 719033182039605508, guid: 516e5d93e69182e48bbfc27b7a8a7563, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 719033182039605508, guid: 516e5d93e69182e48bbfc27b7a8a7563, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 719033182039605508, guid: 516e5d93e69182e48bbfc27b7a8a7563, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 719033182039605508, guid: 516e5d93e69182e48bbfc27b7a8a7563, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 719033182039605512, guid: 516e5d93e69182e48bbfc27b7a8a7563, type: 3}
+      propertyPath: m_Name
+      value: Player
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 516e5d93e69182e48bbfc27b7a8a7563, type: 3}
 --- !u!224 &1441017792 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 2651063052254039797, guid: b259a2cda6e293d4baa29cb5af304cae, type: 3}
@@ -1389,17 +1446,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a21f5b08e14dbb44abcddf4e7565eb3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _isStandartLevel: 0
+  _isStandardLevel: 1
   _timeHowLongLive: 0
+  _percentForSecondStar: 0
+  _percentForThirdStar: 0
   _isBossLevel: 1
   _boss: {fileID: 1905426798733778595, guid: 47e3bc22f224ae54d934ed6dbf0834c1, type: 3}
-  _bossSpawnAudio:
-  - {fileID: 8300000, guid: 27ba5b629e1e32f41959e1a89bc6a6be, type: 3}
-  - {fileID: 8300000, guid: 0064fb3aafbd0a943952e89bc2cbc355, type: 3}
+  _bossSpawnAudio: {fileID: 0}
+  _bossSpawnAudioEaster: {fileID: 0}
   _alarmSound: {fileID: 8300000, guid: 343fffaf73969be4890cc0f125cafde1, type: 3}
   text: {fileID: 1360095656}
   _completeLevelMenu: {fileID: 697905324}
   _starsController: {fileID: 254376720}
+  _starAmount: 3
 --- !u!1 &1504941977
 GameObject:
   m_ObjectHideFlags: 0

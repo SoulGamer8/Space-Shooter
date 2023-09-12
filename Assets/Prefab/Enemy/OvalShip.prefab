@@ -107,10 +107,10 @@ MonoBehaviour:
   _explosion: {fileID: 6054925638629271669, guid: 9af9c30a9ac037943b082dd24ec5280f, type: 3}
   _laser: {fileID: 4978602119496610123, guid: 549d2344a1ab50740bca83a07d31901b, type: 3}
   _fireRate: 1
-  a: 10
-  b: 2
-  divisons: 50
-  positions: []
+  _width: 10
+  _height: 5
+  _divisions: 50
+  _positions: []
 --- !u!61 &7184916895266175857
 BoxCollider2D:
   m_ObjectHideFlags: 0

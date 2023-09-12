@@ -58,6 +58,22 @@ MonoBehaviour:
     m_Localized: Start
     m_Metadata:
       m_Items: []
+  - m_Id: 1516918082920448
+    m_Localized: 'Best Score: {0}'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1517978860150784
+    m_Localized: NEW Record
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1518327633305600
+    m_Localized: Enter your nickname
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1518592004481024
+    m_Localized: Done
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

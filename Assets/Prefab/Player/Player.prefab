@@ -107,8 +107,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _speed: 15
-  _timeWhenActiveSpeedPowerUp: 4
-  _speedPowerUp: 10
+  _timeWhenActiveSpeedPowerUp: 5
+  _speedPowerUp: 25
   _myState: 0
 --- !u!114 &719033182039605505
 MonoBehaviour:
@@ -142,24 +142,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ec7513c7029a08c44b425e4116924e0a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  UnityAction:
+  PlayerDead:
     m_PersistentCalls:
       m_Calls: []
   _healthBarArray:
   - {fileID: 1703989031570211199, guid: 5094165a1781ef544b0223b3279dae1f, type: 3}
   - {fileID: 3912512522151601194, guid: 61f2430d8a3fa144bbc5f35549552d7d, type: 3}
   _health: 3
-  _saudTakeDamage: {fileID: 0}
+  _saudTakeDamage: {fileID: 8300000, guid: c469872d54d446c4598da945f04900b7, type: 3}
   _timeWhenPlayerInvulnerability: 1
   _invincibleAlpha: 0
-  _shieldPrefab: {fileID: 0}
+  _shieldPrefab: {fileID: 8300780217632172099, guid: 3ae0af117f248854eab04f6010c6aa6c, type: 3}
   _shieldHealth: 3
-  _timeWhenActiveShield: 0
+  _timeWhenActiveShield: 5
   _fireOnEngine:
   - {fileID: 7105434114188263568, guid: 60577ad41b86acb40b1ced2d6a3890aa, type: 3}
   - {fileID: 8574169450794588326, guid: 24320022ad1a5794c9b1ff88c0088d33, type: 3}
   _fireOnEngineSpawn: []
-  _hitSound: {fileID: 8300000, guid: c469872d54d446c4598da945f04900b7, type: 3}
   _explosionSound: {fileID: 8300000, guid: a885c043fab7e46438bba03ba9dab6bc, type: 3}
 --- !u!114 &719033182039605496
 MonoBehaviour:
