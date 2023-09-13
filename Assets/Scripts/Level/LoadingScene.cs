@@ -17,7 +17,7 @@ public class LoadingScene : MonoBehaviour
     IEnumerator LoadSceneAsync(int sceneId){
        AsyncOperation scene = SceneManager.LoadSceneAsync(sceneId);
         _loadingScene.SetActive(true);
-        // _slider = _loadingScene.transform.GetChild(0).gameObject.GetComponent<Slider>();
+        _slider = _loadingScene.transform.GetChild(1).gameObject.GetComponent<Slider>();
         
         scene.allowSceneActivation = false;
         while (!scene.isDone){

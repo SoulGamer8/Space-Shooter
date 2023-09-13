@@ -74,6 +74,14 @@ MonoBehaviour:
     m_Localized: Done
     m_Metadata:
       m_Items: []
+  - m_Id: 1660075764375552
+    m_Localized: Level Complete
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1651382129811456
+    m_Localized: Main Menu
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

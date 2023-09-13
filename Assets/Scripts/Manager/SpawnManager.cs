@@ -46,8 +46,9 @@ public class SpawnManager : MonoBehaviour
 
     public void PlayerDeath(){
         StopAllCoroutines();
-        for(int i=0;i<transform.childCount;i++){
-            Destroy(transform.GetChild(i).gameObject);
+        GameObject[] enemies =GameObject.FindGameObjectsWithTag("Enemy");
+        for(int i=0;i<enemies.Length;i++){
+            Destroy(enemies[i]);
         }
     }
 
@@ -79,6 +80,7 @@ public class SpawnManager : MonoBehaviour
     }
 
     private IEnumerator SpawnEnemyCoroutine(){
+        yield return new WaitForSeconds(2);
         while (true)
         {
             Vector3 randomPosition = new Vector3(Random.Range(-8, 8), transform.position.y, 0);

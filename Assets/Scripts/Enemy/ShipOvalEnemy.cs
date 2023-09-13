@@ -33,7 +33,7 @@ public class ShipOvalEnemy : Enemy, ICanShoot, IMoveable
     }
 
     public void DoMove(){
-        transform.position = Vector3.MoveTowards(transform.position,_positions[_currentlyDivision],0.1f);
+        transform.position = Vector3.MoveTowards(transform.position,_positions[_currentlyDivision],_speed*Time.deltaTime);
         if(Vector3.Distance(transform.position,_positions[_currentlyDivision]) <0.1f){
                 if(_currentlyDivision >= _divisions)
                     _currentlyDivision=0;

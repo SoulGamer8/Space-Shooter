@@ -19,11 +19,24 @@ public class PlayerMovement : MonoBehaviour
     private Rigidbody2D _rb;
     private Animator _animator;
     
+    private LevelProgressManager _levelProgressManager;
 
-    private void Awake()
-    {
+    private void Awake(){
+        Time.timeScale = 1f;
         _animator = GetComponent<Animator>();
         _rb =GetComponent<Rigidbody2D>();
+        if( GameObject.FindGameObjectWithTag("LevelManager") != null)
+            _levelProgressManager = GameObject.FindGameObjectWithTag("LevelManager").GetComponent<LevelProgressManager>();
+    }
+
+    private void OnEnable() {
+        if( GameObject.FindGameObjectWithTag("LevelManager") != null)
+            _levelProgressManager.levelCompleteEvent +=LevelComplete;
+    }
+
+    private void OnDisable() {
+        if( GameObject.FindGameObjectWithTag("LevelManager") != null)
+            _levelProgressManager.levelCompleteEvent -=LevelComplete;
     }
 
     private void Start(){
@@ -66,8 +79,11 @@ public class PlayerMovement : MonoBehaviour
 
     private void OnExit(){
         transform.position = Vector3.Lerp(transform.position,new Vector3(transform.position.x,10),0.1f);
-        if(Vector3.Distance(transform.position,new Vector3(transform.position.x,10))<0.1f)
+        if(Vector3.Distance(transform.position,new Vector3(transform.position.x,10))<0.1f){
             GameObject.FindGameObjectWithTag("LevelManager").GetComponent<LevelProgressManager>().LevelComplete();
+            Destroy(gameObject);
+        }
+            
     }
 
     

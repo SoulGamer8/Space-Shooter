@@ -19,7 +19,6 @@ namespace Boss{
         public override void OnExit(){}
 
         public override void UpdateState(){
-            Debug.Log(bossController._target);
             _transform.position = Vector3.MoveTowards(_transform.position,bossController._target,0.2f* _speed);
             if(Vector3.Distance(_transform.position,bossController._target)<0.1f){
                 bossStateMachine.ChangeState(bossController.shootLaserState);

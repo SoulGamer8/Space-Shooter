@@ -420,7 +420,7 @@ Transform:
   m_GameObject: {fileID: 1905426798733778595}
   m_LocalRotation: {x: 0, y: 0, z: 1, w: 0}
   m_LocalPosition: {x: 0.13, y: 15.46, z: 0}
-  m_LocalScale: {x: 0.4, y: 0.4, z: 0}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4409163935415837675}
@@ -518,10 +518,10 @@ MonoBehaviour:
   _secondPhaseSprite: {fileID: 21300000, guid: 1449f7a69764a87468004ea1b0111fd2, type: 3}
   _phaseOneHitBoxes: {fileID: 1160157821468769808}
   _phaseExplosionPoints: {fileID: 6053940048218511264}
-  _miniExplosionScale: 5
+  _miniExplosionScale: 0.5
   _deathExplosionDuration: 2
   _phaseTwoHitBoxes: {fileID: 453936896152365332}
-  _deathExplosionScale: 5
+  _deathExplosionScale: 0.5
 --- !u!114 &1027921282615281220
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -564,9 +564,9 @@ MonoBehaviour:
     _warningLine: {fileID: 3131465681225636068}
   _beamAttackTime: 0.5
   _trackingDuration: 1
-  _timeToLock: 0
-  _trackingFlashTime: 0.25
-  _lockedFlashTime: 0.1
+  _timeToLock: 0.5
+  _trackingFlashTime: 0.3
+  _lockedFlashTime: 0.15
   _amountBeamVolley: 3
   _soundBeamAttack: {fileID: 8300000, guid: 6d49007f6baec3e48ae40e47f4e94756, type: 3}
   _missile: {fileID: 4081181018936694162, guid: 851bbfa9eb810b04aa96207082dd5636, type: 3}

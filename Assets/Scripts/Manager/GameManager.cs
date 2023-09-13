@@ -19,18 +19,8 @@ public class GameManager : MonoBehaviour
 
     private bool _isAllPlayerDied=false;
 
-    async  private void Start() {
-        await UnityServices.InitializeAsync();
-    }
 
     public void AllPlayerDead(){
-        Dictionary<string, object> parameters = new Dictionary<string, object>()
-        {
-            { "levelNumber", SceneManager.GetActiveScene().name},
-        };
-        GameObject.FindGameObjectWithTag("Enemy").GetComponent<AudioSource>();
-        
-        AnalyticsService.Instance.CustomData("PlayerDead",parameters);
         _gameOverScreen.SetActive(true);
 
         spawnManager.PlayerDeath();
@@ -42,6 +32,8 @@ public class GameManager : MonoBehaviour
     }
 
     public void RestartGame(){
+        if(_score == null)
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         if (_isAllPlayerDied  && (_score.IsNewRecordMenuOpen()|| !_isInfinityLevel))
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);  
     }

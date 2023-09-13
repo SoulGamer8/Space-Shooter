@@ -35,7 +35,7 @@ Transform:
   m_GameObject: {fileID: 719033182039605512}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 2.75, y: -1.14, z: 10}
-  m_LocalScale: {x: 0.6, y: 0.6, z: 0.6}
+  m_LocalScale: {x: 0.4, y: 0.4, z: 0.6}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 719033182705352553}
@@ -123,7 +123,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _bullet: {fileID: 4978602119496610123, guid: 80089d3b1aa1bf14c9b707ce4e264b55, type: 3}
-  _fireRate: 0.5
+  _fireRate: 0.1
   _laserShoot: {fileID: 8300000, guid: 75676f361bdfeaf41a46623e95df3dbc, type: 3}
   _rocket: {fileID: 6672853568568838723, guid: 40b9d90a7e18fad4da1da58b86e417c2, type: 3}
   _ammoUI:

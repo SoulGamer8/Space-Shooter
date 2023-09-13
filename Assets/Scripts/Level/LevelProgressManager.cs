@@ -3,11 +3,16 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using Unity.Services.Analytics;
+using Unity.Services.Core;
 using TMPro;
+using UnityEngine.Events;
 public class LevelProgressManager : MonoBehaviour
 {
-    [SerializeField] private bool _isStandardLevel=true;
 
+    public UnityAction levelCompleteEvent;
+
+    [SerializeField] private bool _isStandardLevel=true;
+    
     [ConditionalHide("_isStandardLevel", true)]
     [SerializeField] private float _timeHowLongLive;
     [SerializeField] private int _percentForSecondStar;
@@ -41,10 +46,16 @@ public class LevelProgressManager : MonoBehaviour
     private AudioSource _audioSource;
     private bool _isPlayerTakeDamage =false;
     private Coroutine _timerToCompleteLevelCoroutine;
+    private SpawnManager _spawnManager;
 
+    async private void Awake(){
+        await UnityServices.InitializeAsync();
+    }
 
     private void Start(){
+        _spawnManager =  GameObject.FindGameObjectWithTag("SpawnManager").GetComponent<SpawnManager>();
         _audioSource =GetComponent<AudioSource>();
+
         if(_isStandardLevel)
             _timerToCompleteLevelCoroutine = StartCoroutine(TimerToCompleteLevelCoroutine());
         if(_isBossLevel)
@@ -54,19 +65,22 @@ public class LevelProgressManager : MonoBehaviour
     #region Standard Level
     
     public void AllPlayerDead(){
-        StopCoroutine(_timerToCompleteLevelCoroutine);
+        if(_timerToCompleteLevelCoroutine != null)
+            StopCoroutine(_timerToCompleteLevelCoroutine);
+        AnalyticsLevelLose();
     }
 
     private IEnumerator TimerToCompleteLevelCoroutine(){
         yield return new WaitForSeconds(_timeHowLongLive);
         SetStarLevelStandard();
-        LevelComplete();
+
+        levelCompleteEvent?.Invoke();
     }
 
     private void SetStarLevelStandard(){
-        SpawnManager spawnManager =  GameObject.FindGameObjectWithTag("SpawnManager").GetComponent<SpawnManager>();
-        int sumSpawnScore = spawnManager.GetSumSpawnScore();
-        int  smuKilledEnemyScore = spawnManager.GetSumKilledEnemyScore();
+      
+        int sumSpawnScore = _spawnManager.GetSumSpawnScore();
+        int  smuKilledEnemyScore = _spawnManager.GetSumKilledEnemyScore();
         if(sumSpawnScore == 0)
             return;
         if((smuKilledEnemyScore * 100)/sumSpawnScore < _percentForSecondStar)
@@ -92,10 +106,11 @@ public class LevelProgressManager : MonoBehaviour
         AudioClip audioSpawnBoss = _bossSpawnAudio;
 
         float randomSound = Random.Range(0f,1f);
-        if(randomSound < 1f)
+        Debug.Log(randomSound);
+        if(randomSound < 0.1f)
             _audioSource.PlayOneShot(_bossSpawnAudioEaster);
-
-        _audioSource.PlayOneShot(audioSpawnBoss);
+        else
+            _audioSource.PlayOneShot(audioSpawnBoss);
         StartCoroutine(SpawnBossCoroutine(audioSpawnBoss));
     }
 
@@ -120,22 +135,29 @@ public class LevelProgressManager : MonoBehaviour
         _completeLevelMenu.SetActive(true);
         _starsController.SetStar(_starAmount);
 
-        Debug.Log(this.gameObject.name + "Stars");
-        
+        _spawnManager.PlayerDeath();
         ControllerLevel._scene = SceneManager.GetActiveScene().name;
-
-        Analytics();
-        Debug.Log("Level complete");
+        PlayerPrefs.SetInt(SceneManager.GetActiveScene().name + "Stars",_starAmount);
+        AnalyticsLevelWin();
     }
 
 
-    private void Analytics(){
+    private void AnalyticsLevelWin(){
         Dictionary<string, object> parameters = new Dictionary<string, object>()
         {
         { "level", SceneManager.GetActiveScene().name},
         };
 
         AnalyticsService.Instance.CustomData("levelWin",parameters);
+    }
+
+    private void AnalyticsLevelLose(){
+        Dictionary<string, object> parameters = new Dictionary<string, object>()
+        {
+            { "level", SceneManager.GetActiveScene().name},
+        };
+
+        AnalyticsService.Instance.CustomData("PlayerDead",parameters);
     }
 
     public void PlayerTakeDamage(){

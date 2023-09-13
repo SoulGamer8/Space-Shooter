@@ -10,7 +10,7 @@ public class Missile : Ammo ,IDamageable
     [SerializeField] private float _rotateSpeed = 200f;
     [SerializeField] private int _damage;
     [SerializeField] private int _health = 1;
-
+    [SerializeField] private GameObject _explosion;
 
     private Rigidbody2D _rigiddody2D;
     private Animator _animator;
@@ -56,7 +56,7 @@ public class Missile : Ammo ,IDamageable
     protected override void OnTriggerEnter2D(Collider2D collider){
         IDamageable damageable = collider.GetComponent<IDamageable>();
         if(damageable == null) return;
-        if(_isEnemyMissile && collider.tag =="Player"){
+        if(_isEnemyMissile && collider.tag == "Player"){
             damageable.Damage(_damage);
             Dead();
         }
@@ -68,9 +68,9 @@ public class Missile : Ammo ,IDamageable
 
     
     protected override void Dead(){
-        _animator.SetTrigger("Dead");
-        Destroy(gameObject, _animator.GetCurrentAnimatorStateInfo(0).length);
-
+        _explosion.transform.localScale =new Vector3(0.5f,0.5f,0);
+        Instantiate(_explosion,transform.position,transform.rotation);
+        Destroy(gameObject);
     }
 
     
@@ -80,9 +80,8 @@ public class Missile : Ammo ,IDamageable
     }
 
     public void Damage(int damage){
-        Debug.Log(_health);
         _health -= damage;
-        if(_health <0)
+        if(_health <=0)
             Dead();
     }
 }
